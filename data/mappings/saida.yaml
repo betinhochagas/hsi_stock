@@ -1,0 +1,57 @@
+# Mapeamento para importação de arquivo "Saída"
+# Define como as saídas de estoque serão processadas
+
+file_type: "exit"
+description: "Saídas de estoque"
+encoding: "utf-8"
+delimiter: ";"
+skip_rows: 2
+
+column_mappings:
+  "Item": "name"
+  "Serial Number/Service Tag": "serial_number"
+  "Patrimônio": "asset_tag"
+  "Quantidade": "quantity"
+  "Data de Saída": "exit_date"
+  " Ticket ": "ticket_number"
+  " Usuário/Setor ": "assigned_to_sector"
+  "Observação": "notes"
+  "Retirado por:": "withdrawn_by"
+
+validations:
+  - field: "name"
+    required: true
+    type: "string"
+  
+  - field: "exit_date"
+    required: true
+    type: "date"
+    formats: ["DD/MM/YYYY"]
+  
+  - field: "quantity"
+    required: true
+    type: "integer"
+    min: 1
+
+transformations:
+  - field: "exit_date"
+    transform: "parse_date"
+    format: "DD/MM/YYYY"
+  
+  - field: "serial_number"
+    transform: "normalize_empty"
+    null_values: ["N/A", "n/a", ""]
+  
+  - field: "asset_tag"
+    transform: "normalize_empty"
+    null_values: ["N/A", "n/a", ""]
+  
+  - field: "ticket_number"
+    transform: "trim_whitespace"
+
+# Criar movimentação de saída automaticamente
+create_movement: true
+movement_type: "CHECK_OUT"
+
+# Atualizar status do ativo
+update_asset_status: "EM_USO"

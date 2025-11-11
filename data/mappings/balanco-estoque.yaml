@@ -1,0 +1,65 @@
+# Mapeamento para importação de arquivo "Balanço Estoque"
+# Este arquivo define como as colunas do CSV serão mapeadas para os campos do sistema
+
+file_type: "balance"
+description: "Balanço de estoque - itens com quantidade atual"
+encoding: "utf-8"  # ou "latin1" se necessário
+delimiter: ";"
+skip_rows: 2  # Pula as 2 primeiras linhas (cabeçalhos extras)
+
+# Mapeamento de colunas CSV → campos do domínio
+column_mappings:
+  "Item": "name"  # Nome do ativo
+  "Entradas": "total_in"
+  "Saídas": "total_out"
+  "Quantidade em estoque": "quantity"
+  "Observação": "notes"
+  "Validação estoque": "physical_count"
+  "Físico x Lógico": "match_status"
+
+# Regras de validação
+validations:
+  - field: "name"
+    required: true
+    type: "string"
+    min_length: 2
+  
+  - field: "quantity"
+    required: true
+    type: "integer"
+    min: 0
+  
+  - field: "total_in"
+    required: false
+    type: "integer"
+    min: 0
+  
+  - field: "total_out"
+    required: false
+    type: "integer"
+    min: 0
+
+# Transformações
+transformations:
+  - field: "match_status"
+    transform: "boolean"
+    mapping:
+      "VERDADEIRO": true
+      "FALSO": false
+      "TRUE": true
+      "FALSE": false
+  
+  - field: "notes"
+    transform: "status_from_note"
+    rules:
+      - if_contains: "Repor Estoque"
+        set_status: "EM_ESTOQUE"
+      - if_contains: "OK"
+        set_status: "EM_ESTOQUE"
+      - default: "EM_ESTOQUE"
+
+# Categoria padrão se não especificado
+default_category: "Periféricos"
+
+# Localização padrão
+default_location: "Almoxarifado TI"
