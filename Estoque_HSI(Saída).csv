@@ -1,0 +1,980 @@
+;;;;;;;;;
+SAÍDA ESTOQUE TI HSI;;;;;;;;;
+Item;Serial Number/Service Tag;Patrimônio;Quantidade;Data de Saída; Ticket ; Usuário/Setor ;Observação;Retirado por:;Item encontrado na Drop List?
+Suporte Notebook;N/A;N/A;1;04/06/2025; 292.213 ;;;;Encontrado
+Mouse;N/A;N/A;1;04/06/2025; 292.213 ;;;;Encontrado
+Teclado;N/A;N/A;1;04/06/2025; 292.213 ;;;;Encontrado
+Mouse;N/A;N/A;1;06/06/2025; 293.906 ;;;;Encontrado
+Adaptador DisplayPort x VGA;N/A;N/A;1;11/06/2025; N/A ;;;;Encontrado
+Webcam;N/A;N/A;1;13/06/2025; 290.751 ;;;;Encontrado
+Headset;N/A;N/A;1;13/06/2025; 290.751 ;;;;Encontrado
+Mouse;N/A;N/A;1;16/06/2025; 300.828 ;;;;Encontrado
+Notebook DELL Latitude 5480;9PS6QK2;189697;1;17/06/2025; 300.665 ;;Notebook;;Encontrado
+Adaptador DisplayPort x VGA;N/A;N/A;1;02/07/2025; N/A ;;Substituição de Monitor;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3080;7FVJQB3;182755;1;07/07/2025; N/A ; NIR ;Validação de Estoque;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3040;28WMCK2;158395;1;09/07/2025; N/A ; Almoxarifado ;Almoxarifado;Edson Prado;Encontrado
+Monitor P2425H;CV3SM64;230238;1;15/07/2025; N/A ; TI ;Computador Guilherme;Guilherme Flores;Encontrado
+Monitor P2425H;C6CSM64;230239;1;16/07/2025; N/A ; TI ;Computador Guilherme;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7010;7C66K34;219279;1;16/07/2025; N/A ; Residência Médica ;Obsolescência;Guilherme Flores;Encontrado
+Mouse Pad;N/A;N/A;2;18/07/2025; 328.647 ; Tesouraria ;;Guilherme Flores;Encontrado
+Mouse;N/A;N/A;1;21/07/2025; 321.645 ; Ambulatório Esp ;Sala Fernanda;;Encontrado
+Mouse Pad;N/A;N/A;1;21/07/2025; 321.645 ; Ambulatório Esp ;Sala Fernanda;;Encontrado
+Teclado;N/A;N/A;1;21/07/2025; 321.645 ; Ambulatório Esp ;Sala Fernanda;;Encontrado
+Cabo de Energia;N/A;N/A;2;21/07/2025; 321.645 ; Ambulatório Esp ;Sala Fernanda;;Encontrado
+Cabo HDMI;N/A;N/A;1;21/07/2025; 321.645 ; Ambulatório Esp ;Sala Fernanda;;Encontrado
+Monitor P2425H;C5FRM64;230202;1;21/07/2025; N/A ; TI ;Computador Edson;;Encontrado
+Monitor P2425H;HHWRM64;230241;1;22/07/2025; N/A ; TI ;Computador Eduardo/Rafael;;Encontrado
+Cabo de Energia;N/A;N/A;2;24/07/2025; 325.032 ; Ambulatório Esp ;;;Encontrado
+Mouse;N/A;N/A;1;24/07/2025; 325.032 ; Ambulatório Esp ;;Guilherme Flores;Encontrado
+Mouse Pad;N/A;N/A;1;24/07/2025; 325.032 ; Ambulatório Esp ;;Guilherme Flores;Encontrado
+Cabo de Rede;N/A;N/A;1;24/07/2025; 325.032 ; Ambulatório Esp ;;Guilherme Flores;Encontrado
+Cabo DisplayPort;N/A;N/A;1;24/07/2025; 325.032 ; Ambulatório Esp ;;Guilherme Flores;Encontrado
+Monitor DELL P2018H;6TD5463;182869;1;24/07/2025; 325.032 ; Ambulatório Esp ;Monitor Dell P2018H;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7010;9B66K34;219282;1;24/07/2025; 325.032 ; Ambulatório Esp ;Sala 105 Lado Fora;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7010;5C66K34;219277;1;24/07/2025; 325.025 ; Ambulatório Esp ;Sala 105;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;5MTVSB4;230277;1;24/07/2025; N/A ; Ambulatório Esp ;Sala 105 - Troca Obsoleto - HSI2672D10204;Guilherme Flores;Encontrado
+Monitor P2425H;C5ZQM64;230242;1;24/07/2025; N/A ; Ambulatório Esp ;Sala 105 - Troca Obsoleto - HSI2672D10204;Guilherme Flores;Encontrado
+Monitor P2425H;CRNRM64;230243;1;25/07/2025; N/A ; TI ;Computador Eduardo/Rafael;;Encontrado
+;N/A;N/A;1;29/07/2025; 333.664 ; SCIRRAS ;Scirras;???;Não encontrado
+Cabo de Energia;N/A;N/A;1;29/07/2025; 333.664 ; SCIRRAS ;Scirras;;Encontrado
+Monitor DELL E970SWNL;CRMVL63;188730;1;29/07/2025; 333.664 ; SCIRRAS ;Scirras;;Encontrado
+Suporte Notebook;N/A;N/A;1;31/07/2025; 338.896 ; Diretoria ;Diretoria - Yara;;Encontrado
+Monitor P2222H;GLH8ZM3;219298;1;31/07/2025; 337.781 ; Ambulatório Esp ;Sala da Coordenação;Rafael Muller;Encontrado
+Monitor P2222H;CG27ZN3;219444;1;31/07/2025; 337.781 ; Ambulatório Esp ;Sala da Coordenação;Rafael Muller;Encontrado
+Cabo de Energia;N/A;N/A;1;31/07/2025; 337.781 ; Ambulatório Esp ;Sala da Coordenação;Rafael Muller;Encontrado
+Monitor P2425H;BL35M64;230245;1;31/07/2025; N/A ; TI ;Monitor Edson;;Encontrado
+Cabo HDMI;N/A;N/A;1;31/07/2025; 337.781 ; Ambulatório Esp ;Sala da Coordenação;;Encontrado
+Mouse Pad;Mouse Pad;N/A;1;07/08/2025; N/A ; Guilherme neuro ;Sala 102;;Encontrado
+Mouse;Mouse;N/A;1;07/08/2025; N/A ; Guilherme neuro ;Sala 102;;Encontrado
+Cabo de Energia;Cabo de Força;N/A;1;07/08/2025; N/A ; Projetor  ;;;Encontrado
+Desktop OPTIPLEX 7020;CQTVSB4;230269;1;09/08/2025; N/A ;N.S. Aparecida - Enfermagem;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;8NTVSB4;230267;1;09/08/2025; N/A ;N.S. Aparecida - Enfermagem;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;CNTVSB4;230268;1;09/08/2025; N/A ;N.S. Aparecida - Enfermagem;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;28SJCK2;158376;1;09/08/2025; N/A ; Desktop ;Manutenção - Marcenaria;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;294KCK2;158408;1;09/08/2025; N/A ; Desktop ;Manutenção - Eng. Clinica;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;28XKCK2;158421;1;09/08/2025; N/A ; Desktop ;Manutenção - Mecânica;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;28HJCK2;158392;1;09/08/2025; N/A ; Desktop ;Manutenção - Eletrotécnica;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;BJP8MD2;218125;1;09/08/2025; N/A ; Desktop ;Manutenção - Mecânica Refrigeração;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;282MCK2;158410;1;09/08/2025; N/A ; Desktop ;Manutenção - Hidraulica;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;28VJCK2;158420;1;09/08/2025; N/A ; Desktop ;Manutenção - Pintura;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;28CSCK2;158349;1;09/08/2025; N/A ; Desktop ;Manutenção - Eng. Clinica;Eduardo Nones;Encontrado
+Teclado;N/A;N/A;1;09/08/2025; N/A ; Teclado USB ;Manutenção - Eletrotécnica;Eduardo Nones;Encontrado
+Teclado;N/A;N/A;1;09/08/2025; N/A ; Teclado USB ;Manutenção - Pintura;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;JNTVSB4;230294;1;11/08/2025; N/A ; Tesouraria ;;Guilherme Flores;Encontrado
+Monitor DELL P2018H;6T96463;182872;1;11/08/2025; N/A ; Monitor ;Manutenção - Liderança;Eduardo Nones;Encontrado
+Mouse Pad;N/A;N/A;2;13/08/2025; N/A ; Engenharia clinica ;Manutenção - Eng. Clinica;Edson Prado;Encontrado
+Monitor Dell P2016;1047TM2;158788;1;13/08/2025; N/A ; Amb. Especialidade ;Monitor Dell P2016;Edson Prado;Encontrado
+Cabo de Energia;N/A;N/A;1;13/08/2025; N/A ; Amb. Especialidade ;;Edson Prado;Encontrado
+Desktop OPTIPLEX 3040;28CKCK2;158414;1;13/08/2025; N/A ; Desktop ;Painel - Manutenção Eng. Clinica;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;28SQCK2;158383;1;13/08/2025; N/A ; Desktop ;Painel - Manutenção Corredor;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;290RCK2;158381;1;13/08/2025; N/A ; Desktop ;Coworking sl 2;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;294NCK2;158379;1;13/08/2025; N/A ; Desktop ;Manutenção - Almoxarifado;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;BJRCMD2;207874;1;13/08/2025; N/A ; Desktop ;Coworking sl 2;Eduardo Nones;Encontrado
+Mouse Pad;N/A;N/A;1;14/08/2025; 352.204 ; Ibriela ;transporte de paciente ;Edson Prado;Encontrado
+Monitor P2222H;CS56ZM3 ;219432;1;14/08/2025;352.924; Medicina do Trabalho ;Troca por Notebook;Guilherme Flores;Encontrado
+Cabo de Energia;N/A;N/A;1;14/08/2025;352.924; Medicina do Trabalho ;;Guilherme Flores;Encontrado
+Cabo HDMI;N/A;N/A;1;14/08/2025;352.924; Medicina do Trabalho ;;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3040;295LCK2;158403;1;15/08/2025; N/A ;Sala Costura;Desktop;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;BJZ4MD2;149928;1;15/08/2025; N/A ; Serv. Process Roupas ;Lavanderia;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;BJWDMD2;149936;1;15/08/2025; N/A ; Sala Academica ;Gerência Academica;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;28NNCK2;158384;1;15/08/2025; N/A ; Sala R3 ;Gestão de Qualidade;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;BJW9MD2;149926;1;15/08/2025; N/A ; Coworking sl 1 ;Gestão de Qualidade;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;BJTDMD2;218275;1;15/08/2025; N/A ; Coworking sl 1 ;Gestão de Qualidade;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;28VPCK2;158388;1;15/08/2025; N/A ; Coworking sl 1 ;Gestão de Qualidade;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;9PTVSB4;230283;1;16/08/2025; N/A ; Santa Isabel - VIP ;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;DJX53Y3;230266;1;16/08/2025; N/A ; Santa Isabel - VIP ;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;4MTVSB4;230280;1;16/08/2025; N/A ; São José ;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;CPTVSB4;230297;1;16/08/2025; N/A ; São José ;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;6NTVSB4;230200;1;16/08/2025; N/A ; São José ;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;4QTVSB4;231411;1;16/08/2025; N/A ; São José ;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;DPTVSB4;230279;1;17/08/2025; N/A ; Nossa Senhora das Graças ;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;6MTVSB4;230278;1;17/08/2025; N/A ; Nossa Senhora das Graças ;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;JPTVSB4;231406;1;17/08/2025; N/A ; UCO - Prescrição Médica ;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;6QTVSB4;231404;1;17/08/2025; N/A ; UCO - Prescrição Médica ;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;HPTVSB4;230292;1;17/08/2025; N/A ; UTI - Posto de Enfermagem - Lado C ;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;HMTVSB4;230289;1;17/08/2025; N/A ; UTI - Posto de Enfermagem - Lado C ;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;FMTVSB4;230290;1;17/08/2025; N/A ; UTI - Posto de Enfermagem - Lado C ;Enfermagem;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;BQTVSB4;230291;1;17/08/2025; N/A ; UTI - Posto de Enfermagem - Lado C ;Enfermagem;Eduardo Nones;Encontrado
+Teclado;N/A;N/A;1;18/08/2025; 354.678 ; Segurança do Trabalho ; Segurança do Trabalho ;Rafael Muller;Encontrado
+Teclado;N/A;N/A;1;18/08/2025; 354.763 ; Centro Obstétrico ;Sala 04;Rafael Muller;Encontrado
+Cabo de Rede;N/A;N/A;1;18/08/2025; N/A ; Ambulatório de Especialidades ;Administração - PC Maria ao lado Fernanda;Maruhan Teodoro;Encontrado
+Monitor DELL P2018H;6TD5463;182869;1;18/08/2025; N/A ;Ambulatório de Esp - Sala 105 - Fora;Ambulatório de Esp. -Sala 105- Fora;Edson Prado;Encontrado
+Teclado;N/A;N/A;1;18/08/2025; N/A ;Ambulatório de Esp - Sala 105 - Fora;Ambulatório de Esp. Sala 105 -Fora;Edson Prado;Encontrado
+Mouse;N/A;N/A;1;18/08/2025; N/A ; Ambulatório de Esp- Sala 105 -Fora ;Ambulatório de Esp. -Sala 105- Fora;Edson Prado;Encontrado
+Cabo de Energia;N/A;N/A;2;18/08/2025; N/A ; Ambulatório de Esp- Sala 105-Fora ;Ambulatório de Esp. -Sala 105 -Fora;Edson Prado;Encontrado
+Mouse Pad;N/A;N/A;1;18/08/2025; N/A ; Ambulatório de Esp- Sala 105-Fora ;Ambulatório de Esp. -Sala 105 -Fora;Edson Prado;Encontrado
+Cabo de Rede;N/A;N/A;1;18/08/2025; N/A ; Ambulatório de Esp- Sala 105-Fora ;Ambulatório de Esp. -Sala 105 - Fora;Edson Prado;Encontrado
+Cabo DisplayPort;N/A;N/A;1;18/08/2025; N/A ; Ambulatório de Esp- Sala 105 - Fora ;Ambulatório de Esp. -Sala 105 - Fora;Edson Prado;Encontrado
+Teclado;N/A;N/A;1;19/08/2025; 352.928 ; Medicina do Trabalho ;Medicina do Trabalho;Edson Prado;Encontrado
+Mouse;N/A;N/A;1;19/08/2025; 356.576 ; Pronto socorro - Posto de Enfermagem ; Pronto socorro - Posto de Enfermagem ;Rafael Muller;Encontrado
+Cabo de Energia;N/A;N/A;1;19/08/2025; N/A ; Pronto socorro - Posto de Enfermagem ; Pronto socorro - Posto de Enfermagem ;Rafael Muller;Encontrado
+Cabo HDMI;N/A;N/A;1;19/08/2025; N/A ; Pronto socorro - Posto de Enfermagem ; Pronto socorro - Posto de Enfermagem ;Rafael Muller;Encontrado
+Desktop OPTIPLEX 3040;28JRCK2;158416;1;19/08/2025; N/A ; Pronto socorro - Posto de Enfermagem ; Pronto socorro - Posto de Enfermagem ;Rafael Muller;Encontrado
+Mouse;N/A;N/A;1;19/08/2025; 356.689 ; Lavanderia ;Lavanderia;Edson;Encontrado
+Mouse;N/A;N/A;1;19/08/2025; 355.502 ; Centro Obstétrico ;Sala 3;Rafael Muller;Encontrado
+Teclado;N/A;N/A;1;19/08/2025; N/A ; Centro Obstétrico ;Sala 3;Rafael Muller;Encontrado
+Mouse;N/A;N/A;1;19/08/2025; N/A ; Centro Obstétrico ;Sala 4 - Anestesista;Rafael Muller;Encontrado
+Cabo de Rede;N/A;N/A;1;22/08/2025; N/A ; Capela ;Troca de posição de camera da capela;Maruhan Teodoro;Encontrado
+Teclado;N/A;N/A;1;22/08/2025; 359.862 ; CDI ;Sala de Laudos ;Edson Prado;Encontrado
+Mouse;N/A;N/A;1;22/08/2025; 359.862 ; CDI ;Sala de Laudos ;Edson Prado;Encontrado
+Teclado;N/A;N/A;1;22/08/2025; N/A ; Sala 105 ; Sala 105 ;Edson Prado;Encontrado
+Mouse;N/A;N/A;1;22/08/2025; N/A ; Sala 105 ; Sala 105 ;Edson Prado;Encontrado
+Cabo de Energia;N/A;N/A;1;22/08/2025; N/A ; Sala 105 ; Sala 105 ;Edson Prado;Encontrado
+Cabo de Energia;N/A;N/A;1;22/08/2025; N/A ; Sala 105 ; Sala 105 ;Edson Prado;Encontrado
+Cabo de Rede;N/A;N/A;1;22/08/2025; N/A ; Sala 105 ; Sala 105 ;Edson Prado;Encontrado
+Cabo HDMI;N/A;N/A;1;22/08/2025; N/A ; Sala 105 ; Sala 105 ;Edson Prado;Encontrado
+Monitor P2222H;HBB7ZM3;219184;1;22/08/2025; N/A ; Sala 105 ; Sala 105 ;Edson Prado;Encontrado
+Desktop OPTIPLEX 7020;GLTVSB4;230286;1;23/08/2025; N/A ; Enfermagem - Luizita ;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;FPTVSB4;230287;1;23/08/2025; N/A ; Enfermagem - Luizita ;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;7QTVSB4;230288;1;23/08/2025; N/A ; Enfermagem - Luizita ;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;BNTVSB4;230299;1;23/08/2025; N/A ; Enfermagem - Sta Luzia ;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;6PTVSB4;230293;1;23/08/2025; N/A ; Enfermagem - Sta Luzia ;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;5PTVSB4;230260;1;23/08/2025; N/A ; Enfermagem - Sta Luzia ;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;GMTVSB4;231401;1;24/08/2025; N/A ; Escrituração N.S. Fátima - FURB ;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;ZPTVSB4;231402;1;24/08/2025; N/A ; Escrituração N.S. Fátima - FURB ;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;3PTVSB4;230263;1;24/08/2025; N/A ; Enfermagem - Sta Luzia ;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;7NTVSB4;230258;1;24/08/2025; N/A ; Enfermagem - Luizita ;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;8MTVSB4;230273;1;24/08/2025; N/A ; PS - Consultório 2 ;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;JLTVSB4;230275;1;24/08/2025; N/A ; PS - Consultório 3 ;;Eduardo Nones;Encontrado
+Headset;H390;N/A;1;25/08/2025; N/A ; Captação de Recursos ;;Eduardo Nones;Encontrado
+Suporte Notebook;N/A;N/A;1;25/08/2025; N/A ; Captação de Recursos ;;Eduardo Nones;Encontrado
+SSD 240GB;N/A;N/A;1;25/08/2025; N/A ; COMIP ;Fábio Fouchi;Eduardo Nones;Encontrado
+Notebook DELL Latitude 5480;9PS6QK2;189697;1;25/08/2025; N/A ; EMPRÉSTIMO - CC SL 05 ;NOTEBOOK DELL LATITUDE  5480;Eduardo Nones;Encontrado
+Notebook DELL Latitude 5480;5WJXFP2;189729;1;26/08/2025; 362.876 ; Centro Cirurgico ;Sala 06 (Caiu água no teclado);Rafael Muller;Encontrado
+Notebook DELL Latitude 3450;7ZVVSB4;231434;1;27/08/2025; N/A ; UCO ;Leito 01 - Novo Beira Leito;Maruhan Teodoro;Encontrado
+Desktop OPTIPLEX 7020;2NTVSB4;230270;1;27/08/2025; N/A ; PS - Sala Vermelha ;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;7MTVSB4;230271;1;27/08/2025; N/A ; PS - Sala Vermelha ;;Eduardo Nones;Encontrado
+Monitor P2222H;;219193;1;27/08/2025; N/A ; PS - Escrituração ;DELL;Eduardo Nones;Encontrado
+Monitor P2222H;;219191;1;27/08/2025; N/A ; PS - Coordenação Médica ;DELL;Eduardo Nones;Encontrado
+Mouse Pad;N/A;N/A;1;27/08/2025; N/A ; Gestão de Pessoas ;Luciane;Jefferson Cantarelli;Encontrado
+Notebook DELL Latitude 3490;2MX34W2;173471;1;28/08/2025; N/A ; Centro Cirurgico  ;Sala 06;Notebook Dell Latitude 3490;Encontrado
+Teclado;N/A;N/A;1;29/08/2025; 360.376 ; Coração de Jesus ;Teclado com defeito(efetuado troca);Guilherme Flores;Encontrado
+Mouse;N/A;N/A;1;29/08/2025; N/A ; Coração de Jesus ;Mouse com problema tecla;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;BJV5MD2;149924;1;29/08/2025; N/A ;Educação Continuada;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;BJV7MD2;149921;1;29/08/2025; N/A ;DML - Sta Luzia;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;BJV9MD2;149920;1;29/08/2025; N/A ;DML - N.S. Aparecida;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;28DRCK2;158419;1;29/08/2025; N/A ;Almoxarifado;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 3040;BJQDMD2;218367;1;29/08/2025; N/A ;Sl Descanso Médicos;;Eduardo Nones;Encontrado
+Antena WIFI6 AX1800;EP-AX1697;N/A;1;29/08/2025; N/A ; COMIP ;Fábio Fouchy;Eduardo Nones;Encontrado
+Monitor P2222H;;219429;1;29/08/2025; N/A ; Praticas Assistenciais ;;Eduardo Nones;Encontrado
+Desktop OPTIPLEX 7020;HLTVSB4;230285;1;30/08/2025; N/A ; UTI (Lado A) ;Lotada, não permitirando inst. PACS;Rafael Muller;Encontrado
+Fita para rotulador;N/A;N/A;1;30/08/2025; N/A ; Rafael Muller ;;Rafael Muller;Encontrado
+Teclado;N/A;N/A;1;01/09/2025; 365.162 ; UTI ;;Rafael Muller;Encontrado
+Notebook DELL Latitude 5480;5WNRFP2;188897;1;02/09/2025; N/A ; Eduarda Caetano ;Emprestimo - devolução no dia 03/09;Eduardo Nones;Encontrado
+Monitor P2222H;BB2THH3;231441;1;03/09/2025; N/A ; Ana Ogliari ;Tela Secundária;Rafael Muller;Encontrado
+Cabo de Energia;N/A;N/A;1;03/09/2025; N/A ; Ana Ogliari ;Tela Secundária;Rafael Muller;Encontrado
+Cabo HDMI;N/A;N/A;1;03/09/2025; N/A ; Ana Ogliari ;Tela Secundária;Rafael Muller;Encontrado
+Fonte Fortek 200W;N/A;N/A;1;03/09/2025; N/A ; PS Sus ;Pc Totem SUS;Fonte Fortek 200W;Encontrado
+Notebook DELL Latitude 3450;DZVVSB4;231437;1;03/09/2025; N/A ; Maruhan  ;Projeto Beira Leito;Maruhan;Encontrado
+Mouse;N/A;N/A;1;03/09/2025; N/A ; Maruhan ;Projeto Beira Leito;Maruhan;Encontrado
+Leitor de cod de barras;N/A;N/A;1;03/09/2025; N/A ; Maruhan ;Projeto Beira Leito;Maruhan ;Encontrado
+Notebook DELL Latitude 5480;3SR6CD2;189737;1;03/09/2025; N/A ;Leticia Remussi Vanzuita;Devolvido para novo colaborador;Rafael Muller;Encontrado
+Notebook DELL Latitude 5480;9PS6QK2;189697;1;04/09/2025; 370.775 ;Sueli Patrimonio;Emprestimo (prazo em aberto);Edson Prado;Encontrado
+Headset;N/A;N/A;1;05/09/2025; 371.216 ; Jonathan Willian Schaff ;Manutenção;Rafael Muller;Encontrado
+Teclado;N/A;N/A;1;05/09/2025; 372.433 ; Fabio Junior Sampaio ;UTI Lado A;Rafael Muller;Encontrado
+Desktop OPTIPLEX 3000;G04WST3;197008;1;06/09/2025; N/A ; Enf. Coração de Jesus ;Enf. Coração de Jesus;Eduardo Nones;Encontrado
+Suporte Notebook;N/A;N/A;1;08/09/2025; N/A ; N/A ;Validação Estoque ;Guilherme Flores;Encontrado
+Pilhas AAA;N/A;N/A;1;08/09/2025; N/A ; Sala TI ;;Jefferson Cantareli;Encontrado
+Pilhas AAA;N/A;N/A;2;08/09/2025; N/A ; Sala TI ;;Vitor Barros;Encontrado
+Monitor P2222H;J3K7ZM3;219472;1;09/09/2025; 374.100 ; Farmácia CC ;;Rafael Muller;Encontrado
+Cabo de Rede;N/A;N/A;1;09/09/2025; 375.017 ; CC ;Sala 5;Rafael Muller;Encontrado
+Teclado;N/A;N/A;1;09/09/2025; 371.026 ; Manutenção ;Oficina da Marcenária;Rafael Muller;Encontrado
+Notebook Dell Latitude E5470;92K5MD2;189691;1;10/09/2025; N/A ;;Auditório;Graziela Corrente;Encontrado
+SSD 240GB;N/A;N/A;1;10/09/2025; N/A ; Troca CPU Obsoleto ;;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3040;28VMCK2;158413;1;10/09/2025; 375.497 ; Emergência Geral - Painel BI ;;Guilherme Flores;Encontrado
+Cabo de Energia;N/A;N/A;1;10/09/2025; 375.497 ; Emergência Geral - Painel BI ;;Guilherme Flores;Encontrado
+Cabo HDMI;N/A;N/A;1;10/09/2025; 375.497 ; Emergência Geral - Painel BI ;;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;2MTVSB4;230276;1;10/09/2025; N/A ; PS - Enfermagem ;;Eduardo Nones;Encontrado
+Mouse;N/A;N/A;1;11/09/2025; 377.930 ; Maternidade ;;Rafael Muller;Encontrado
+Desktop OPTIPLEX 7020;BMTVSB4;230298;1;11/09/2025; 377.758 ; Santa Luzia ;;Rafael Muller;Encontrado
+Teclado;N/A;N/A;1;12/09/2025; 378.801 ; Sala dos Farmas ;Guilherme Raimundo;Edson Prado;Encontrado
+Mouse Pad;N/A;N/A;3;12/09/2025;379.626; Lavanderia ;Sueli Mayer;Edson Prado;Encontrado
+Mouse;N/A;N/A;1;12/09/2025; 379.679 ; Comp. do Fluxista ;Andrea Sousa ;Edson Prado;Encontrado
+SSD 240GB;N/A;N/A;1;12/09/2025; N/A ; Obsoleto ;Guilherme Flores;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3060;2JQ24W2;173453;1;12/09/2025; N/A ; CC - Monta Carga ;Troca Obsoleto;Edson Prado;Encontrado
+Desktop OPTIPLEX 3080;82S8WF3;182893;1;13/09/2025; N/A ; Sala 10 CC ;Obsolescência;Rafael Muller;Encontrado
+Desktop OPTIPLEX 3080;B1S8WF3;182919;1;13/09/2025; N/A ; Sala 10 CC ;Obsolescência;Rafael Muller;Encontrado
+Desktop OPTIPLEX 3080;B0S8WF3;182905;1;13/09/2025; N/A ; Corredor CDI ;Obsolescência;Rafael Muller;Encontrado
+Desktop OPTIPLEX 3080;C2S8WF3;182922;1;13/09/2025; N/A ; Escrituração CC ;Obsolescência;Rafael Muller;Encontrado
+Desktop OPTIPLEX 3080;F0S8WF3;182932;1;15/09/2025; N/A ; Almoxarifado ;Obsolescência;Rafael Muller;Encontrado
+Desktop OPTIPLEX 3080;5FVJQB3;182754;1;15/09/2025; N/A ; Almoxarifado ;Obsolescência;Rafael Muller;Encontrado
+Desktop OPTIPLEX 3000;7GX53Y3;189601;1;15/09/2025; N/A ; Medicina do Trabalho ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3000;FGX53Y3;219799;1;15/09/2025; N/A ; RH ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3080;72S8WF3;182895;1;16/09/2025; N/A ; Quarto Cardiologistas PS ;Obsolescência;Rafael Muller;Encontrado
+Desktop OPTIPLEX 3080;32S8WF3;182845;1;16/09/2025; N/A ; Sala de Acolhimento P/Alta PS ;Obsolescência;Rafael Muller;Encontrado
+Desktop OPTIPLEX 3000;D3F8NY3;189676;1;16/09/2025; N/A ; Transpl - Consultório 2 ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3000;DJX53Y3;189567;1;16/09/2025; N/A ; Transpl - Supervisão ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3000;D366YY3;188839;1;16/09/2025; N/A ; Transpl - Consultório 3 ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3000;3166YY3;188842;1;16/09/2025; N/A ; Transpl - Corredor ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3000;JFX53Y3;189607;1;16/09/2025; N/A ; Transpl - Samanta(ADM) ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3000;H366YY3;188816;1;16/09/2025; N/A ; Transpl - Class de Risco ;Obsolescência;Guilherme Flores;Encontrado
+Teclado;N/A;N/A;1;16/09/2025; 375.267 ; Manutenção ;Jonathan Schaff;Edson Prado;Encontrado
+Cabo de Energia;N/A;N/A;1;16/09/2025; N/A ; Manutenção ;Para usar em lixadeira - Sem chamado;Maruhan Teodoro;Encontrado
+Webcam;N/A;N/A;1;16/09/2025; 381.612 ; Manutenção ;Jonathan;Edson Prado;Encontrado
+Desktop OPTIPLEX 3000;J266YY3;188803;1;16/09/2025; N/A ; CHT ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3000;9166YY3;188841;1;16/09/2025; N/A ; CHT ;Obsolescência;Guilherme Flores;Encontrado
+Teclado;N/A;N/A;1;17/09/2025; 383.318 ; Internação ;Troca de teclado com Defeito;Rafael Muller;Encontrado
+Notebook Dell Latitude E5470;92K5MD2;189691;1;17/09/2025; N/A ; Maria - Segurança do Trabalho ;Empréstimo Auditório;Rafael Muller;Encontrado
+Projetor Epson ;N/A;10765;1;17/09/2025; N/A ; Maria - Segurança do Trabalho ;Empréstimo Auditório;Rafael Muller;Encontrado
+Extensor USB;N/A;N/A;1;17/09/2025; 382.604 ; Yara - Sala de Reunião ;R1;Rafael Muller;Encontrado
+Desktop OPTIPLEX 3080;10S8WF3;182910;1;19/09/2025; N/A ; UTI - Sala de Espera (SL Reuniões Nova) ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3000;9266YY3;188814;1;19/09/2025; N/A ; SAC ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;3NTVSB4;231405;1;19/09/2025; N/A ; Serviço Social ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;9QTVSB4;231409;1;19/09/2025; N/A ; Serviço Social ;Obsolescência;Guilherme Flores;Encontrado
+Antena WIFI6 AX1800;N/A;N/A;1;22/09/2025; 384.182 ; Suely - Lavanderia ;Sumiu o Adaptador aqui na sala TI;Maruhan Teodoro;Encontrado
+Desktop OPTIPLEX 7020;BPTVSB4;231407;1;23/09/2025; N/A ; Diretoria - Recepção ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7010;7K66K34;219381;1;23/09/2025; N/A ; OPME - Hemodinâmica ;Obsolescência;Guilherme Flores;Encontrado
+Bateria 2032;N/A;N/A;1;23/09/2025; N/A ; Sala Dora ;Máquina com defeito na bateria;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3060;2JM44W2;173458;1;24/09/2025; N/A ; Sala Treinamento - Dora ;Obsolescência;Guilherme Flores;Encontrado
+Adaptador Wifi;N/A;N/A;1;24/09/2025; N/A ; Coord OPME ;Empréstimo;Guilherme Flores;Encontrado
+Cabo HDMI;N/A;N/A;1;25/09/2025; N/A ; Yara Caroline Vaz ;Troca de cabo;Rafael Muller;Encontrado
+Desktop OPTIPLEX 3000;GJX53Y3;189576;1;26/09/2025; N/A ; SAC ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7010;2G66K34;219403;1;26/09/2025; N/A ; NSDG Sala de Acolhimento ;Obsolescência;Guilherme Flores;Encontrado
+Cabo DisplayPort;N/A;N/A;1;26/09/2025; N/A ; Sala dos Farmas ;Substituição;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3000;H2F8NY3;189678;1;26/09/2025; N/A ; Almoxarifado - Manutenção ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OptiPlex 3090;HD83LQ3;196842;1;26/09/2025; N/A ; Sala dos Farmaceuticos ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OptiPlex 3090;3F83LQ3;196851;1;26/09/2025; N/A ; Sala dos Farmaceuticos ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OptiPlex 3090;PGNNHQ3;196821;1;26/09/2025; N/A ; Sala dos Farmaceuticos ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7010;6H66K34;219375;1;29/09/2025; N/A ; Sala de Laudos ;Obsolescência;Guilherme Flores;Encontrado
+;N/A;N/A;1;29/09/2025; 388.893 ; PS ;Colocado pois ponto está com problema;Antena Multilaser ;Não encontrado
+Fita para rotulador;N/A;N/A;1;29/09/2025; N/A ; TI ;Reposição;Rafael Muller;Encontrado
+Desktop OPTIPLEX 7020;4NTVSB4;230250;1;29/09/2025; N/A ; Farmácia Clínica ;Obsolescência;Rafael Muller;Encontrado
+Desktop OPTIPLEX 7020;5NTVSB4;230259;1;29/09/2025; N/A ; Farmácia Clínica ;Obsolescência;Rafael Muller;Encontrado
+Desktop OPTIPLEX 7020;DNTVSB4;230295;1;29/09/2025; N/A ; Farmácia Clínica ;Obsolescência;Rafael Muller;Encontrado
+Desktop OPTIPLEX 7020;5QTVSB4;230281;1;29/09/2025; N/A ; Farmácia Clínica ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;1QTVSB4;230282;1;29/09/2025; N/A ; Farmácia Clínica ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;HNTVSB4;230262;1;29/09/2025; N/A ; Farmácia Clínica ;Obsolescência;Guilherme Flores;Encontrado
+Webcam;N/A;N/A;1;30/09/2025; 394.991 ; UTI Geral ;Sala nova de reunião UTI Geral;Maruhan Teodoro;Encontrado
+Headset;N/A;N/A;1;30/09/2025; 394.992 ; UTI Geral ;Sala nova de reunião UTI Geral;Maruhan Teodoro;Encontrado
+Mouse;N/A;N/A;1;30/09/2025; 194.645 ; Farmácia 5ª Andar ;Defeito;Guilherme Flores;Encontrado
+Cabo HDMI;N/A;N/A;1;30/09/2025; 395.565 ; Lavanderia ;Defeito;Tiago Santana;Encontrado
+Desktop OPTIPLEX 7010;BB66K34;219288;1;30/09/2025; N/A ; Manutenção - Liderança ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7010;BC66K34;219271;1;01/10/2025; N/A ; Custos  ;Obsolescência;Guilherme Flores;Encontrado
+Monitor LG E19418X;;9865;1;01/10/2025; N/A ; Manutenção - Mecânica ;;Rafael Muller;Encontrado
+Desktop OPTIPLEX 3000;6GX53Y3;189605;1;02/10/2025; N/A ; SAC ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;DMTVSB4;230251;1;02/10/2025; N/A ; Comunicação ;Obsolescência;Guilherme Flores;Encontrado
+Mouse;N/A;N/A;1;03/10/2025; 398.943 ; UTI ;Lado A;Rafael Muller;Encontrado
+Monitor P2222H;GLW6ZM3;219174;1;04/10/2025; N/A ; UTI - Corredor ;Obsolescência;Tiago Abreu;Encontrado
+Monitor P2222H;GJY5ZM3;219178;1;04/10/2025; N/A ; CC - Sala de Cirurgia 10 ;Obsolescência;Tiago Abreu;Encontrado
+Monitor P2222H;GJ88ZM3;219188;1;05/10/2025; N/A ; CC - Sala de Cirurgia 10 ;Obsolescência;Tiago Abreu;Encontrado
+Monitor P2222H;G81P8Q3;219453;1;05/10/2025; N/A ; CDI - Corredor ;Obsolescência;Tiago Abreu;Encontrado
+Teclado;N/A;N/A;1;06/10/2025; 401.724 ; Farmácia Clínica ;Defeito;Guilherme Flores;Encontrado
+Monitor P2222H;G5T7ZM3;219187;1;06/10/2025; N/A ; CC - Monta Carga ;Obsolescência;Tiago Abreu;Encontrado
+Desktop OPTIPLEX 7010;GF66K34;219377;1;07/10/2025; N/A ; Sala de Laudos ;Obsolescência;Guilherme Flores;Encontrado
+Adaptador Wifi;N/A;B/A;1;07/10/2025; 401.646 ; Sala de Reunião - UCO ;Necessita de Wifi;Rafael Muller;Encontrado
+Bateria 2032;N/A;N/A;1;08/10/2025; 403.532 ; Faturamento ;Defeito;Tiago Abreu;Encontrado
+Desktop OPTIPLEX 3040;BJY6MD2;149934;1;09/10/2025; 399.592 ; SND ;Empréstimo;Guilherme Flores;Encontrado
+Cabo de Energia;N/A;N/A;1;09/10/2025; 399.592 ; SND ;Empréstimo;Guilherme Flores;Encontrado
+Antena WIFI6 AX1800;N/A;N/A;1;09/10/2025; 399.592 ; SND ;Empréstimo;Guilherme Flores;Encontrado
+Adaptador DisplayPort x VGA;N/A;N/A;1;09/10/2025; 399.592 ; SND ;Empréstimo;Guilherme Flores;Encontrado
+Cabo VGA;N/A;N/A;1;09/10/2025; 399.592 ; SND ;Empréstimo;Guilherme Flores;Encontrado
+Teclado;N/A;N/A;1;09/10/2025; 399.592 ; SND ;Empréstimo;Guilherme Flores;Encontrado
+Mouse;N/A;N/A;1;09/10/2025; 399.592 ; SND ;Empréstimo;Guilherme Flores;Encontrado
+Monitor SAM S19C301F;Y1X9HXFF408052Z;192285;1;09/10/2025; 399.592 ; SND ;Empréstimo;Guilherme Flores;Encontrado
+Monitor P2425H;C5JQM64;230203;1;09/10/2025; N/A ; N S das Graças - SL de Acolhimento ;Obsolescência;Guilherme Flores;Encontrado
+Mouse;N/A;N/A;1;09/10/2025;403.438; N S das Graças - SL de Acolhimento ;Defeito;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;1NTVSB4;230265;1;10/10/2025; N/A ; Menino Deus ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;8PTVSB4;230261;1;10/10/2025; N/A ; NIR - Coordenação ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3000;B366YY3;188845;1;10/10/2025; N/A ; CCIH ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;G9F6ZM3;219192;1;10/10/2025; N/A ; Ambulatório 110 - Recepção ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;G9Z5ZM3;219200;1;10/10/2025; N/A ; Sala 101 - Consultório 1 ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;GM56ZM3;219179;1;10/10/2025; N/A ; Sala 101 - Consultório 2 ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;G837ZM3;219430;1;10/10/2025; N/A ; Convênio - Guichê 3 ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;6DV6ZM3;219183;1;10/10/2025; N/A ; Sala de Acolhimento Pós Alta ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;FG88ZM3;219195;1;10/10/2025; N/A ; Amb Trans - Administrativo ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;FKQ8ZM3;219431;1;10/10/2025; N/A ; Amb Trans - Recepção ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;FZL6ZM3;219161;1;10/10/2025; N/A ; Amb Trans - Class Risco ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;G0W6ZM3;219419;1;10/10/2025; N/A ; Amb Trans - Fisioterapia ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;CZQQM64;230192;1;10/10/2025; N/A ; Faturamento SUS - Extra ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;C39QM64;230191;1;10/10/2025; N/A ; Faturamento SUS - Extra ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;3SNRM64;230228;1;11/10/2025; N/A ; CDI - Posto de Enfermagem ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;C44SM64;230209;1;11/10/2025; N/A ; CDI - Posto de Enfermagem ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;BP8QM64;230226;1;11/10/2025; N/A ; CDI - Posto de Enfermagem ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;BPFRM64;230204;1;11/10/2025; N/A ; Transporte do Paciente  ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;C31TM64;230194;1;11/10/2025; N/A ;Hemodinâmica - Sala de Comando 01;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;BGFRM64;230246;1;11/10/2025; N/A ; Internação ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;HK1TM64;230240;1;12/10/2025; N/A ; N.S Fátima - Posto de Enfermagem ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;HKWRM64;230190;1;12/10/2025; N/A ; Internação ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2222H;G8W6ZM3;219196;1;12/10/2025; N/A ; CAF - Fracionamento ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;G7W6ZM3;219447;1;13/10/2025; N/A ;Ambulatório 106 - Ergometria;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;CT3SM64;230189;1;13/10/2025; N/A ;Diretoria - Gerente Médico;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;C41TM64;230193;1;13/10/2025; N/A ;Faturamento SUS;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;BPNRM64;230247;1;13/10/2025; N/A ;Gestão de Pessoas;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;3R5RM64;230230;1;13/10/2025; N/A ;Almoxarifado;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;3STSM64;230232;1;13/10/2025; N/A ;Ambulatório Sala 110;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;C0RQM64;230200;1;13/10/2025; N/A ;Faturamento SUS;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;BQTSM64;230199;1;13/10/2025; N/A ;Faturamento SUS;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;HKFRM64;230195;1;13/10/2025; N/A ; Almoxarifado ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;3RZQM64;230231;1;13/10/2025; N/A ; Almoxarifado ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;3RHQM64;230235;1;13/10/2025; N/A ; TI - Vitor ;Troca;Rafael Muller;Encontrado
+Monitor P2425H;3RDRM64;230236;1;13/10/2025; N/A ; TI - Vitor ;Troca;Rafael Muller;Encontrado
+Monitor P2425H;BQNRM64;230205;1;14/10/2025; N/A ;Menino Deus - Em Frente ao Posto;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;C49QM64;230198;1;14/10/2025; N/A ; Praticas Assistenciais  ;Obsolescência;Guilherme Flores;Encontrado
+Monitor SAM S19C300;LS19PUYKFMZD;7997;1;14/10/2025; 400.079 ; Lavanderia ;Troca;Tiago Abreu;Encontrado
+Monitor P2222H;5S46ZM3;219451;1;15/10/2025; N/A ;Manutenção - Almoxarifado;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;BQWRM64;230244;1;15/10/2025; N/A ;Ambulatório TX - Administrativo;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;BPHQM64;230248;1;15/10/2025; N/A ;Ambulatório TX - Administrativo;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;HKZQM64;230211;1;15/10/2025; N/A ; Compras ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;BN8TM64;230206;1;15/10/2025; N/A ; Compras ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;HKTSM64;230234;1;15/10/2025; N/A ; Manutenção - Liderança ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;3RTSM64;230224;1;15/10/2025; N/A ; OPME ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;BC6RM64;230197;1;15/10/2025; N/A ; OPME ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;CXNRM64;230212;1;15/10/2025; N/A ;  OPME  ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;BP6RM64;230196;1;15/10/2025; N/A ; Qualidade ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;C51TM64;230208;1;15/10/2025; N/A ; Qualidade ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;HG6RM64;230188;1;15/10/2025; N/A ; Tesouraria ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;3SHQM64;230233;1;15/10/2025; N/A ; Compras - Líder Suprimentos ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;G9B7ZM3;219190;1;15/10/2025; N/A ;Manutenção - Almoxarifado;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;G818ZM3;219189;1;15/10/2025; N/A ; Manutenção - Engenharia Clínica ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;BKWRM64;230215;1;15/10/2025; N/A ; OPME ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2425H;C59QM64;230214;1;15/10/2025; N/A ; Qualidade ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;C4CSM64;230216;1;15/10/2025; N/A ; Qualidade ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;3S1TM64;230225;1;15/10/2025; N/A ; Custos ;Obsolescência;Rafael Muller;Encontrado
+Teclado;N/A;N/A;1;15/10/2025; 408.522 ; Faturamento SUS - Viviane ;Troca;Rafael Muller;Encontrado
+Monitor Aoc E2270S;GYVN1XA006369;188750;1;15/10/2025; 409.079 ; Lavanderia ;Troca;Rafael Muller;Encontrado
+Monitor Aoc E2270S;DTK451A004875;192075;1;15/10/2025; 410.381 ; Nutrição ;Troca;Rafael Muller;Encontrado
+Desktop OPTIPLEX 7020;GNTVSB4;231408;1;16/10/2025; N/A ; Hemodinâmica - Sl de Comando 1 ;Obsolescência;Tiago Abreu;Encontrado
+Teclado;N/A;N/A;1;20/10/2025; 414.176 ; Menino de Deus ;Substituição;Tiago Abreu;Encontrado
+Desktop OPTIPLEX 7020;1MTVSB4;230272;1;21/10/2025;N/A; CC - Escrituração ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;3MTVSB4;230284;1;21/10/2025; N/A ; CC - Escrituração ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;GPTVSB4;231410;1;21/10/2025; N/A ; UTI - Lado A ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;9MTVSB4;230274;1;21/10/2025; N/A ; UTI - Lado A ;Obsolescência;Guilherme Flores;Encontrado
+Notebook DELL Latitude 5480;9PS6QK2;189697;1;21/10/2025; N/A ; CC - Sala de Cirurgia 05 ;Troca;Guilherme Flores;Encontrado
+Monitor P2222H;FQH8ZM3;219172;1;22/10/2025; N/A ;Serviço Social;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;GHW6ZM3;219194;1;22/10/2025; N/A ;Sala ADM - Frente ao Elevador;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;3Q6RM64;230229;1;22/10/2025; N/A ;CCIH Ministério;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;C4JQM64;230207;1;22/10/2025; N/A ;CCIH Ministério;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;BFWRM64;230249;1;22/10/2025; N/A ; Agendamento ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;C46RM64;230201;1;22/10/2025; N/A ; Agendamento ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2425H;CSQQM64;230210;1;22/10/2025; N/A ; Agendamento ;Obsolescência;Guilherme Flores;Encontrado
+Teclado;N/A;N/A;1;23/10/2025; 418.726 ; NSG - Escrituração ;Troca;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;CMTVSB4;230255;1;23/10/2025; N/A ; Almoxarifado ;Obsolescência;Guilherme Flores;Encontrado
+Teclado;N/A;N/A;1;23/10/2025; N/A ; TI - Vitor ;Troca;Guilherme Flores;Encontrado
+Teclado;N/A;N/A;1;24/10/2025; N/A ; Nossa Senhora das Graças ;Troca;Tiago Abreu;Encontrado
+Monitor P2222H;G966ZM3;219182;1;27/10/2025; N/A ; Direção - Yara ;Aquisição;Rafael Muller;Encontrado
+Monitor P2425H;CZHQM64;230217;1;29/10/2025; N/A ;OPME - Hemodinâmica (Tânia);Obsolescência;Guilherme Flores;Encontrado
+Monitor P2422H;3R8TM64;230227;1;29/10/2025; N/A ;Transplantes - Supervisão (Ariadne);Obsolescência;Lucas/Roberto;Encontrado
+Monitor P2222H;GJN6ZM3;219176;1;29/10/2025; N/A ;Qualidade;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;GBZ5ZM3;219159;1;29/10/2025; N/A ;Qualidade;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;G788ZM3;219197;1;29/10/2025; N/A ;Qualidade;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;GCQ5ZM3;219198;1;29/10/2025; N/A ;Qualidade;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;GLQ8ZM3;219177;1;29/10/2025; N/A ;Segurança do Trabalho;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2422H;7PZPXK3;196878;1;30/10/2025; N/A ;Ambulatório de Especialidade (Fernanda);Obsolescência;Guilherme Flores;Encontrado
+Monitor P2422H;3R1TM64;230237;1;30/10/2025; N/A ;OPME;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2422H;CZFRM64;230219;1;30/10/2025; N/A ;Faturamento SUS;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2422H;C5XRM64;230220;1;30/10/2025; N/A ;Faturamento SUS;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2422H;CZYQM64;230223;1;30/10/2025; N/A ;Faturamento SUS;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2422H;BQDRM64;230213;1;30/10/2025; N/A ;Faturamento SUS;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2422H;BFZQM64;230221;1;30/10/2025; N/A ;OPME;Obsolescência;Guilherme Flores;Encontrado
+Monitor Aoc E2270S;GYVNN1XA005699;188721;1;30/10/2025; N/A ; Amb de Transplante ;Emprestimo;Tiago Abreu;Encontrado
+Desktop OPTIPLEX 7020;7PTVSB4;230296;1;30/10/2025; N/A ; CC - Coordenação ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2422H;2MBPXK3;196877;1;31/10/2025; N/A ;SCIRAS (Caroline);Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;G888ZM3;219449;1;31/10/2025; N/A ;Emergência Geral - Coordenação;Obsolescência;Guilherme Flores;Encontrado
+Monitor Aoc E2270S;GYVN1XA006477;188755;1;31/10/2025; N/A ; Coworking SL 1 ;Obsolescência;Rafael Muller;Encontrado
+Monitor Aoc E2270S;GYVN1XA005688;188741;1;31/10/2025; N/A ; Coworking SL 1 ;Obsolescência;Rafael Muller;Encontrado
+Fita para rotulador;N/A;N/A;1;31/10/2025; N/A ; TI ;;Rafael Muller;Encontrado
+Monitor Aoc E2270S;GYVN1XA005350;188771;1;31/10/2025; N/A ; Coworking SL 1 ;Obsolescência;Rafael Muller;Encontrado
+Monitor Aoc E2270S;GYVN1XA005692;188772;1;31/10/2025; N/A ;  Coworking SL 2 ;Obsolescência;Rafael Muller;Encontrado
+Monitor Aoc E2270S;GYVN1XA004843;188774;1;31/10/2025; N/A ;  Coworking SL 2 ;Obsolescência;Rafael Muller;Encontrado
+Monitor P2422H;C5CSM64;230222;1;31/10/2025; N/A ;Ambulatório de Transplante - Recepção;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2222H;G6R5ZM3;219185;1;31/10/2025; N/A ;Sala dos Farmacêuticos;Obsolescência;Guilherme Flores;Encontrado
+Monitor Aoc E2270S;GYVN1XA006517;188765;1;02/11/2025; N/A ; Manutenção - Eletrotécnica ;Obsolescência;Tiago Abreu;Encontrado
+Monitor Aoc E2270S;GYVN1XA003590;188708;1;02/11/2025; N/A ; Manutenção - Hidráulica ;Obsolescência;Tiago Abreu;Encontrado
+Monitor Aoc E2270S;GYVN1XA005307;188738;1;02/11/2025; N/A ; Manutenção - Marcenaria ;Obsolescência;Tiago Abreu;Encontrado
+Monitor Aoc E2270S;GYVN1XA003607;188786;1;02/11/2025; N/A ; Manutenção - Mecânica ;Obsolescência;Tiago Abreu;Encontrado
+Monitor Aoc E2270S;GYVN1XA004840;188733;1;02/11/2025; N/A ; Manutenção - Mecânica Refrigeração ;Obsolescência;Tiago Abreu;Encontrado
+Monitor Aoc E2270S;GYVN1XA003597;188712;1;02/11/2025; N/A ; Manutenção - Pintura ;Obsolescência;Tiago Abreu;Encontrado
+Monitor Aoc E2270S;GYVN1XA003719;188785;1;02/11/2025; N/A ; CDI - Sala de Estudos ;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2422H;;196994;1;03/11/2025; N/A ;Captação de Recursos;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2422H;BPTSM64;230218;1;03/11/2025; N/A ;UTI - Coordenação;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 7020;4PTVSB4;230252;1;03/11/2025; N/A ; UCO - Coordenação ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3060;9TSLQX2;162239;1;03/11/2025; N/A ; Gestão de Pessoas - Educon ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3060;2JTZ3W2;173445;1;03/11/2025; N/A ; Amb 106 - Sala de Gesso - Cons 1 ;Obsolescência;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3060;2JT64W2;218885;1;03/11/2025; N/A ; Amb 101 ;Substituição;Tiago Abreu;Encontrado
+Desktop OPTIPLEX 3060;2JN54W2;173456;1;03/11/2025; N/A ; Amb 101 ;Substituição;Tiago Abreu;Encontrado
+Desktop OPTIPLEX 7020;3QTVSB4;230253;1;04/11/2025; N/A ; Sala de Reuniões - R2 ;Obsolescência;Rafael Muller;Encontrado
+Monitor Aoc E2270S;GYVN1XA005263;188737;1;04/11/2025; N/A ; Tesouraria ;Aquisição;Guilherme Flores;Encontrado
+Monitor P2222H;F1W6ZM3;219180;1;04/11/2025; N/A ;Educação Contas Médicas;Obsolescência;Guilherme Flores;Encontrado
+Monitor P2422H;;196987;1;04/11/2025; N/A ;Gerencia Assistencial Educação Continuada;Obsolescência;Guilherme Flores;Encontrado
+Leitor de cod de barras;N/A;N/A;1;04/11/2025; 428.029 ; UTI ;Anterior sem fio, está com problema;Rafael Muller;Encontrado
+Mouse;N/A;N/A;1;04/11/2025; 428.014 ; Farmácia 3º ;Troca;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;04/11/2025; N/A ; Máquina de Crise UCO ; Máquina de Crise UCO ;Rafael Muller;Encontrado
+Monitor P2222H;GK88ZM3;219460;1;; 394.047 ; CME - 5ºAndar ;Novo Computador no local;;Encontrado
+Cabo de Energia;N/A;N/A;1;; 394.047 ; CME - 5ºAndar ;Novo Computador no local;;Encontrado
+Cabo DisplayPort;N/A;N/A;1;; 394.047 ; CME - 5ºAndar ;Novo Computador no local;;Encontrado
+Teclado;N/A;N/A;1;; 394.047 ; CME - 5ºAndar ;Novo Computador no local;;Encontrado
+Mouse;N/A;N/A;1;; 394.047 ; CME - 5ºAndar ;Novo Computador no local;;Encontrado
+Cabo de Rede;N/A;N/A;1;; 394.047 ; CME - 5ºAndar ;Novo Computador no local;;Encontrado
+Mouse Pad;N/A;N/A;1;; 394.047 ; CME - 5ºAndar ;Novo Computador no local;;Encontrado
+Desktop OptiPlex 3090;6F83LQ3;197838;1;; 394.047 ; CME - 5ºAndar ;Novo Computador no local;;Encontrado
+Monitor Aoc E2270S;GYVN1XA006366;188748;1;; N/A ; Emergência Geral - Quarto Cardiologistas ;Obsolescência;;Encontrado
+Monitor Aoc E2270S;GYVN1XA006508;188760;1;; N/A ;TRR - Capela - Descanso Médico;Obsolescência;;Encontrado
+Adaptador Wifi;N/A;N/A;1;04/11/2025; 428.245 ; Sala de Reunião - UTI ;;Rafael Muller;Encontrado
+Mouse;N/A;N/A;;05/11/2025; 430.220 ; Unidade Coração de Jesus ;Troca;Tiago Abreu;Encontrado
+Cabo HDMI;N/A;N/A;1;06/11/2025; 431.199 ; Sala de Reunião - UTI ;Troca;Rafael Muller;Encontrado
+Webcam;N/A;N/A;1;06/11/2025; N/A ; Kemuel - Tesouraria ;Aquisição;Rafael Muller;Encontrado
+Pilhas AA;N/A;N/A;2;07/11/2025; N/A ; TI  ;Troca de pilha mouse;Vitor Machado;Encontrado
+Notebook DELL Latitude 3450;40WVSB4;231439;1;07/11/2025; 433.185 ; Patrimonio - Sueli ;Empréstimo com tempo indeterminado;Guilherme Flores;Encontrado
+Desktop OPTIPLEX 3040;BJV5MD2;149924;1;10/11/2025; 433.712 ; Engenharia Clinica ;Painel - Troca por conta da placa mãe;Rafael Muller;Encontrado
+Adaptador DVI x VGA;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Cabo de Energia;N/A;N/A;46;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Cabo de Rede;N/A;N/A;23;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Cabo DisplayPort;N/A;N/A;319;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Cabo HDMI;N/A;N/A;54;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Cabo USB - Type-C;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Cabo VGA;N/A;N/A;94;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Carregador USB x Indução;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+HP Prodesk 600 G1 SFF;N/A;N/A;4;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+HP 402 G1 SFF BUSINESS PC;N/A;N/A;21;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Impressora M4020ND;N/A;N/A;6;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Mouse Pad;N/A;N/A;33;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Desktop OPTIPLEX 3000;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Desktop OPTIPLEX 3040;N/A;N/A;44;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Desktop OPTIPLEX 3050;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Desktop OPTIPLEX 7020;N/A;N/A;3;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Desktop OPTIPLEX 3060;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Extensor HDMI;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor  DELL 200V41;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor DELL 193V5L;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor DELL 19135B;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor DELL 19418X;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor DELL 19EB13PW;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor DELL 633NW;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor DELL 7128A;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor DELL 733nw;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor DELL E1960TT;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor DELL E1970TT;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor DELL E2222HSF;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor DELL E2222HSI;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor DELL L1742TT;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor DELL LCD;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor LG FLATRON 19EB13P-B;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor HP L1910;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor HP V194Z;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor HP V198BZ;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor HP V198BZ G2;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor LG 20EN3388A;N/A;N/A;3;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor LG 20EN33SSA;N/A;N/A;3;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor LG E19418X;N/A;N/A;13;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor P1913SF;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor P2222H;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor P2425H;N/A;N/A;9;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor P242HB;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor PHI 200V4LSB2/57;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor SAM S19C300;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor SAM S19C300F;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor SAM S19C301F;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Monitor W19438V;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Notebook DELL Vostro 3401;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Notebook DELL Latitude 3040;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+;;;;;;;;;
+Notebook DELL Latitude 3440;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Scanner portátil USB;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+SSD 240GB;N/A;N/A;4;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+SSD 500GB;N/A;N/A;4;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Teclado;N/A;N/A;32;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Teclado Beira Leito;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+HP ProDesk 400 G7;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado
+;;;;;;;;;Não encontrado

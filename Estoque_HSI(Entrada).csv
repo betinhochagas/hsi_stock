@@ -1,0 +1,622 @@
+;;;;;;;;
+;ENTRADA ESTOQUE TI HSI;;;;;;;
+;Item;Serial Number/Service Tag;Patrimônio;Quantidade;Data de Entrada;Ticket;Observação/Recebido por:;Item encontrado na Drop List?
+;Adaptador DisplayPort x VGA;N/A;N/A;2;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Adaptador HDMI x VGA;N/A;N/A;2;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Adaptador Wifi;N/A;N/A;14;06/08/2025;N/A;ADPTADOR WIFI;Encontrado
+;Adaptador Viagem - Turbo;N/A;N/A;1;13/08/2025;N/A;Adptador viagem turbo;Encontrado
+;Antena WIFI6 AX1800;N/A;N/A;4;12/08/2025;N/A;Antena WIFI6 AX1800;Encontrado
+;Adaptador DVI x VGA;N/A;N/A;8;06/08/2025;N/A;APTADOR DVI /VGA;Encontrado
+;Bateria WDXOR DELL;N/A;N/A;2;12/08/2025;N/A;Bateria WDXOR DELL;Encontrado
+;Extensor HDMI;N/A;N/A;2;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Cabo USB - Type-C;N/A;N/A;5;06/08/2025;N/A;CABO TIPO C;Encontrado
+;Cabo de energia;N/A;N/A;169;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Cabo Duplicador HDMI;;;;;;Cabo Duplicador HDMI;Encontrado
+;Extensor HDMI RJ45;N/A;N/A;2;12/08/2025;N/A;Extensor HDMI RJ45;Encontrado
+;Cabo de Rede;N/A;N/A;86;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Cabo DisplayPort;N/A;N/A;370;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Cabo Extensor VGA;N/A;N/A;43;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Cabo HDMI;N/A;N/A;90;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Cabo Impressora;N/A;N/A;14;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Cabo VGA;N/A;N/A;148;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;;N/A;N/A;5;12/09/2025;N/A;Cabo USB x AXB 5 M;Não encontrado
+;;N/A;N/A;30;12/09/2025;N/A;Cabo USB x AXB  3 M;Não encontrado
+;Capa p/ Smartphone  A55 5G;N/A;N/A;1;13/08/2025;N/A;Capa p/ Smartphone  A55 5G;Encontrado
+;Smartphone Samsung;N/A;N/A;1;06/08/2025;N/A;CELULAR SANSUNG;Encontrado
+;Carregador USB x Indução;N/A;N/A;1;07/08/2025;N/A;carregador por indução;Encontrado
+;Smartphone Redmi;N/A;N/A;1;06/08/2025;N/A;CELULAR REDMI;Encontrado
+;Desktop OPTIPLEX 3040;28FPCK2;158393;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3040;28NNCK2;158384;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3040;BJZBMD2;229962;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3040;BRJ724GB95;149889;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3040;BJZBMD2;229962;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3040;BJX6MD2;149927;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3040;BB66K34;219288;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3040;2C66K34;219403;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3040;28WQCK2;158407;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3040;28RMCK2;158397;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3040;28FPCK2;158393;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3040;29PPCK2;158398;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3040;28WMCK2;158395;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7010;5C66K34;219277;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7010;JD66K34;219332;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7010;GD66K34;219332;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7010;7K66K34;219381;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3080;7FVJQB3;182755;1;22/05/2025; ;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7010;B66K34;219271;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7010;6H66K34;219375;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7010;GF66K34;219377;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3040;295QCK2;158382;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;4QTVSB4;231411;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;JPTVSB4;231406;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;3NTVSB4;231405;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;6QTVSB4;231404;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;2PTVSB4;231402;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;9NTVSB4;231403;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;GMTVSB4;231401;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;6NTVSB4;230300;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;BNTVSB4;230299;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;BMTVSB4;230298;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;CPTVSB4;230297;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;7PTVSB4;230296;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;DNTVSB4;230295;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;JNTVSB4;230294;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;HLTVSB4;230285;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;2MTVSB4;230276;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;JLTVSB4;230275;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;9MTVSB4;230274;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;BMTVSB4;230273;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;1MTVSB4;230272;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;7MTVSB4;230271;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;2NTVSB4;230270;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;3MTVSB4;230284;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;GPTVSB4;231410;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;SQTVSB4;231409;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;JMTVSB4;230264;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;3PTVSB4;230263;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;HNTVSB4;230262;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;1NTVSB4;230265;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;2QTVSB4;230266;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020; 8NTVSB4;230267;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;CNTVSB4;230268;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;CQTVSB4;230269;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;GNTVSB4;231408;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;BPTVSB4;231407;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;9PTVSB4;230283;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;1QTVSB4;230282;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;4MTVSB4;230280;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;5QTVSB4;230281;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;6PTVSB4;230293;1;14/07/2025;N/A;Entrada de Estorque;Encontrado
+;Desktop OPTIPLEX 7020;HPTVSB4;230292;1;14/07/2025;N/A;Entrada de Estoque ;Encontrado
+;Desktop OPTIPLEX 7020;BQTVSB4;230291;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;FMTVSB4;230290;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;HMTVSB4;230289;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;7QTVSB4;230288;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;DPTVSB4;230279;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;FPTVSB4;230287;1;14/07/2025;N/A;Entrada de Estoque ;Encontrado
+;Desktop OPTIPLEX 7020;6MTVDB4;230278;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;GLTVSB4;230286;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;5MTVSB4;230277;1;14/07/2025;N/A;Entrada de Estoque ;Encontrado
+;Desktop OPTIPLEX 7020;8PTVSB4;230261;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;SPTVSB4;230260;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;FNTVSB4;230254;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;3QTVSB4;230253;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;4PTVSB4;230252;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;CMTVSB4;230255;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;4NTVSB4;230250;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;DMTVSB4;230251;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;7NTVSB4;230258;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;8QTVSB4;230256;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;5NTVSB4;230259;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 7020;1PTVSB4;230257;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Extensor USB;N/A;N/A;1;06/08/2025;N/A;EXTENSOR DE USB;Encontrado
+;Fonte Carregador Smartphone (sem cabo USB);N/A;N/A;4;06/08/2025;N/A;FONTE CARREGADOR;Encontrado
+;Fita para rotulador;N/A;N/A;7;06/08/2025;N/A;FITA P/ ROTULADOR;Encontrado
+;Impressora M4020ND;ZEQYBQAF800NN;N/A;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Impressora M4020ND;ZDB0B8GJ8A001LB;N/A;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Impressora M4020ND;ZDB0B8GJ8A0027L;N/A;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Impressora M4020ND;ZDB0B8GJ8F0075J;N/A;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Impressora M4020ND;ZDB0B8GJ8F007RD;N/A;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Impressora M4020ND;ZDEJB07K823KAMA;N/A;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Impressora M4020ND;ZDB0B8GJ8A002AW;N/A;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Impressora M4020ND;ZDB0B8GJ8F00BFN;N/A;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Impressora M4020ND;0DKBB07KA147X1;N/A;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Impressora M4020ND;ZDDPB07JB10HB1N;N/A;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Impressora M4020ND;ZDB0B8GJ8A001XD;N/A;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Impressora M4020ND;Z7UHBJEJ800060N;N/A;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Leitor de cod de barras;N/A;N/A;1;11/08/2025;N/A;Leitor de cod de barras;Encontrado
+;Memória RAM 16 GB DDR4;;;;;;Memória RAM 16 GB DDR4;Encontrado
+;Memória RAM 4 GB DDR3;N/A;N/A;2;12/08/2025;N/A;Memória RAM 4 GB DDR3;Encontrado
+;Monitor DELL 19135B;052-IN-00858;10188;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;K7ZM3J3;219472;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G91P8Q3;219429;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G817ZM3;219193;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G8Z5ZM3;219191;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;HBB7ZM3;219184;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;GN56ZM3;219168;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;F1W6ZM3;219180;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G818ZM3;219189;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;5S46ZM3;219451;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G6R5ZM3;219185;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;6DV6ZM3;219183;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G5T7ZM3;219187;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;FZL6ZM3;219161;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G9Z5ZM3;219200;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;GLW6ZM3;219174;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G837ZM3;219430;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;GM56ZM3;219179;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;GJY5ZM3;219178;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G888ZM3;219449;1;04/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;GBZ5ZM3;219159;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;GNHBZM3;219173;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;GCQ5ZM3;219198;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G8W6ZM3;219195;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G788ZM3;219197;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;GJ88ZM3;219188;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G9F6ZM3;219192;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;FKQ8ZM3;219431;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G0W6ZM3;219419;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;FG88ZM3;219195;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;GJN6ZM3;219176;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G7W6ZM3;219447;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;CS5GZM3;219432;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;FQH8ZM3;219172;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;GHW6ZM3;219194;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;GLQ8ZM3;219177;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G966ZM3;219182;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G987ZM3;219190;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;G81P8Q3;219453;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;GK88ZM3;219460;1;05/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor DELL 733nw;N/A;6989;1;05/08/2025;N/A;Monitor 733nw;Encontrado
+;Monitor HP L1910;N/A;182722;1;05/08/2025;N/A;HP L1910;Encontrado
+;Monitor DELL LCD;N/A;182740;1;05/08/2025;N/A;DELL LCD;Encontrado
+;Monitor DELL 733nw;N/A;7166;1;05/08/2025;N/A;733NW;Encontrado
+;Monitor  DELL 200V41;N/A;052-IN-00743;1;05/08/2025;N/A;200V41;Encontrado
+;Monitor DELL 7128A;  N/A ;217531;1;05/08/2025;N/A;7128A;Encontrado
+;Monitor DELL 633NW;N/A;204434;1;05/08/2025;N/A;633NW;Encontrado
+;Monitor DELL L1742TT;N/A;7306;1;05/08/2025;N/A;L1742TT;Encontrado
+;Monitor W19438V;N/A;173792;1;05/08/2025;N/A;W19438V;Encontrado
+;Monitor DELL 19EB13PW;N/A;188386;1;05/08/2025;N/A;19EB13PW;Encontrado
+;Monitor LG E19418X;N/A;188585;1;05/08/2025;N/A;E19418X;Encontrado
+;Monitor DELL 193V5L;FX0A1345052751;10276;1;05/08/2025;N/A;193V5L;Encontrado
+;Monitor DELL 19418X;3028PXVOU946;9745;1;05/08/2025;N/A;19418X;Encontrado
+;Monitor DELL 193V5L;BRC52001HV;149458;1;05/08/2025;N/A;V194BZ;Encontrado
+;Monitor LG E19418X;3048PNYOQ871;9893;1;05/08/2025;N/A;LG E19418X;Encontrado
+;Monitor LG E19418X;3028PRWOU947;192202;1;05/08/2025;N/A;LG E19418X;Encontrado
+;Monitor HP V198BZ;BRG61000LP;149809;1;05/08/2025;N/A;HP V198BZ;Encontrado
+;Monitor LG 20EN33SSA;411SPXVA8922;173793;1;05/08/2025;N/A;LG 20EN33SSA;Encontrado
+;Monitor LG 20EN3388A;3118PUU1J126;10255;1;05/08/2025;N/A;LG 20EN3388A;Encontrado
+;Monitor LG 20EN3388A;3088PW02H969;10134;1;05/08/2025;N/A;LG 20EN3388A;Encontrado
+;Monitor LG 20EN3388A;3118PXV1M282;10254;1;05/08/2025;N/A;LG20EN3388A;Encontrado
+;Monitor HP V194Z;BRC51100GQ;149463;1;05/08/2025;N/A;HP V194Z;Encontrado
+;Monitor PHI 200V4LSB2/57;FX0A14110588679;11005;1;05/08/2025;N/A;PHI 200V4LSB2/57;Encontrado
+;Monitor LG E19418X;3048PQJ0Q692;188544;1;05/08/2025;N/A;LG E19418X;Encontrado
+;Monitor LG E19418X;2108PMZ09363;87801;1;05/08/2025;N/A;LG E19418X;Encontrado
+;Monitor LG E19418X;2128PYR08146;9673;1;05/08/2025;N/A;LG E19418X;Encontrado
+;Monitor LG E19418X;2098PM2114299;11553;1;05/08/2025;N/A;LG E19418X;Encontrado
+;Monitor LG E19418X;2108PBF09349;188405;1;05/08/2025;N/A;LG E19418X;Encontrado
+;Monitor LG E19418X;2118PFX25339;9674;1;05/08/2025;N/A;LG E19418X;Encontrado
+;Monitor LG 20EN33SSA;408SPZK19773;173789;1;05/08/2025;N/A;LG 2OEN33SSA;Encontrado
+;Monitor SAM S19C301F;Y1x9hxff311428;192073;1;05/08/2025;N/A;SAM S19C301F;Encontrado
+;Monitor SAM S19C300;N/A;10249;1;05/08/2025;N/A;SAM S19C300;Encontrado
+;Monitor HP V198BZ G2;BRG61000MG;149813;1;05/08/2025;N/A;HP V198BZ G2;Encontrado
+;Monitor SAM S19C301F;;192110;1;05/08/2025;N/A;SAM S19C301F;Encontrado
+;Monitor SAM S19C300F;;188666;1;05/08/2025;N/A;SAM S19C300F;Encontrado
+;Monitor DELL E2222HSI;BSSYGR3;197056;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor DELL E1960TT;;8560;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor DELL E1970TT;052IN00592;8561;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor DELL E2222HSF;3ZRRZM3;197061;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor DELL E970SWNL;HND4CIA013232;11128;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P1913SF;ONWXT6;11532;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2222H;4NJP3P3;230145;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P242HB;7RWNX3;196880;1;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;CZYQM64;230223;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;C5CSM64;230222;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BFZQM64;230221;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;C5XRM64;230220;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;CZFRM64;230219;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BPTSM64;230218;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;CZHQM64;230217;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;C4CSM64;230216;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BKWRM64;230215;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;C59QM64;230214;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BQDRM64;230213;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;3R1TM64;230237;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;3RDRM64;230236;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;3RHQM64;230235;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;3SHQM64;230233;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;CSQQM64;230210;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BQTSM64;230199;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;CORQM64;230200;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;C46RM64;230201;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BPFRM64;230204;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BQNRM64;230205;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;C44SM64;230209;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;HKTSM64;230234;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BN8TM64;230206;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;C51TM64;230208;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;C4JQM64;230207;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;3STSM64;230232;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;3RZQM64;230231;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;3R5RM64;230230;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;3Q6RM64;230229;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;3SNRM64;230228;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;3R8TM64;230227;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BP8QM64;230226;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;3RTSM64;230224;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;3S1TM64;230225;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;CXNRM64;230212;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;HKZQM64;230211;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;C49QM64;230198;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BC6RM64;230197;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BP6RM64;230196;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;HKFRM64;230195;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;C31TM64;230194;1;15/07/2025;N/A;Entrada de estoque;Encontrado
+;Monitor P2425H;CZQQM64;230192;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;C39QM64;230191;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;HKWRM64;230190;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;CT3SM64;230189;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;C41TM64;230193;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;HG6RM64;230188;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BFWRM64;230249;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BPHQM64;230248;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BPNRM64;230247;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BGFRM64;230246;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BQWRM64;230244;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;BL3SM64;230245;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;CSZQM64;230242;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;HHWRM64;230241;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;MK1TM64;230240;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;CSJQM64;230203;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;CSFRM64;230202;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;C6CSM64;230239;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;CV3SM64;230238;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor P2425H;CRNRM64;230243;1;15/07/2025;N/A;Entrada de Estoque;Encontrado
+;Mouse;N/A;N/A;41;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Mouse Pad;N/A;N/A;155;22/05/2025;N/A;Entrada de Estoque;Encontrado
+;Suporte Notebook;N/A;N/A;3;20/05/2025;N/A;Entrada de Estoque;Encontrado
+;Scanner portátil USB;N/A;188900;1;06/08/2025;N/A;SCANNER;Encontrado
+;Webcam;N/A;N/A;1;13/06/2025;290.751;Entrada de Estoque;Encontrado
+;Headset;N/A;N/A;1;13/06/2025;290.751;                                          Entrada de Estoque;Encontrado
+;Mouse S/ Fio;N/A;N/A;1;16/06/2025;300.828;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3040;9PS6QK2;189697;1;17/06/2025;300.655;Notebook;Encontrado
+;Notebook DELL Latitude 3040;9PS6QK2;189697;1;01/07/2025;300.655;Notebook (Retornou de empréstimo);Encontrado
+;Notebook DELL Latitude 3450;FZVVSB4;231426;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;D0WVSB4;231424;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;BZVVSB4;231423;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;B0WVSB4;231421;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;6ZVVSB4;231420;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;80WVS84;231419;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;C0WVSB4;231418;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;90WVSB4;231417;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450; 10WVSB4;231416;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;9ZVVSB4;231415;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;11WVSB4;231414;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;H0EVSB4;231422;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;20WVSB4;231413;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;GZVVSB4;231412;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;50WVSB4;231425;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;60WVSB4;231440;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;40WVSB4;231439;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;5ZVVSB4;231438;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;DZVVSB4;231437;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;HZVVSB4;231436;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;G0WVSB4;231435;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;7ZVVSB4;231434;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;JZVVSB4;231433;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;J0WVSB4;231432;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;8ZVVSB4;231431;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;30WVSB4;231430;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;70WVSB4;231429;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;F0WVSB4;231428;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 3450;CZVVSB4;231427;1;14/07/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 5480;5WNRFP2;188897;1;06/08/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Latitude 5480;BFQLVN2;188792;1;06/08/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Vostro 3401;13HTQK3;183757;1;06/08/2025;N/A;Entrada de Estoque;Encontrado
+;Notebook DELL Vostro 3401;23HTQK3;183756;1;06/08/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor DELL E2222HSI;1047TM2;158788;1;31/07/2025;N/A;Monitor P2016(Aguardando Tomadas para ser secundário da Maria Ambulatório de Especialidades(Sala da Coordenação));Encontrado
+;Pelicula FOR A35/A55;N/A;N/A;2;13/08/2025;;Pelicula FOR A35/A55;Encontrado
+;Pilhas AAA;N/A;N/A;8;06/08/2025;N/A;PILHAS;Encontrado
+;;N/A;N/A;10;08/09/2025;N/A;Pilhas AA;Não encontrado
+;Projetor ;N/A;192092;1;07/08/2025;N/A;Projetor ;Encontrado
+;Projetor Epson ;N/A;10765;1;05/09/2025;NA;Entrada de Estoque;Encontrado
+;Headset;N/A;N/A;5;14/08/2025;N/A;Entrada de Estoque;Encontrado
+;SSD 240GB;N/A;N/A;41;07/08/2025;N/A;SSD240GB;Encontrado
+;SSD 500GB;N/A;N/A;4;07/08/2025;N/A;SSD 500GB;Encontrado
+;SSD 120GB;N/A;N/A;16;07/08/2025;N/A;SSD 120GB;Encontrado
+;SSD 128GB;N/A;N/A;5;07/08/2025;N/A;SSD 128GB;Encontrado
+;Teclado;N/A;N/A;89;06/08/2025;N/A;Entrada de Estoque;Encontrado
+;Teclado S/ Fio;N/A;N/A;3;07/08/2025;;;Encontrado
+;Telefone Analógico;N/A;N/A;1;13/08/2025;N/A;Telefone Ramal;Encontrado
+;Teclado Beira Leito;N/A;N/A;2;06/08/2025;N/A;TECLADO BEIRA LEITO;Encontrado
+;Telefone com fio;N/A;N/A;4;06/08/2025;N/A;Entrada de Estoque;Encontrado
+;Leitor Código de Barras C/ Auxiliar;N/A;N/A;1;06/08/2025;N/A;;Encontrado
+;Monitor LG E19418X;BEJE1941SX;192144;1;11/08/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OptiPlex 3060;2JN74W2;173450;1;11/08/2025;N/A;Desktop OptiPlex 3060;Encontrado
+;Desktop OPTIPLEX 3080;F0S8WF3;182932;1;09/08/2025;N/A;N.S. Aparecida Enfermagem;Encontrado
+;Desktop OPTIPLEX 3080;B0S8WF3;182905;1;09/08/2025;N/A;N.S. Aparecida Enfermagem;Encontrado
+;Desktop OptiPlex 3000;H366YY3;188816;1;09/08/2025;N/A;Desktop OptiPlex 3000;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ524SRWZ;149609;1;09/08/2025;N/A;HP 402 G1 SFF BUSINESS PC;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ524SRSV;149583;1;09/08/2025;N/A;HP 402 G1 SFF BUSINESS PC;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ524SS9B;149568;1;09/08/2025;N/A;HP 402 G1 SFF BUSINESS PC;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ524SRWL;N/A;1;09/08/2025;N/A;HP 402 G1 SFF BUSINESS PC;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ6081YZ8;149796;1;09/08/2025;N/A;HP 402 G1 SFF BUSINESS PC;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ523SGB1;149621;1;09/08/2025;N/A;HP 402 G1 SFF BUSINESS PC;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ524SRTF;149570;1;09/08/2025;N/A;HP 402 G1 SFF BUSINESS PC;Encontrado
+;Webcam;N/A;N/A;5;12/08/2025;N/A;Entrada de Estoque;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ523SG9S;229960;1;13/08/2025;N/A;Eduardo Nones;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ523SG9K;149619;1;13/08/2025;N/A;Eduardo Nones;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ523SGHK;149602;1;13/08/2025;N/A;Eduardo Nones;Encontrado
+;HP ProDesk 600 G1 SFF;BRJ515PQ9M;149341;1;13/08/2025;N/A;Eduardo Nones;Encontrado
+;HP Prodesk 600 G1 SFF;BRJ527TQ70;149456;1;13/08/2025;N/A;Eduardo Nones;Encontrado
+;Notebook DELL Latitude 3440;DH16K34;219302;1;14/08/2025;352.924;Rafael Muller;Encontrado
+;Suporte Notebook;N/A;N/A;1;14/08/2025;352.924;Rafael Muller;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ523SGHB;188587;1;15/08/2025;N/A;Eduardo Nones;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ523SG9V;149622;1;15/08/2025;N/A;Eduardo Nones;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ524SS77;149600;1;15/08/2025;N/A;Eduardo Nones;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ523SGC5;149799;1;15/08/2025;N/A;Eduardo Nones;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ55034RQ;208619;1;15/08/2025;N/A;Eduardo Nones;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ524SRT7;149795;1;15/08/2025;N/A;Eduardo Nones;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ523SGCB;149615;1;15/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OPTIPLEX 3080;82S8WF3;182893;1;16/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OPTIPLEX 3080;72S8WF3;182895;1;16/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;DJX53Y3;189567;1;16/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;6JX53Y3;189576;1;16/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;FGX53Y3;219799;1;16/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;7JX53Y3;219798;1;16/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;6GX53Y3;189605;1;17/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;JFX53Y3;189607;1;17/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OPTIPLEX 3080;32S8WF3;182845;1;17/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OPTIPLEX 3080;C2S8WF3;182922;1;17/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OPTIPLEX 3060;2JQ24W2;173453;1;17/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;D3F8NY3;189676;1;17/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;H2F8NY3;189678;1;17/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;7GX53Y3;189601;1;17/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OPTIPLEX 3080;B1S8WF3;182919;1;17/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;J266YY3;188803;1;23/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OPTIPLEX 3080;5FVJQB3;182754;1;23/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OPTIPLEX 3050;B8BTFP2;158825;1;23/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3090;6F83LQ3;196838;1;23/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3090;3F83LQ3;196851;1;23/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OPTIPLEX 3080;5FVJQB3;182910;1;23/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;B366YY3;188845;1;24/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;D366YY3;188839;1;24/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3090;BGNNHQ3;196821;1;24/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;9266YY3;188814;1;24/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OPTIPLEX 3050;B84QFP2;158819;1;24/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3090;HD83LQ3;196842;1;24/08/2025;N/A;Eduardo Nones;Encontrado
+;SSD 128GB;N/A;N/A;1;25/08/2025;N/A;Eduardo Nones;Encontrado
+;Notebook DELL Latitude 3490;2MX34W2;173471;1;25/08/2025;FORMATAÇÃO;NOTEBOOK DELL LATITUDE 3490;Encontrado
+;Notebook DELL Latitude 3490;2MQ64W2;173477;1;26/08/2025;362.876;Notebook DELL Latitude 3490;Encontrado
+;Desktop OptiPlex 3000;9166YY3;188841;1;27/08/2025;N/A;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;3166YY3;188842;1;27/08/2025;N/A;Eduardo Nones;Encontrado
+;Monitor LG FLATRON 19EB13P-B;305SPWQ0B929;9956;1;27/08/2025;PS - Escrituração;Monitor LG FLATRON 19EB13P-B;Encontrado
+;Notebook DELL Latitude 5480;9PS6QK2;189697;1;28/08/2025;N/A;Rafael Muller;Encontrado
+;;N/A;N/A;2;28/08/2025;N/A;Cooler Latitude 3490;Não encontrado
+;;N/A;N/A;1;28/08/2025;N/A;Speakers interno Latitude 3490;Não encontrado
+;;N/A;N/A;2;28/08/2025;N/A;Adaptador Wireless Notebook;Não encontrado
+;;N/A;N/A;2;28/08/2025;N/A;Pilha 2032;Não encontrado
+;;N/A;N/A;2;28/08/2025;N/A;NVME M2 256gb;Não encontrado
+;;N/A;N/A;1;28/08/2025;N/A;Adaptador VGA Latitude 3490;Não encontrado
+;Bateria WDXOR DELL;N/A;N/A;1;28/08/2025;N/A;Guilherme Flores;Encontrado
+;;N/A;N/A;1;28/08/2025;N/A;Bateria 93FTF Dell;Não encontrado
+;;N/A;N/A;1;28/08/2025;N/A;Conector Carregador Bateria Latitude 5480;Não encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ524SS9C;149611;1;29/08/2025;Educação Continuada;Eduardo Nones;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ55034FK;208378;1;29/08/2025;DML - Sta Luzia;Eduardo Nones;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ524SRT4;149614;1;29/08/2025;DML - N.S. Aparecida;Eduardo Nones;Encontrado
+;HP 402 G1 SFF BUSINESS PC;BRJ6081YRJ;149798;1;29/08/2025;Almoxarifado;Eduardo Nones;Encontrado
+;HP Prodesk 600 G1 SFF;BRJ527TQ8L;149451;1;29/08/2025;Sl Descanso Médicos;Eduardo Nones;Encontrado
+;Desktop OptiPlex 3000;G04W5T3;197008;1;29/05/2025;PS Enfermagem;Eduardo Nones;Encontrado
+;Monitor LG E19418X;303SPNY0Y103;9865;1;29/05/2025;Práticas Assistenciais;Eduardo Nones;Encontrado
+;;FMQRHK2;158550;1;30/08/2025;UTI (Lado A);Desktop Dell Optiplex 5050;Não encontrado
+;Notebook DELL Latitude 5480;3SR6CD2;189737;1;01/09/2025;N/A;Rafael Muller;Encontrado
+;Antena WIFI6 AX1800;N/A;N/A;1;01/09/2025;N/A;Rafael Muller;Encontrado
+;Cabo de Energia;N/A;N/A;1;03/09/2025;N/A;Rafael Muller;Encontrado
+;Cabo VGA;N/A;N/A;1;03/09/2025;N/A;Rafael Muller;Encontrado
+;Monitor LG E2011;3058PWQ1J273;10158;1;03/09/2025;N/A;Rafael Muller;Não encontrado
+;Fonte Fortek 200W;N/A;N/A;1;03/09/2025;N/A;Rafael Muller;Encontrado
+;Monitor DELL P2018H;6TD5463;182869;1;07/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor DELL P2018H;6T96463;182872;1;07/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor DELL P2018H;6TD5463;182869;1;07/07/2025;N/A;Entrada de Estoque;Encontrado
+;Monitor Dell P2016;1047TM2;158788;1;11/08/2025;N/A;Entrada de Estoque;Encontrado
+;Desktop OPTIPLEX 3050;B89XFP2;158804;1;06/09/2025;N/A;Eduardo Nones;Encontrado
+;Teclado;N/A;N/A;1;08/09/2025;N/A;Guilherme Flores;Encontrado
+;Mouse;N/A;N/A;1;08/09/2025;N/A;Guilherme Flores;Encontrado
+;Notebook DELL Latitude 5480;;;2;08/09/2025;Backup;Validação estoque - Guilherme Flores;Encontrado
+;Notebook DELL Latitude 5480;9PS6QK2;189697;1;04/09/2025;Backup;Guilherme Flores;Encontrado
+;Projetor Epson ;N/A;N/A;1;09/09/2025;375.444;Guilherme Flores;Encontrado
+;Notebook Dell Latitude E5470;92K5MD2;189691;1;10/09/2025;N/A;Backup Auditório - Guilherme Flores;Encontrado
+;Armazenamento M2 NVME 128gb;N/A;N/A;2;10/09/2025;N/A;Guilherme Flores;Encontrado
+;Memória RAM 4 GB DDR3;N/A;N/A;4;10/09/2025;N/A;Validação de Estoque - Guilherme Flores;Encontrado
+;Armazenamento M2 NVME 256gb;N/A;N/A;1;10/09/2025;N/A;Validação de Estoque - Guilherme Flores;Encontrado
+;Desktop OPTIPLEX 3040;28SJCK2;158376;1;10/09/2025;N/A;Validação de Estoque - Edson Prado;Encontrado
+;Desktop OPTIPLEX 3040;294KCK2;158408;1;10/09/2025;N/A;Validação de Estoque - Edson Prado;Encontrado
+;Desktop OPTIPLEX 3040;28XKCK2;158421;1;10/09/2025;N/A;Validação de Estoque - Edson Prado;Encontrado
+;Desktop OPTIPLEX 3040;28HJCK2;158392;1;10/09/2025;N/A;Validação de Estoque - Edson Prado;Encontrado
+;Desktop OPTIPLEX 3040;BJP8MD2;218125;1;10/09/2025;N/A;Validação de Estoque - Edson Prado;Encontrado
+;Desktop OPTIPLEX 3040;282MCK2;158410;1;10/09/2025;N/A;Validação de Estoque - Edson Prado;Encontrado
+;Desktop OPTIPLEX 3040;28VJCK2;158420;1;10/09/2025;N/A;Validação de Estoque - Edson Prado;Encontrado
+;Desktop OPTIPLEX 3040;28CSCK2;158349;1;10/09/2025;N/A;Validação de Estoque - Edson Prado;Encontrado
+;Desktop OPTIPLEX 3040;28CKCK2;158414;1;10/09/2025;N/A;Validação de Estoque - Edson Prado;Encontrado
+;Desktop OPTIPLEX 3040;28SQCK2;158383;1;10/09/2025;N/A;Validação de Estoque - Edson Prado;Encontrado
+;Desktop OPTIPLEX 3040;290RCK2;158381;1;10/09/2025;N/A;Validação de Estoque - Edson Prado;Encontrado
+;Desktop OPTIPLEX 3040;294NCK2;158379;1;10/09/2025;N/A;Validação de Estoque - Edson Prado;Encontrado
+;Desktop OPTIPLEX 3040;BJRCMD2;149917;1;10/09/2025;N/A;Validação de Estoque - Edson Prado;Encontrado
+;Desktop OPTIPLEX 7020;BNTVSB4;230299;1;11/09/2025;N/A;Possivel problema na Placa Mãe;Encontrado
+;Notebook Dell Latitude E5470;92K5MD2;189691;1;12/09/2025;N/A;Devolução da Leticia;Encontrado
+;Notebook HP ProBook 400;BRJ512NFJG;149472;1;12/09/2025;N/A;Sueli - Emprestado nosso equipamento e recolhido esse;Encontrado
+;Desktop OPTIPLEX 3040;28TPCK2;158394;1;13/09/2025;N/A;Rafael Muller - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;BJSCMD2;149929;1;13/09/2025;N/A;Rafael Muller - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;281RCK2;158375;1;13/09/2025;N/A;Rafael Muller - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;BJR6MD2;207953;1;13/09/2025;N/A;Rafael Muller - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;28WMCK2;158395;1;15/09/2025;N/A;Rafael Muller - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;BJT6MD2;149918;1;15/09/2025;N/A;Rafael Muller - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;28QPCK2;158418;1;15/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;292SCK2;158404;1;15/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;292MCK2;158415;1;15/09/2025;N/A;Recolhido RH Armário - Guilherme Flores;Encontrado
+;Desktop OPTIPLEX 3040;BJS6MD2;149933;1;16/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;295NCK2;158391;1;16/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;BJX9MD2;149935;1;16/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;28HRCK2;158373;1;16/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;28YRCK2;158423;1;16/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;BJQ9MD2;149912;1;16/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;294RCK2;158422;1;16/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;28MQCK2;158387;1;16/09/2025;N/A;Edson Prado - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;290PCK2;218708;1;16/09/2025;N/A;Edson Prado - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;281MCK2;158402;1;16/09/2025;N/A;Edson Prado - Obsolescência;Encontrado
+;Notebook Dell Latitude E5470;92K5MD2;189691;1;17/09/2025;N/A;Entrada estoque;Encontrado
+;Projetor Epson ;N/A;10765;1;17/09/2025;N/A;Entrada estoque;Encontrado
+;Desktop OPTIPLEX 3040;28WJCK2;158399;1;19/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;293SCK2;158412;1;19/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;293LCK2;158411;1;19/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;28XQCK2;158390;1;19/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;HP Prodesk 600 G1 SFF;BRJ515PQ6L;149342;1;19/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;SSD 120GB;N/A;N/A;2;22/09/2025;N/A;Guilherme Flores;Encontrado
+;SSD 240GB;N/A;N/A;10;22/09/2025;N/A;Guilherme Flores;Encontrado
+;Pilhas AAA;N/A;N/A;4;23/09/2025;N/A;Entrada de Estoque - Guilherme Flores;Encontrado
+;Pilhas AA;N/A;N/A;10;23/09/2025;N/A;Entrada de Estoque - Guilherme Flores;Encontrado
+;Bateria 2032;N/A;N/A;10;23/09/2025;N/A;Entrada de Estoque - Guilherme Flores;Encontrado
+;Desktop OPTIPLEX 3040;28WQCK2;158407;1;23/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;BJS7MD2;149916;1;23/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;SSD 128GB;N/A;N/A;16;23/09/2025;N/A;Entrada de Estoque - Guilherme Flores;Encontrado
+;Cabo de Rede;N/A;N/A;1;24/09/2025;N/A;Retorno SL Leticia Remussi - Guilherme Flores;Encontrado
+;Cabo DisplayPort;N/A;N/A;1;25/05/2025;N/A;Yara Caroline Vaz;Encontrado
+;Cabo HDMI;N/A;N/A;1;26/09/2025;N/A;Guilherme Flores;Encontrado
+;Desktop OPTIPLEX 3040;NÃO ENCONTRADO;149931;1;26/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;295JCK2;158400;1;26/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;28SKCK2;158401;1;26/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;28YLCK2;158385;1;26/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;295QCK2;158382;1;26/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;BJR8MD2;149922;1;26/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Teclado;N/A;N/A;13;26/09/2025;N/A;Entrada de Estoque - Guilherme Flores;Encontrado
+;Mouse;N/A;N/A;13;26/09/2025;N/A;Entrada de Estoque - Guilherme Flores;Encontrado
+;Mouse Pad;N/A;N/A;13;26/09/2025;N/A;Entrada de Estoque - Guilherme Flores;Encontrado
+;Cabo de Energia;N/A;N/A;14;26/09/2025;N/A;Entrada de Estoque - Guilherme Flores;Encontrado
+;Desktop OPTIPLEX 3040;28ZQCK2;158374;1;29/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;BJX6MD2;149927;1;29/09/2025;N/A;Rafael Muller - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;BJQ5MD2;149930;1;29/09/2025;N/A;Rafael Muller - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;28PPCK2;158398;1;29/09/2025;N/A;Rafael Muller - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;28RMCK2;158397;1;29/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;BJT9MD2;149919;1;29/09/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;28GNCK2;158417;1;30/09/2025;N/A;Tiago Abreu-Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;BJZBMD2;229962;1;30/09/2025;N/A;Tiago Abreu-Obsolescência;Encontrado
+;Monitor LG 20EN33SSA;;173789;1;30/09/2025;N/A;Tiago Abreu - Defeito;Encontrado
+;Desktop OPTIPLEX 3040;292JCK2;158380;1;01/10/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;28TKCK2;158402;1;02/10/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;28FPCK2;158393;1;02/10/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Monitor LG E19418X;303SPGS0Y311;9858;1;05/10/2025;N/A;Tiago Abreu-Obsolescência;Encontrado
+;Monitor HP V198BZ G2;BRG61000LJ;217556;1;05/10/2025;N/A;Tiago Abreu-Obsolescência;Encontrado
+;Monitor LG E19418X;304spae0q968;197085;1;05/10/2025;N/A;Tiago Abreu-Obsolescência;Encontrado
+;Monitor LG FLATRON 19EB13P-B;202SPJP03524;8559;1;05/10/2025;N/A;Tiago Abreu-Obsolescência;Encontrado
+;Monitor SAM S19C300;LS119PUYKFMZD;217766;1;05/10/2025;N/A;Tiago Abreu-Obsolescência;Encontrado
+;Desktop OPTIPLEX 3040;BJY6MD2;149934;1;07/10/2025;N/A;Guilherme Flores - Obsolescência;Encontrado
+;Mouse;N/A;N/A;1;09/10/2025;403.438;Guilherme Flores;Encontrado
+;Desktop OPTIPLEX 3060;2JT14W2;173434;1;10/10/2025;N/A;Guilherme Flores;Encontrado
+;Desktop OPTIPLEX 3060;1B2VBS2;161824;1;10/10/2025;N/A;Guilherme Flores;Encontrado
+;Desktop OPTIPLEX 3040;28LSCK2;158389;1;10/10/2025;N/A;Guilherme Flores;Encontrado
+;Monitor P2422H;7PZPXK3;196878;1;13/10/2025;N/A;Rafael Muller;Encontrado
+;Monitor P2422H;2MBPXK3;196877;1;13/10/2025;N/A;Rafael Muller;Encontrado
+;Monitor Aoc E2270S;GYVN4XA006510;188761;1;13/10/2025;N/A;Rafael Muller;Encontrado
+;Pendrive Sandisk 32Gb;N/A;N/A;3;13/10/2025;N/A;Rafael Muller;Encontrado
+;Monitor LG E19418X;303SPJP0Y132;188259;1;15/10/2025;400.079;Tiago Abreu;Encontrado
+;Cabo de Rede;N/A;N/A;2;15/10/2025;N/A;Tiago Abreu;Encontrado
+;Monitor Aoc E2270S;GYVN1XA006369;188750;1;15/10/2025;N/A;Rafael Muller;Encontrado
+;Monitor SAM S19C301F;Y1X9HXFF408052Z;192285;1;15/10/2025;410.381;Rafael Muller;Encontrado
+;Desktop OPTIPLEX 3040;;173455;1;16/10/2025;N/A;Tiago Abreu;Encontrado
+;Desktop OPTIPLEX 3060;2JN54W2;173456;1;21/10/2025;N/A;Guilherme Flores;Encontrado
+;Desktop OPTIPLEX 3060;9TSLQX2;162239;1;21/10/2025;N/A;Guilherme Flores;Encontrado
+;Desktop OPTIPLEX 3060;2JN34W2;173440;1;21/10/2025;N/A;Guilherme Flores;Encontrado
+;Desktop OPTIPLEX 3060;J2TZ3W2;173445;1;21/10/2025;N/A;Guilherme Flores;Encontrado
+;Notebook DELL Latitude 3490;2MX34W2;173471;1;21/10/2025;N/A;Guilherme Flores;Encontrado
+;Desktop OPTIPLEX 3040;28DRCK2;158419;1;23/10/2025;N/A;Guilherme Flores;Encontrado
+;Monitor Aoc E2270S;N/A;188757;1;29/10/2025;N/A;Luiz Roberto;Encontrado
+;Monitor P2425H;BQWRM64;230244;1;29/10/2025;N/A;Luiz Roberto;Encontrado
+;Monitor Aoc E2270S;;188774;1;29/10/2025;N/A;Guilherme Flores;Encontrado
+;Monitor Aoc E2270S;;188755;1;29/10/2025;N/A;Guilherme Flores;Encontrado
+;Monitor Aoc E2270S;;188741;1;29/10/2025;N/A;Guilherme Flores;Encontrado
+;Monitor Aoc E2270S;;188771;1;29/10/2025;N/A;Guilherme Flores;Encontrado
+;Scanner portátil USB;N/A;N/A;1;30/10/2025;N/A;Tiago Abreu;Encontrado
+;Monitor Aoc E2270S;;188748;1;30/10/2025;N/A;Guilherme Flores;Encontrado
+;Monitor Aoc E2270S;;188737;1;30/10/2025;N/A;Guilherme Flores;Encontrado
+;Monitor Aoc E2270S;;188772;1;30/10/2025;N/A;Guilherme Flores;Encontrado
+;Monitor Aoc E2270S;;188704;1;30/10/2025;N/A;Guilherme Flores;Encontrado
+;Monitor Aoc E2270S;;188765;1;30/10/2025;N/A;Guilherme Flores;Encontrado
+;Monitor Aoc E2270S;;188741;1;30/10/2025;N/A;Guilherme Flores;Encontrado
+;Desktop OPTIPLEX 3060;2JT64W2;218885;1;30/10/2025;N/A;Guilherme Flores;Encontrado
+;HP ProDesk 400 G7;BRJ2433HWT;197029;1;03/11/2025;N/A;Tiago Abreu;Encontrado
+;HP ProDesk 400 G7;BRJ2433HWR;197032;1;03/11/2025;N/A;Tiago Abreu;Encontrado
+;Notebook DELL Latitude 3450;90WVSB4;231417;1;04/11/2025;N/A;Rafael Muller;Encontrado
+;Webcam;N/A;N/A;1;06/11/2025;N/A;Rafael Muller;Encontrado
+;Desktop OPTIPLEX 3040;28CKCK2;158414;1;10/11/2025;N/A;Rafael Muller;Encontrado
+;Adaptador DisplayPort x VGA;N/A;N/A;6;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Adaptador HDMI x VGA;N/A;N/A;43;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Adaptador Wifi;N/A;N/A;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Antena WIFI6 AX1800;N/A;N/A;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Cabo Impressora;N/A;;40;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Capa p/ Smartphone  A55 5G;N/A;;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Fonte Fortek 200W;N/A;;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Fonte Carregador Smartphone (sem cabo USB);N/A;;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Leitor Código de Barras C/ Auxiliar;N/A;;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Leitor de cod de barras;N/A;;12;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Memória RAM 16 GB DDR4;N/A;;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Memória RAM 4 GB DDR3;N/A;;4;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Mouse;N/A;;62;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Notebook DELL Latitude 5480;N/A;;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Desktop OPTIPLEX 7010;N/A;;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Pilhas AAA;N/A;;3;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Projetor Epson ;N/A;;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Smartphone Samsung;N/A;;6;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;SSD 120GB;N/A;;6;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;SSD 128GB;N/A;;12;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Headset;N/A;;3;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Armazenamento M2 NVME 128gb;N/A;;8;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Pilhas AA;N/A;;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Monitor Aoc E2270S;N/A;;17;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Monitor P2422H;N/A;;11;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado
+;;;;;;;;Não encontrado

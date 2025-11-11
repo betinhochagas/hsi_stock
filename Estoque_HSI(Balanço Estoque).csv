@@ -1,0 +1,118 @@
+;;;;;;
+BALANÇO ESTOQUE TI HSI;;;;;;
+Item;Entradas;Saídas;Quantidade em estoque;Observação;Validação estoque;Físico x Lógico
+Adaptador DisplayPort x VGA;8;3;5;OK;0;FALSO
+Adaptador DVI x VGA;8;2;6;OK;8;FALSO
+Adaptador HDMI x VGA;45;0;45;OK;1;FALSO
+Adaptador Viagem - Turbo;1;0;1;Repor Estoque;1;VERDADEIRO
+Adaptador Wifi;16;3;13;OK;14;FALSO
+Antena WIFI6 AX1800;6;3;3;OK;4;FALSO
+Bateria WDXOR DELL;3;0;3;OK;3;VERDADEIRO
+Cabo de Energia;184;65;119;OK;153;FALSO
+Cabo de Rede;89;30;59;OK;80;FALSO
+Cabo DisplayPort;371;323;48;OK;368;FALSO
+Cabo Duplicador HDMI;0;0;0;Repor Estoque;0;VERDADEIRO
+Cabo Extensor VGA;43;0;43;OK;43;VERDADEIRO
+Cabo HDMI;91;64;27;OK;83;FALSO
+Cabo Impressora;54;1;53;OK;14;FALSO
+Cabo USB - Type-C;5;1;4;OK;5;FALSO
+Cabo VGA;149;95;54;OK;149;FALSO
+Capa p/ Smartphone  A55 5G;2;0;2;Repor Estoque;1;FALSO
+Carregador USB x Indução;1;1;0;Repor Estoque;1;FALSO
+Desktop OPTIPLEX 3000;17;17;0;Repor Estoque;6;FALSO
+Desktop OPTIPLEX 3040;74;74;0;Repor Estoque;19;FALSO
+Desktop OPTIPLEX 3050;3;2;1;Repor Estoque;3;FALSO
+Desktop OPTIPLEX 3060;9;8;1;Repor Estoque;0;FALSO
+Desktop OPTIPLEX 3080;10;10;0;Repor Estoque;0;VERDADEIRO
+Desktop OptiPlex 3090;4;4;0;Repor Estoque;4;FALSO
+Desktop OPTIPLEX 7010;9;9;0;Repor Estoque;4;FALSO
+Desktop OPTIPLEX 7020;63;60;3;OK;27;FALSO
+Extensor HDMI;2;2;0;Repor Estoque;2;FALSO
+Extensor HDMI RJ45;2;0;2;Repor Estoque;2;VERDADEIRO
+Extensor USB;1;1;0;Repor Estoque;0;VERDADEIRO
+Fita para rotulador;7;3;4;OK;6;FALSO
+Fonte Fortek 200W;2;1;1;Repor Estoque;0;FALSO
+Fonte Carregador Smartphone (sem cabo USB);6;0;6;OK;4;FALSO
+Headset;9;4;5;OK;3;FALSO
+HP 402 G1 SFF BUSINESS PC;21;21;0;Repor Estoque;21;FALSO
+HP Prodesk 600 G1 SFF;4;4;0;Repor Estoque;3;FALSO
+Impressora M4020ND;12;6;6;OK;12;FALSO
+Leitor Código de Barras C/ Auxiliar;2;0;2;Repor Estoque;1;FALSO
+Leitor de cod de barras;13;2;11;OK;0;FALSO
+Memória RAM 16 GB DDR4;1;0;1;Repor Estoque;0;FALSO
+Memória RAM 4 GB DDR3;10;0;10;OK;6;FALSO
+Monitor  DELL 200V41;1;1;0;Repor Estoque;1;FALSO
+Monitor DELL 19135B;1;1;0;Repor Estoque;1;FALSO
+Monitor DELL 193V5L;1;1;0;Repor Estoque;1;FALSO
+Monitor DELL 19418X;1;1;0;Repor Estoque;1;FALSO
+Monitor DELL 19EB13PW;1;1;0;Repor Estoque;1;FALSO
+Monitor DELL 633NW;1;1;0;Repor Estoque;1;FALSO
+Monitor DELL 7128A;1;1;0;Repor Estoque;1;FALSO
+Monitor DELL 733nw;2;2;0;Repor Estoque;2;FALSO
+Monitor DELL E1960TT;1;1;0;Repor Estoque;1;FALSO
+Monitor DELL E1970TT;1;1;0;Repor Estoque;1;FALSO
+Monitor DELL E2222HSF;1;1;0;Repor Estoque;1;FALSO
+Monitor DELL E2222HSI;2;2;0;Repor Estoque;2;FALSO
+Monitor DELL E970SWNL;1;1;0;Repor Estoque;0;VERDADEIRO
+Monitor DELL L1742TT;1;1;0;Repor Estoque;1;FALSO
+Monitor DELL LCD;1;1;0;Repor Estoque;0;VERDADEIRO
+Monitor DELL P2016;1;1;0;Repor Estoque;0;VERDADEIRO
+Monitor Dell P2018H;3;3;0;Repor Estoque;0;VERDADEIRO
+Monitor LG FLATRON 19EB13P-B;2;2;0;Repor Estoque;0;VERDADEIRO
+Monitor HP L1910;1;1;0;Repor Estoque;0;VERDADEIRO
+Monitor HP V194Z;1;1;0;Repor Estoque;0;VERDADEIRO
+Monitor HP V198BZ;1;1;0;Repor Estoque;0;VERDADEIRO
+Monitor HP V198BZ G2;2;2;0;Repor Estoque;0;VERDADEIRO
+Monitor LG 20EN3388A;3;3;0;Repor Estoque;0;VERDADEIRO
+Monitor LG 20EN33SSA;3;3;0;Repor Estoque;0;VERDADEIRO
+Monitor LG 2OEN33SSA;0;0;0;Repor Estoque;0;VERDADEIRO
+Monitor LG E19418X;14;14;0;Repor Estoque;0;VERDADEIRO
+Monitor P1913SF;1;1;0;Repor Estoque;0;VERDADEIRO
+Monitor P2222H;40;40;0;Repor Estoque;31;FALSO
+Monitor P2425H;63;63;0;Repor Estoque;55;FALSO
+Monitor P242HB;1;1;0;Repor Estoque;1;FALSO
+Monitor PHI 200V4LSB2/57;1;1;0;Repor Estoque;0;VERDADEIRO
+Monitor SAM S19C300;2;2;0;Repor Estoque;0;VERDADEIRO
+Monitor SAM S19C300F;1;1;0;Repor Estoque;0;VERDADEIRO
+Monitor SAM S19C301F;3;3;0;Repor Estoque;0;VERDADEIRO
+Monitor V194BZ;0;0;0;Repor Estoque;0;VERDADEIRO
+Monitor W19438V;1;1;0;Repor Estoque;0;VERDADEIRO
+Mouse;118;23;95;OK;25;FALSO
+Mouse Pad;168;47;121;OK;142;FALSO
+Mouse S/ Fio;1;0;1;Repor Estoque;1;VERDADEIRO
+Notebook DELL E7450;0;0;0;Repor Estoque;0;VERDADEIRO
+Notebook DELL Latitude 3040;2;2;0;Repor Estoque;2;FALSO
+Notebook DELL Latitude 3090;0;0;0;Repor Estoque;0;VERDADEIRO
+Notebook DELL Latitude 3440;1;1;0;Repor Estoque;1;FALSO
+Notebook DELL Latitude 3450;30;3;27;OK;27;VERDADEIRO
+Notebook DELL Latitude 3490;3;1;2;Repor Estoque;1;FALSO
+Notebook DELL Latitude 5480;8;7;1;Repor Estoque;1;VERDADEIRO
+Notebook Dell Latitude E5470;3;2;1;Repor Estoque;1;VERDADEIRO
+Notebook DELL Vostro 3401;2;1;1;Repor Estoque;2;FALSO
+Pelicula FOR A35/A55;2;0;2;Repor Estoque;2;VERDADEIRO
+Pilhas AAA;15;3;12;OK;5;FALSO
+Projetor ;1;0;1;Repor Estoque;1;VERDADEIRO
+Projetor Epson ;5;1;4;OK;2;FALSO
+Scanner portátil USB;2;1;1;Repor Estoque;1;VERDADEIRO
+Smartphone Redmi;1;0;1;Repor Estoque;1;VERDADEIRO
+Smartphone Samsung;7;0;7;OK;1;FALSO
+SSD 120GB;24;0;24;OK;16;FALSO
+SSD 128GB;34;0;34;OK;6;FALSO
+SSD 240GB;51;7;44;OK;38;FALSO
+SSD 500GB;4;4;0;Repor Estoque;4;FALSO
+Suporte Notebook;4;4;0;Repor Estoque;0;VERDADEIRO
+Teclado;103;58;45;OK;72;FALSO
+Teclado Beira Leito;2;2;0;Repor Estoque;2;FALSO
+Teclado S/ Fio;3;0;3;OK;3;VERDADEIRO
+Telefone Analógico;1;0;1;Repor Estoque;1;VERDADEIRO
+Telefone com fio;4;0;4;OK;4;VERDADEIRO
+Webcam;7;4;3;OK;4;FALSO
+Armazenamento M2 NVME 128gb;10;0;10;OK;2;FALSO
+Armazenamento M2 NVME 256gb;1;0;1;Repor Estoque;1;VERDADEIRO
+Notebook HP ProBook 400;1;0;1;Repor Estoque;1;VERDADEIRO
+Pilhas AA;12;2;10;OK;;FALSO
+Bateria 2032;10;2;8;OK;;FALSO
+Monitor Aoc E2270S;30;18;12;OK;;FALSO
+Pendrive Sandisk 32Gb;3;0;3;OK;;FALSO
+Monitor P2422H;13;13;0;Repor Estoque;;VERDADEIRO
+HP ProDesk 400 G7;2;1;1;Repor Estoque;;FALSO

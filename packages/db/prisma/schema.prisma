@@ -1,0 +1,433 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===========================
+// AUTENTICAÇÃO E USUÁRIOS
+// ===========================
+
+enum UserRole {
+  ADMIN     // Acesso total
+  GESTOR    // Gerencia ativos, aprovações
+  TECNICO   // Operações técnicas, manutenções
+  LEITOR    // Somente leitura
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // bcrypt hash
+  name      String
+  role      UserRole @default(LEITOR)
+  active    Boolean  @default(true)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relações
+  assignedAssets    Asset[]       @relation("AssetAssignee")
+  createdAssets     Asset[]       @relation("AssetCreator")
+  movements         Movement[]
+  maintenances      Maintenance[]
+  importLogs        ImportLog[]
+  auditLogs         AuditLog[]
+  
+  @@map("users")
+}
+
+// ===========================
+// DOMÍNIO PRINCIPAL
+// ===========================
+
+enum AssetStatus {
+  EM_ESTOQUE      // Disponível no estoque
+  EM_USO          // Atribuído e em uso
+  EM_MANUTENCAO   // Em manutenção/reparo
+  INATIVO         // Desativado/obsoleto
+  DESCARTADO      // Descartado
+}
+
+model Asset {
+  id          String      @id @default(cuid())
+  assetTag    String?     @unique  // Patrimônio/número do ativo
+  name        String                // Nome do item
+  description String?               // Descrição adicional
+  serialNumber String?              // Serial Number / Service Tag
+  model       String?               // Modelo
+  status      AssetStatus @default(EM_ESTOQUE)
+  
+  purchaseDate  DateTime?
+  purchasePrice Decimal?   @db.Decimal(10, 2)
+  warrantyUntil DateTime?
+  
+  observations  String?    @db.Text
+  
+  // Localização e atribuição
+  locationId    String?
+  location      Location?  @relation(fields: [locationId], references: [id])
+  
+  assignedToId  String?
+  assignedTo    User?      @relation("AssetAssignee", fields: [assignedToId], references: [id])
+  assignedAt    DateTime?
+  
+  // Categorização
+  categoryId    String?
+  category      Category?  @relation(fields: [categoryId], references: [id])
+  
+  manufacturerId String?
+  manufacturer   Manufacturer? @relation(fields: [manufacturerId], references: [id])
+  
+  supplierId    String?
+  supplier      Supplier?  @relation(fields: [supplierId], references: [id])
+  
+  // Auditoria
+  createdById   String
+  createdBy     User       @relation("AssetCreator", fields: [createdById], references: [id])
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  
+  // Relações
+  movements     Movement[]
+  maintenances  Maintenance[]
+  attachments   Attachment[]
+  contracts     Contract[]
+  
+  @@index([assetTag])
+  @@index([serialNumber])
+  @@index([status])
+  @@index([categoryId])
+  @@index([locationId])
+  @@map("assets")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  icon        String?  // Nome do ícone (ex: "laptop", "monitor")
+  color       String?  // Cor hex para UI
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  assets      Asset[]
+  
+  @@map("categories")
+}
+
+model Location {
+  id          String   @id @default(cuid())
+  name        String   @unique  // Ex: "Almoxarifado", "TI - Sala 102", "Ambulatório"
+  description String?
+  building    String?           // Prédio
+  floor       String?           // Andar
+  room        String?           // Sala
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  assets      Asset[]
+  movements   Movement[]
+  
+  @@map("locations")
+}
+
+model Manufacturer {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  website     String?
+  supportPhone String?
+  supportEmail String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  assets      Asset[]
+  
+  @@map("manufacturers")
+}
+
+model Supplier {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  cnpj        String?  @unique
+  contact     String?
+  email       String?
+  phone       String?
+  address     String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  assets      Asset[]
+  contracts   Contract[]
+  
+  @@map("suppliers")
+}
+
+// ===========================
+// LICENÇAS DE SOFTWARE
+// ===========================
+
+enum LicenseStatus {
+  ATIVA
+  EXPIRADA
+  CANCELADA
+}
+
+model License {
+  id              String        @id @default(cuid())
+  name            String                      // Nome do software
+  licenseKey      String?       @unique       // Chave de ativação
+  totalSeats      Int           @default(1)   // Quantidade de licenças
+  usedSeats       Int           @default(0)   // Quantas estão em uso
+  
+  purchaseDate    DateTime?
+  expirationDate  DateTime?
+  status          LicenseStatus @default(ATIVA)
+  
+  cost            Decimal?      @db.Decimal(10, 2)
+  vendor          String?                     // Fornecedor
+  notes           String?       @db.Text
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  
+  assignments     LicenseAssignment[]
+  contracts       Contract[]
+  
+  @@index([expirationDate])
+  @@map("licenses")
+}
+
+model LicenseAssignment {
+  id          String   @id @default(cuid())
+  licenseId   String
+  license     License  @relation(fields: [licenseId], references: [id], onDelete: Cascade)
+  
+  deviceName  String?  // Nome da máquina/dispositivo
+  userName    String?  // Nome do usuário
+  email       String?
+  
+  assignedAt  DateTime @default(now())
+  revokedAt   DateTime?
+  
+  @@index([licenseId])
+  @@map("license_assignments")
+}
+
+// ===========================
+// CONTRATOS E GARANTIAS
+// ===========================
+
+enum ContractType {
+  GARANTIA
+  MANUTENCAO
+  SUPORTE
+  LOCACAO
+}
+
+model Contract {
+  id            String       @id @default(cuid())
+  type          ContractType
+  contractNumber String?     @unique
+  
+  startDate     DateTime
+  endDate       DateTime
+  cost          Decimal?     @db.Decimal(10, 2)
+  
+  description   String?      @db.Text
+  terms         String?      @db.Text
+  
+  supplierId    String?
+  supplier      Supplier?    @relation(fields: [supplierId], references: [id])
+  
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  
+  assets        Asset[]
+  licenses      License[]
+  attachments   Attachment[]
+  
+  @@index([endDate])
+  @@map("contracts")
+}
+
+// ===========================
+// MOVIMENTAÇÕES
+// ===========================
+
+enum MovementType {
+  CHECK_IN   // Entrada no estoque
+  CHECK_OUT  // Saída do estoque
+  TRANSFER   // Transferência entre locais
+  ASSIGNMENT // Atribuição a usuário
+  RETURN     // Devolução
+}
+
+model Movement {
+  id          String       @id @default(cuid())
+  type        MovementType
+  
+  assetId     String
+  asset       Asset        @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  
+  fromLocationId String?
+  fromLocation   Location? @relation(fields: [fromLocationId], references: [id])
+  
+  toLocation  String?      // Texto livre para destino
+  
+  userId      String?
+  user        User?        @relation(fields: [userId], references: [id])
+  
+  reason      String?      @db.Text
+  ticketNumber String?     // Número do ticket de suporte
+  
+  movedAt     DateTime     @default(now())
+  movedBy     String?      // Nome de quem realizou
+  
+  @@index([assetId])
+  @@index([movedAt])
+  @@map("movements")
+}
+
+// ===========================
+// MANUTENÇÕES E OS
+// ===========================
+
+enum MaintenanceStatus {
+  ABERTA
+  EM_ANDAMENTO
+  AGUARDANDO_PECA
+  CONCLUIDA
+  CANCELADA
+}
+
+model Maintenance {
+  id          String            @id @default(cuid())
+  assetId     String
+  asset       Asset             @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  
+  status      MaintenanceStatus @default(ABERTA)
+  title       String
+  description String            @db.Text
+  
+  reportedAt  DateTime          @default(now())
+  startedAt   DateTime?
+  completedAt DateTime?
+  
+  technicianId String?
+  technician   User?            @relation(fields: [technicianId], references: [id])
+  
+  cost        Decimal?          @db.Decimal(10, 2)
+  parts       String?           @db.Text  // Peças utilizadas (JSON ou texto)
+  solution    String?           @db.Text
+  
+  @@index([assetId])
+  @@index([status])
+  @@map("maintenances")
+}
+
+// ===========================
+// ANEXOS
+// ===========================
+
+model Attachment {
+  id          String   @id @default(cuid())
+  filename    String
+  originalName String
+  mimeType    String
+  size        Int                    // bytes
+  path        String                 // caminho no disco/storage
+  
+  assetId     String?
+  asset       Asset?   @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  
+  contractId  String?
+  contract    Contract? @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  
+  uploadedAt  DateTime @default(now())
+  
+  @@index([assetId])
+  @@map("attachments")
+}
+
+// ===========================
+// IMPORTAÇÕES (AUDITORIA)
+// ===========================
+
+enum ImportStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+model ImportLog {
+  id          String       @id @default(cuid())
+  filename    String
+  originalName String
+  status      ImportStatus @default(PENDING)
+  
+  totalRows   Int          @default(0)
+  successRows Int          @default(0)
+  errorRows   Int          @default(0)
+  
+  errors      String?      @db.Text  // JSON com lista de erros
+  metadata    String?      @db.Text  // JSON com metadados
+  
+  startedAt   DateTime     @default(now())
+  completedAt DateTime?
+  
+  userId      String?
+  user        User?        @relation(fields: [userId], references: [id])
+  
+  @@index([status])
+  @@index([startedAt])
+  @@map("import_logs")
+}
+
+// ===========================
+// AUDITORIA (TRILHA)
+// ===========================
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  IMPORT
+  EXPORT
+}
+
+model AuditLog {
+  id          String      @id @default(cuid())
+  action      AuditAction
+  entityType  String                  // Ex: "Asset", "User", "License"
+  entityId    String?
+  
+  changes     String?     @db.Text    // JSON com diff das mudanças
+  metadata    String?     @db.Text    // JSON com contexto adicional
+  
+  userId      String?
+  user        User?       @relation(fields: [userId], references: [id])
+  
+  ipAddress   String?
+  userAgent   String?
+  
+  createdAt   DateTime    @default(now())
+  
+  @@index([entityType, entityId])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
