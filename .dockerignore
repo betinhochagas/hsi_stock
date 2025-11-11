@@ -1,0 +1,38 @@
+# Dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Build outputs
+dist
+build
+.next
+out
+.turbo
+
+# Development
+.git
+.gitignore
+.env*.local
+.vscode
+.idea
+
+# Testing
+coverage
+.nyc_output
+
+# Documentation
+*.md
+!README.md
+
+# CI/CD
+.github
+
+# Misc
+.DS_Store
+Thumbs.db
+*.log
+
+# CSV data files
+*.csv
