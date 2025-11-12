@@ -6,6 +6,8 @@ import { UsersModule } from './users/users.module';
 import { AssetsModule } from './assets/assets.module';
 import { CategoriesModule } from './categories/categories.module';
 import { LocationsModule } from './locations/locations.module';
+import { ManufacturersModule } from './manufacturers/manufacturers.module';
+import { SuppliersModule } from './suppliers/suppliers.module';
 import { LicensesModule } from './licenses/licenses.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { HealthController } from './health/health.controller';
@@ -27,6 +29,8 @@ import { HealthController } from './health/health.controller';
     AssetsModule,
     CategoriesModule,
     LocationsModule,
+    ManufacturersModule,
+    SuppliersModule,
     LicensesModule,
   ],
   controllers: [HealthController],
