@@ -13,8 +13,9 @@ export default function Home() {
     // Redirect to login if not authenticated
     if (!isAuthenticated) {
       router.push('/login');
+    } else {
+      router.push('/dashboard');
     }
-    // TODO: Redirect to dashboard when implemented
   }, [isAuthenticated, router]);
 
   return (

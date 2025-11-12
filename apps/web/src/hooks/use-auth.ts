@@ -24,7 +24,7 @@ export function useAuth() {
     onSuccess: (data) => {
       setAuth(data.user, data.access_token);
       toast.success(`Bem-vindo, ${data.user.name}!`);
-      router.push('/');
+      router.push('/dashboard');
     },
     onError: (error: Error) => {
       toast.error(error.message || 'Erro ao fazer login');
