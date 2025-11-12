@@ -9,6 +9,7 @@ import { LocationsModule } from './locations/locations.module';
 import { ManufacturersModule } from './manufacturers/manufacturers.module';
 import { SuppliersModule } from './suppliers/suppliers.module';
 import { LicensesModule } from './licenses/licenses.module';
+import { MovementsModule } from './movements/movements.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { HealthController } from './health/health.controller';
 
@@ -32,6 +33,7 @@ import { HealthController } from './health/health.controller';
     ManufacturersModule,
     SuppliersModule,
     LicensesModule,
+    MovementsModule,
   ],
   controllers: [HealthController],
 })
