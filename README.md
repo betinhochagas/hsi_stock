@@ -8,7 +8,7 @@
 
 Sistema completo de gerenciamento de estoque de TI para hospitais e instituições de saúde, com importação de dados via CSV, dashboard analítico, controle de ativos, licenças de software e auditoria completa.
 
-**🚀 Status Atual:** API 100% operacional em Docker | Database populado | 26+ endpoints REST | Swagger UI funcional
+**🚀 Status Atual:** Backend 100% completo | 47 endpoints REST | Docker operacional | Swagger UI funcional | Database populado
 
 ---
 
@@ -65,37 +65,42 @@ docker-compose up api -d --build
 
 | Componente | Status | Descrição |
 |------------|--------|-----------|
-| **Database Schema** | ✅ 100% | 16 tabelas, relacionamentos, índices |
+| **Database Schema** | ✅ 100% | 17 tabelas, relacionamentos, índices |
 | **Prisma ORM** | ✅ 100% | Client gerado, binary targets configurados |
 | **Docker Environment** | ✅ 100% | PostgreSQL, Redis, API containerizados |
 | **Auth Module** | ✅ 100% | JWT, bcrypt, Guards, Strategies |
-| **Users CRUD** | ✅ 100% | Endpoints completos com RBAC |
-| **Categories CRUD** | ✅ 100% | Endpoints completos |
-| **Locations CRUD** | ✅ 100% | Endpoints completos |
-| **Assets Endpoints** | ✅ 60% | GET funcionando, falta POST/PATCH/DELETE |
-| **Manufacturers** | ✅ 50% | GET funcionando, falta implementar resto |
-| **Suppliers** | ✅ 50% | GET funcionando, falta implementar resto |
+| **Users CRUD** | ✅ 100% | 5 endpoints REST completos |
+| **Assets CRUD** | ✅ 100% | 5 endpoints REST completos |
+| **Categories CRUD** | ✅ 100% | 5 endpoints REST completos |
+| **Locations CRUD** | ✅ 100% | 5 endpoints REST completos |
+| **Manufacturers CRUD** | ✅ 100% | 5 endpoints REST completos |
+| **Suppliers CRUD** | ✅ 100% | 5 endpoints REST completos |
+| **Licenses CRUD** | ✅ 100% | 8 endpoints REST (assign/revoke/expiring) |
+| **Movements CRUD** | ✅ 100% | 5 endpoints REST (tracking completo) |
 | **Swagger UI** | ✅ 100% | Documentação interativa completa |
-| **Health Check** | ✅ 100% | Endpoint funcional |
+| **Health Check** | ✅ 100% | 2 endpoints de monitoramento |
+
+**Total:** 47 endpoints REST documentados e funcionando
 
 ### Pendente de Implementação ⏳
 
 | Feature | Prioridade | Estimativa |
 |---------|-----------|------------|
-| Assets CRUD completo | 🔴 Alta | 3h |
-| Licenses Module | 🔴 Alta | 5h |
-| Movements Module | 🟡 Média | 4h |
+| Maintenances Module | � Média | 10h |
+| Contracts Module | � Média | 8h |
+| Attachments Module | 🟡 Média | 6h |
 | Import CSV Wizard | 🔴 Alta | 18h |
 | Frontend (Next.js) | 🔴 Alta | 42h |
-| Testes E2E | 🟢 Baixa | 10h |
+| Testes (Unit + E2E) | 🟢 Baixa | 20h |
 
 ### Próximas Entregas
 
-1. **Sprint 1:** Completar CRUDs Backend (12h)
-2. **Sprint 2:** Frontend MVP com Auth + Dashboard (14h)
+1. **Sprint 1:** Frontend MVP com Auth + Dashboard (14h) 🔴 PRÓXIMO
+2. **Sprint 2:** Assets/Movements/Licenses UI (20h)
 3. **Sprint 3:** Wizard de Importação CSV (18h)
+4. **Sprint 4:** Testes e módulos secundários (24h)
 
-**📄 Detalhes:** Ver [PROGRESS-ATUAL.md](PROGRESS-ATUAL.md) e [ROADMAP.md](ROADMAP.md)
+**📄 Detalhes:** Ver [PROGRESS.md](PROGRESS.md) v5.0.0 (atualizado com backend 100%)
 
 ---
 
@@ -388,10 +393,10 @@ A aplicação estará disponível em:
 - **Web:** http://localhost:3000 (ainda não implementado)
 
 **Status Atual:**
-- ✅ API funcionando 100% em Docker
-- ✅ 26+ endpoints REST documentados
-- ✅ Database populado com 48 registros seed
-- ⏳ Frontend em desenvolvimento
+- ✅ Backend 100% completo em Docker
+- ✅ 47 endpoints REST documentados (Swagger UI)
+- ✅ Database populado com 37 registros seed
+- ⏳ Frontend em desenvolvimento (próximo sprint)
 
 ### Opção 2: Desenvolvimento Local (sem Docker)
 
