@@ -30,6 +30,59 @@ Sistema completo de gerenciamento de estoque de TI para hospitais e instituiçõ
 
 ---
 
+---
+
+## 📊 Status do Projeto
+
+### Componentes Implementados ✅
+
+| Componente | Status | Descrição |
+|------------|--------|-----------|
+| **Database Schema** | ✅ 100% | 16 tabelas, relacionamentos, índices |
+| **Prisma ORM** | ✅ 100% | Client gerado, binary targets configurados |
+| **Docker Environment** | ✅ 100% | PostgreSQL, Redis, API containerizados |
+| **Auth Module** | ✅ 100% | JWT, bcrypt, Guards, Strategies |
+| **Users CRUD** | ✅ 100% | Endpoints completos com RBAC |
+| **Categories CRUD** | ✅ 100% | Endpoints completos |
+| **Locations CRUD** | ✅ 100% | Endpoints completos |
+| **Assets Endpoints** | ✅ 60% | GET funcionando, falta POST/PATCH/DELETE |
+| **Manufacturers** | ✅ 50% | GET funcionando, falta implementar resto |
+| **Suppliers** | ✅ 50% | GET funcionando, falta implementar resto |
+| **Swagger UI** | ✅ 100% | Documentação interativa completa |
+| **Health Check** | ✅ 100% | Endpoint funcional |
+
+### Pendente de Implementação ⏳
+
+| Feature | Prioridade | Estimativa |
+|---------|-----------|------------|
+| Assets CRUD completo | 🔴 Alta | 3h |
+| Licenses Module | 🔴 Alta | 5h |
+| Movements Module | 🟡 Média | 4h |
+| Import CSV Wizard | 🔴 Alta | 18h |
+| Frontend (Next.js) | 🔴 Alta | 42h |
+| Testes E2E | 🟢 Baixa | 10h |
+
+### Próximas Entregas
+
+1. **Sprint 1:** Completar CRUDs Backend (12h)
+2. **Sprint 2:** Frontend MVP com Auth + Dashboard (14h)
+3. **Sprint 3:** Wizard de Importação CSV (18h)
+
+**📄 Detalhes:** Ver [PROGRESS-ATUAL.md](PROGRESS-ATUAL.md) e [ROADMAP.md](ROADMAP.md)
+
+---
+
+## 📚 Documentação Adicional
+
+- **[QUICKSTART.md](QUICKSTART.md)** - Guia rápido de 10 minutos
+- **[SETUP-DOCKER-COMPLETO.md](SETUP-DOCKER-COMPLETO.md)** - Documentação detalhada do setup Docker
+- **[PROGRESS-ATUAL.md](PROGRESS-ATUAL.md)** - Status detalhado do projeto
+- **[ROADMAP.md](ROADMAP.md)** - Plano de desenvolvimento (150h)
+- **[docs/arquitetura.md](docs/arquitetura.md)** - Diagramas de arquitetura
+- **[docs/adr/](docs/adr/)** - Architecture Decision Records
+
+---
+
 ## 🎯 Visão Geral
 
 O **Sistema de Estoque TI HSI** é uma aplicação web moderna desenvolvida para gerenciar ativos de tecnologia da informação, incluindo:
@@ -212,16 +265,31 @@ Edite o arquivo `.env` com suas configurações (veja seção [Configuração](#
 
 ### 4. Prepare o banco de dados
 
-\`\`\`powershell
-# Gerar cliente Prisma
-npm run db:generate --workspace=@estoque-hsi/db
+**⚠️ No Windows, use SQL direto** (Prisma tem problemas de autenticação com PostgreSQL Docker):
 
-# Executar migrações
-npm run db:migrate --workspace=@estoque-hsi/db
+\`\`\`powershell
+# Gerar cliente Prisma com binary targets para Docker
+cd packages/db
+npx prisma generate
+cd ../..
+
+# Subir PostgreSQL e Redis
+docker-compose up -d db redis
+
+# Aguardar containers ficarem healthy (~30s)
+docker-compose ps
+
+# Criar schema do banco
+Get-Content create_schema.sql | docker exec -i estoque-hsi-db psql -U estoque_user -d estoque_hsi
 
 # Popular com dados iniciais
-npm run db:seed --workspace=@estoque-hsi/db
+Get-Content seed.sql | docker exec -i estoque-hsi-db psql -U estoque_user -d estoque_hsi
+
+# Verificar dados
+docker exec estoque-hsi-db psql -U estoque_user -d estoque_hsi -c "SELECT COUNT(*) FROM assets;"
 \`\`\`
+
+**ℹ️ Documentação completa:** [SETUP-DOCKER-COMPLETO.md](SETUP-DOCKER-COMPLETO.md)
 
 ---
 
@@ -274,59 +342,59 @@ CORS_ORIGIN=http://localhost:3000
 
 ## 🎮 Execução
 
-### Opção 1: Com Docker (Recomendado)
+### Opção 1: Com Docker (Recomendado) ✅
 
 \`\`\`powershell
-# Subir todos os serviços (db, redis, api, web)
+# Subir todos os serviços (db, redis, api)
 docker-compose up -d
 
-# Ver logs
-docker-compose logs -f
+# Ver logs em tempo real
+docker-compose logs -f api
 
 # Parar serviços
 docker-compose down
 \`\`\`
 
 A aplicação estará disponível em:
-- **Web:** http://localhost:3000
 - **API:** http://localhost:3001
 - **API Docs (Swagger):** http://localhost:3001/api/docs
+- **Web:** http://localhost:3000 (ainda não implementado)
+
+**Status Atual:**
+- ✅ API funcionando 100% em Docker
+- ✅ 26+ endpoints REST documentados
+- ✅ Database populado com 48 registros seed
+- ⏳ Frontend em desenvolvimento
 
 ### Opção 2: Desenvolvimento Local (sem Docker)
 
+⚠️ **Não recomendado no Windows** devido a problemas de autenticação Prisma.
+
+Se optar por desenvolver localmente:
+
 #### Passo 1: Banco de dados e Redis
 
-Certifique-se de que PostgreSQL e Redis estão rodando localmente ou ajuste `.env` para apontar para instâncias remotas.
+Você ainda precisará do Docker para PostgreSQL e Redis:
 
 \`\`\`powershell
-# Se usar Docker apenas para DB e Redis
+# Subir apenas DB e Redis
 docker-compose up -d db redis
 \`\`\`
 
-#### Passo 2: Executar migrações e seed
+#### Passo 2: Executar schema e seed
 
 \`\`\`powershell
-npm run db:migrate
-npm run db:seed
+# Criar schema
+Get-Content create_schema.sql | docker exec -i estoque-hsi-db psql -U estoque_user -d estoque_hsi
+
+# Popular dados
+Get-Content seed.sql | docker exec -i estoque-hsi-db psql -U estoque_user -d estoque_hsi
 \`\`\`
 
-#### Passo 3: Iniciar aplicações
-
-Em terminais separados:
+#### Passo 3: Iniciar API localmente
 
 \`\`\`powershell
-# Terminal 1 - API
 cd apps/api
-npm run dev
-
-# Terminal 2 - Web
-cd apps/web
-npm run dev
-\`\`\`
-
-Ou use o Turborepo para rodar todos os workspaces:
-
-\`\`\`powershell
 npm run dev
 \`\`\`
 

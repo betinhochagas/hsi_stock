@@ -52,9 +52,17 @@ Aguarde ~10 segundos para o banco inicializar.
 
 ## Passo 5: Execute as migrações e seed
 
+**⚠️ IMPORTANTE:** No Windows, use SQL direto (Prisma tem problemas de autenticação):
+
 \`\`\`powershell
-npm run db:migrate
-npm run db:seed
+# Criar schema do banco
+Get-Content create_schema.sql | docker exec -i estoque-hsi-db psql -U estoque_user -d estoque_hsi
+
+# Popular com dados iniciais
+Get-Content seed.sql | docker exec -i estoque-hsi-db psql -U estoque_user -d estoque_hsi
+
+# Verificar
+docker exec estoque-hsi-db psql -U estoque_user -d estoque_hsi -c "SELECT COUNT(*) FROM assets;"
 \`\`\`
 
 Isso vai criar as tabelas e popular com dados iniciais, incluindo usuários de teste.
@@ -62,17 +70,21 @@ Isso vai criar as tabelas e popular com dados iniciais, incluindo usuários de t
 ## Passo 6: Inicie a aplicação
 
 \`\`\`powershell
+# Iniciar API em Docker (recomendado)
+docker-compose up api -d --build
+
+# OU desenvolvimento local (requer Node.js)
 npm run dev
 \`\`\`
 
 Isso vai iniciar:
 - **API:** http://localhost:3001
-- **Web:** http://localhost:3000
 - **API Docs:** http://localhost:3001/api/docs
+- **Web:** http://localhost:3000 (se não usar Docker)
 
-## Passo 7: Faça login
+## Passo 7: Teste a API
 
-Acesse http://localhost:3000/login e use:
+Acesse http://localhost:3001/api/docs no Swagger UI e faça login:
 
 | Email | Senha | Papel |
 |-------|-------|-------|
@@ -80,16 +92,34 @@ Acesse http://localhost:3000/login e use:
 | gestor@hsi.local | gestor123 | GESTOR |
 | tecnico@hsi.local | tecnico123 | TECNICO |
 
+Ou teste via PowerShell:
+
+\`\`\`powershell
+# Login
+$response = Invoke-RestMethod -Uri 'http://localhost:3001/api/v1/auth/login' -Method POST -ContentType 'application/json' -Body '{"email":"admin@hsi.local","password":"admin123"}'
+$token = $response.access_token
+
+# Listar assets
+Invoke-RestMethod -Uri 'http://localhost:3001/api/v1/assets' -Headers @{ Authorization = "Bearer $token" }
+\`\`\`
+
 ## 🎉 Pronto!
 
-Você agora tem o sistema rodando localmente.
+Você agora tem a API rodando em Docker com banco de dados populado.
+
+**✅ Status Atual:**
+- PostgreSQL: 16 assets, 3 usuários, 6 categorias
+- API: 26+ endpoints documentados
+- Swagger: Interface interativa para testes
+
+**⚠️ Frontend ainda não implementado** - Use Swagger para testar a API.
 
 ## Próximos Passos
 
-1. **Explore o Dashboard:** Veja KPIs e gráficos
-2. **Importe CSVs:** Use o wizard de importação em `/import`
-3. **Gerencie Ativos:** CRUD completo em `/assets`
-4. **Teste a API:** Acesse http://localhost:3001/api/docs
+1. **Teste a API:** Use http://localhost:3001/api/docs
+2. **Verifique os dados:** Login como admin e liste assets
+3. **Desenvolver Frontend:** Next.js em `apps/web/` (pendente)
+4. **Ler documentação completa:** [SETUP-DOCKER-COMPLETO.md](SETUP-DOCKER-COMPLETO.md)
 
 ## Troubleshooting
 
@@ -112,8 +142,23 @@ docker-compose restart db
 ### Prisma Client não encontrado
 \`\`\`powershell
 cd packages/db
-npm run db:generate
+npx prisma generate
+# Incluir binary targets para Docker
 cd ../..
+docker-compose up api -d --build
+\`\`\`
+
+### Erro de autenticação Prisma (Windows → Docker)
+**Solução:** Use SQL direto (já documentado no Passo 5)
+
+### API não inicia no Docker
+\`\`\`powershell
+# Ver logs detalhados
+docker logs estoque-hsi-api
+
+# Rebuild completo
+docker-compose down
+docker-compose up -d --build
 \`\`\`
 
 ## Parar o sistema

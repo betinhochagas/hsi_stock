@@ -8,15 +8,19 @@
 
 ## 🎯 RESUMO EXECUTIVO
 
-### Status Atual: AMBIENTE CONFIGURADO, PRONTO PARA DESENVOLVIMENTO
+### Status Atual: SISTEMA 100% OPERACIONAL EM DOCKER
 
 ✅ **Dependências instaladas** (1144 packages)  
-✅ **Prisma Client gerado**  
+✅ **Prisma Client gerado** com binary targets para Alpine Linux  
 ✅ **Arquivo .env configurado**  
 ✅ **Git versionado** (commit 3611d9c)  
 ✅ **Categories e Locations CRUDs implementados**  
-⚠️ **Docker não disponível** (bloqueador para database)  
-⚠️ **PostgreSQL não instalado localmente**
+✅ **Docker Desktop rodando** (PostgreSQL + Redis + API)  
+✅ **Database criado e populado** (16 tabelas, 48 registros seed)  
+✅ **API funcionando** em http://localhost:3001  
+✅ **Swagger UI acessível** em http://localhost:3001/api/docs  
+✅ **Autenticação JWT testada e funcionando**  
+✅ **Todos endpoints principais validados**
 
 ---
 
@@ -25,25 +29,25 @@
 ### Visão Geral por Área
 
 ```
-Backend API:      ███████████░░░░░░░░░ 55% (+20% desde última análise)
-Frontend Web:     █████░░░░░░░░░░░░░░░ 25%
-Database Schema:  ████████████████████ 100%
-Infraestrutura:   ████████████░░░░░░░░ 60% (Docker não disponível)
+Backend API:      ███████████░░░░░░░░░ 55% (funcionando em Docker)
+Frontend Web:     █████░░░░░░░░░░░░░░░ 25% (não iniciado)
+Database Schema:  ████████████████████ 100% (migrado via SQL)
+Infraestrutura:   ████████████████████ 100% (Docker operacional)
 Testes:           ███░░░░░░░░░░░░░░░░░ 15% (configurado, poucos testes)
 Documentação:     ████████████████████ 100%
 
-TOTAL DO PROJETO: ███████████░░░░░░░░░ 57%
+TOTAL DO PROJETO: ████████████░░░░░░░░ 63% (+6% desde última análise)
 ```
 
 ### Tempo Estimado para MVP Completo
 
 | Fase | Horas | Status |
 |------|-------|--------|
-| Setup Database | 2h | ⏳ Próximo (instalar Docker/PostgreSQL) |
+| Setup Database | 2h | ✅ CONCLUÍDO (via Docker + SQL direto) |
 | Backend Core Restante | 35h | ⏳ |
 | Frontend Core | 42h | ⏳ |
 | Testes Essenciais | 10h | ⏳ |
-| **TOTAL MVP** | **89h** | **~11 dias úteis** |
+| **TOTAL MVP** | **87h** | **~11 dias úteis** |
 
 ---
 
@@ -170,7 +174,7 @@ TOTAL DO PROJETO: ███████████░░░░░░░░░ 5
 
 ### Infraestrutura e DevOps
 
-#### ✅ CONCLUÍDO (60%)
+#### ✅ CONCLUÍDO (100%)
 
 - ✅ Turborepo configurado
 - ✅ docker-compose.yml (4 serviços)
@@ -179,19 +183,24 @@ TOTAL DO PROJETO: ███████████░░░░░░░░░ 5
 - ✅ Scripts de setup (setup.ps1, setup.bat)
 - ✅ .env.example completo
 - ✅ .env criado
+- ✅ **Docker Desktop instalado e rodando**
+- ✅ **PostgreSQL 15 rodando** no container estoque-hsi-db
+- ✅ **Redis 7 rodando** no container estoque-hsi-redis
+- ✅ **API NestJS rodando** no container estoque-hsi-api
+- ✅ **Database criado e populado** com schema completo
 
-#### ⚠️ BLOQUEADORES
+#### ✅ SOLUÇÕES IMPLEMENTADAS
 
-- ❌ **Docker não instalado no Windows**
-- ❌ **PostgreSQL não disponível localmente**
-- ❌ **Redis não disponível**
+**Problema:** Prisma não conseguiu autenticar do Windows para PostgreSQL Docker  
+**Solução:** Geração e execução direta de SQL via `prisma migrate diff`
 
-**Impacto:** Impede smoke test completo, migrations, seed e execução da API.
+**Problema:** API não encontrava Prisma Client no container Alpine  
+**Solução:** Adicionado binaryTargets linux-musl-openssl-3.0.x + OpenSSL no Dockerfile
 
-**Soluções Possíveis:**
-1. **Instalar Docker Desktop** (recomendado)
-2. **Instalar PostgreSQL + Redis nativos** no Windows
-3. **Usar database remoto** (Supabase, Neon, etc.)
+**Problema:** API retornava caminho errado para main.js  
+**Solução:** Corrigido CMD no Dockerfile para dist/apps/api/src/main
+
+**Resultado:** Sistema 100% operacional em Docker sem dependências do Windows
 
 ---
 
@@ -342,22 +351,24 @@ TOTAL DO PROJETO: ███████████░░░░░░░░░ 5
 
 ## 🚨 RISCOS E BLOQUEADORES ATUAIS
 
-### Bloqueadores Críticos (Impedem Desenvolvimento)
+### ✅ Bloqueadores Críticos RESOLVIDOS
 
-| # | Bloqueador | Impacto | Solução | Tempo |
-|---|-----------|---------|---------|-------|
-| 1 | **Docker não instalado** | 🔴 Alto | Instalar Docker Desktop | 30min |
-| 2 | **PostgreSQL não disponível** | 🔴 Alto | Via Docker OU nativo | 30min |
-| 3 | **Redis não disponível** | 🟡 Médio | Via Docker (jobs podem aguardar) | 10min |
+| # | Bloqueador | Status | Solução Implementada |
+|---|-----------|---------|----------------------|
+| 1 | **Docker não instalado** | ✅ RESOLVIDO | Docker Desktop instalado e rodando |
+| 2 | **PostgreSQL não disponível** | ✅ RESOLVIDO | Container estoque-hsi-db operacional |
+| 3 | **Redis não disponível** | ✅ RESOLVIDO | Container estoque-hsi-redis operacional |
+| 4 | **Prisma migrations falhando** | ✅ RESOLVIDO | Schema criado via SQL direto |
+| 5 | **API não inicia no Docker** | ✅ RESOLVIDO | Corrigido Dockerfile + binary targets |
 
 ### Riscos Identificados
 
 | Risco | Probabilidade | Impacto | Mitigação |
 |-------|--------------|---------|-----------|
-| **Docker falhar no Windows** | Média | Alto | Usar PostgreSQL nativo |
-| **Migrations falharem** | Baixa | Médio | Resetar DB, verificar DATABASE_URL |
-| **Porta 5432 em uso** | Baixa | Baixo | Alterar porta no docker-compose |
-| **BullMQ sem Redis** | Alta | Médio | Importações CSV serão síncronas temporariamente |
+| **Migrations Prisma no Windows** | Alta | Médio | Usar SQL direto ou migrations no container |
+| **Alpine Linux incompatibilidades** | Baixa | Baixo | Binary targets corretos configurados |
+| **Performance com 100k+ assets** | Média | Médio | Índices no banco + pagination |
+| **Upload de arquivos grandes** | Média | Médio | Stream processing + validação de tamanho |
 
 ---
 

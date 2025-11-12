@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: estoque_user
-      POSTGRES_PASSWORD: estoque_pass
+      POSTGRES_PASSWORD: admin
       POSTGRES_DB: estoque_hsi
     ports:
       - "5432:5432"
@@ -45,7 +45,7 @@ services:
       redis:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://estoque_user:estoque_pass@db:5432/estoque_hsi
+      DATABASE_URL: postgresql://estoque_user:admin@db:5432/estoque_hsi
       REDIS_URL: redis://redis:6379
       JWT_SECRET: ${JWT_SECRET:-change_me_in_production}
       NODE_ENV: production

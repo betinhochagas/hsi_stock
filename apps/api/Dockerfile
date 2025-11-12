@@ -28,6 +28,9 @@ RUN npm run build
 FROM node:20-alpine AS runner
 WORKDIR /app
 
+# Instalar OpenSSL para o Prisma
+RUN apk add --no-cache openssl
+
 ENV NODE_ENV=production
 
 RUN addgroup --system --gid 1001 nodejs
@@ -35,10 +38,11 @@ RUN adduser --system --uid 1001 nestjs
 
 COPY --from=builder --chown=nestjs:nodejs /app/apps/api/dist ./dist
 COPY --from=builder --chown=nestjs:nodejs /app/node_modules ./node_modules
-COPY --from=builder --chown=nestjs:nodejs /app/packages/db/prisma ./packages/db/prisma
+COPY --from=builder --chown=nestjs:nodejs /app/packages/db ./packages/db
+COPY --from=builder --chown=nestjs:nodejs /app/package.json ./package.json
 
 USER nestjs
 
 EXPOSE 3001
 
-CMD ["node", "dist/main"]
+CMD ["node", "dist/apps/api/src/main"]
