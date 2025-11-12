@@ -8,10 +8,37 @@
 
 Sistema completo de gerenciamento de estoque de TI para hospitais e instituições de saúde, com importação de dados via CSV, dashboard analítico, controle de ativos, licenças de software e auditoria completa.
 
+**🚀 Status Atual:** API 100% operacional em Docker | Database populado | 26+ endpoints REST | Swagger UI funcional
+
+---
+
+## 🎯 Início Rápido
+
+```powershell
+# 1. Subir Docker
+docker-compose up -d db redis
+
+# 2. Criar banco
+Get-Content create_schema.sql | docker exec -i estoque-hsi-db psql -U estoque_user -d estoque_hsi
+
+# 3. Popular dados
+Get-Content seed.sql | docker exec -i estoque-hsi-db psql -U estoque_user -d estoque_hsi
+
+# 4. Iniciar API
+docker-compose up api -d --build
+
+# 5. Testar: http://localhost:3001/api/docs
+```
+
+**📚 Documentação:**
+- **[QUICKSTART.md](QUICKSTART.md)** - Guia completo passo a passo
+- **[SETUP-DOCKER-COMPLETO.md](SETUP-DOCKER-COMPLETO.md)** - Troubleshooting detalhado
+
 ---
 
 ## 📋 Índice
 
+- [Status do Projeto](#-status-do-projeto)
 - [Visão Geral](#-visão-geral)
 - [Arquitetura](#-arquitetura)
 - [Funcionalidades](#-funcionalidades)
