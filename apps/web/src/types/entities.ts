@@ -172,4 +172,5 @@ export interface DashboardStats {
   totalLicenses: number;
   expiringLicenses: number;
   recentMovements: number;
+  totalValue: number;
 }

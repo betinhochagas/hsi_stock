@@ -3,6 +3,7 @@ import { ApiTags, ApiOperation, ApiBearerAuth, ApiQuery, ApiResponse } from '@ne
 import { AssetsService } from './assets.service';
 import { CreateAssetDto } from './dto/create-asset.dto';
 import { UpdateAssetDto } from './dto/update-asset.dto';
+import { DashboardStatsDto } from './dto/stats-response.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @ApiTags('assets')
@@ -11,6 +12,13 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 @Controller('assets')
 export class AssetsController {
   constructor(private assetsService: AssetsService) {}
+
+  @Get('stats/dashboard')
+  @ApiOperation({ summary: 'Obter estatísticas do dashboard' })
+  @ApiResponse({ status: 200, description: 'Estatísticas retornadas com sucesso', type: DashboardStatsDto })
+  async getDashboardStats(): Promise<DashboardStatsDto> {
+    return this.assetsService.getDashboardStats();
+  }
 
   @Get()
   @ApiOperation({ summary: 'Listar ativos com paginação e filtros' })

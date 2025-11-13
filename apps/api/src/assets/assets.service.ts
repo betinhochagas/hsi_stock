@@ -2,10 +2,83 @@ import { Injectable, NotFoundException, ConflictException } from '@nestjs/common
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateAssetDto } from './dto/create-asset.dto';
 import { UpdateAssetDto } from './dto/update-asset.dto';
+import { DashboardStatsDto } from './dto/stats-response.dto';
 
 @Injectable()
 export class AssetsService {
   constructor(private prisma: PrismaService) {}
+
+  async getDashboardStats(): Promise<DashboardStatsDto> {
+    // Buscar total de ativos
+    const totalAssets = await this.prisma.asset.count();
+
+    // Buscar ativos por status
+    const assetsByStatus = await this.prisma.asset.groupBy({
+      by: ['status'],
+      _count: true,
+    });
+
+    const statusCounts = {
+      EM_ESTOQUE: 0,
+      EM_USO: 0,
+      EM_MANUTENCAO: 0,
+      INATIVO: 0,
+      DESCARTADO: 0,
+    };
+
+    assetsByStatus.forEach((item) => {
+      statusCounts[item.status] = item._count;
+    });
+
+    // Buscar total de licenças ativas
+    const totalLicenses = await this.prisma.license.count({
+      where: { status: 'ATIVA' },
+    });
+
+    // Buscar licenças expirando em 30 dias
+    const thirtyDaysFromNow = new Date();
+    thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
+
+    const expiringLicenses = await this.prisma.license.count({
+      where: {
+        status: 'ATIVA',
+        expirationDate: {
+          lte: thirtyDaysFromNow,
+          gte: new Date(),
+        },
+      },
+    });
+
+    // Buscar movimentações dos últimos 30 dias
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    const recentMovements = await this.prisma.movement.count({
+      where: {
+        movedAt: {
+          gte: thirtyDaysAgo,
+        },
+      },
+    });
+
+    // Calcular valor total dos ativos (soma de purchasePrice)
+    const totalValueResult = await this.prisma.asset.aggregate({
+      _sum: {
+        purchasePrice: true,
+      },
+    });
+
+    const totalValue = totalValueResult._sum.purchasePrice || 0;
+
+    return {
+      totalAssets,
+      assetsByStatus: statusCounts,
+      totalLicenses,
+      expiringLicenses,
+      recentMovements,
+      totalValue: Number(totalValue),
+    };
+  }
 
   async findAll(params?: { skip?: number; take?: number; search?: string; status?: string }) {
     const { skip = 0, take = 50, search, status } = params || {};
