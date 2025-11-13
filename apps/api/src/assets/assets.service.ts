@@ -15,7 +15,9 @@ export class AssetsService {
     // Buscar ativos por status
     const assetsByStatus = await this.prisma.asset.groupBy({
       by: ['status'],
-      _count: true,
+      _count: {
+        _all: true,
+      },
     });
 
     const statusCounts = {
@@ -27,7 +29,7 @@ export class AssetsService {
     };
 
     assetsByStatus.forEach((item) => {
-      statusCounts[item.status] = item._count;
+      statusCounts[item.status] = item._count._all;
     });
 
     // Buscar total de licenças ativas

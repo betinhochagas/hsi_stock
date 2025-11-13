@@ -12,12 +12,14 @@ export default function DashboardPage() {
   const { data: stats, isLoading: statsLoading } = useDashboardStats()
   const { data: movementsData, isLoading: movementsLoading } = useRecentMovements(10)
 
-  // Preparar dados para o gráfico
+  // Preparar dados para o gráfico (filtrar zeros)
   const chartData = stats?.assetsByStatus
-    ? Object.entries(stats.assetsByStatus).map(([status, count]) => ({
-        status,
-        count,
-      }))
+    ? Object.entries(stats.assetsByStatus)
+        .filter(([, count]) => count > 0)
+        .map(([status, count]) => ({
+          status,
+          count,
+        }))
     : []
 
   return (
@@ -61,11 +63,15 @@ export default function DashboardPage() {
           loading={statsLoading}
         />
         <StatsCard
-          title="Alertas"
-          value={stats?.expiringLicenses || '0'}
-          description="Licenças expirando"
+          title="Em Manutenção"
+          value={stats?.assetsByStatus.EM_MANUTENCAO || '0'}
+          description="Ativos em manutenção"
           icon={AlertCircle}
-          trend={stats?.expiringLicenses && stats.expiringLicenses > 0 ? 'down' : 'neutral'}
+          trend={
+            stats?.assetsByStatus.EM_MANUTENCAO && stats.assetsByStatus.EM_MANUTENCAO > 0
+              ? 'down'
+              : 'neutral'
+          }
           loading={statsLoading}
         />
       </div>
