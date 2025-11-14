@@ -9,8 +9,16 @@ async function bootstrap() {
 
   // Segurança
   app.use(helmet());
+  
+  // CORS - permitir acesso de qualquer origem em desenvolvimento
+  const corsOrigins = process.env.CORS_ORIGIN 
+    ? process.env.CORS_ORIGIN.split(',')
+    : ['http://localhost:3000', 'http://10.30.1.8:3000'];
+  
   app.enableCors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    origin: process.env.NODE_ENV === 'production' 
+      ? corsOrigins 
+      : true, // Em desenvolvimento, aceita qualquer origem
     credentials: true,
   });
 

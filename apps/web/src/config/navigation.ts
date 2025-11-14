@@ -62,13 +62,13 @@ export const navigation: NavGroup[] = [
     items: [
       {
         title: 'Categorias',
-        href: '/settings/categories',
+        href: '/categories',
         icon: Settings,
         description: 'Gerenciar categorias',
       },
       {
         title: 'Localizações',
-        href: '/settings/locations',
+        href: '/locations',
         icon: MapPin,
         description: 'Gerenciar localizações',
       },

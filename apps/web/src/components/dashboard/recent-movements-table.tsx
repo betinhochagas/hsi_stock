@@ -106,7 +106,7 @@ export function RecentMovementsTable({ movements, loading }: RecentMovementsTabl
                     </span>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    {movement.fromLocation?.name} → {movement.toLocation}
+                    {movement.fromLocation?.name || 'Origem'} → {movement.toLocation || 'Destino'}
                   </p>
                   {movement.reason && (
                     <p className="text-xs text-muted-foreground italic">
@@ -118,9 +118,9 @@ export function RecentMovementsTable({ movements, loading }: RecentMovementsTabl
                   <p className="text-xs text-muted-foreground">
                     {formatDateTime(movement.movedAt)}
                   </p>
-                  {movement.movedBy && (
+                  {movement.user && (
                     <p className="text-xs text-muted-foreground">
-                      {movement.movedBy}
+                      por {movement.user.name}
                     </p>
                   )}
                 </div>

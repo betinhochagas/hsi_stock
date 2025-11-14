@@ -1,5 +1,5 @@
 import './globals.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { QueryProvider } from '@/lib/query-provider';
@@ -10,6 +10,26 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Estoque TI HSI - Sistema de Gestão de Ativos',
   description: 'Sistema de gerenciamento de estoque de TI para hospitais e instituições de saúde',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'HSI Estoque',
+  },
+  formatDetection: {
+    telephone: false,
+  },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#0099ff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0d1117' },
+  ],
 };
 
 export default function RootLayout({
@@ -19,6 +39,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
+      <head>
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="HSI Estoque" />
+      </head>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"

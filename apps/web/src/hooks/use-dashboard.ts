@@ -13,5 +13,6 @@ export function useDashboardStats() {
     },
     staleTime: 1000 * 60 * 5, // 5 minutos
     refetchInterval: 1000 * 60 * 5, // Refetch a cada 5 minutos
+    retry: 2,
   });
 }

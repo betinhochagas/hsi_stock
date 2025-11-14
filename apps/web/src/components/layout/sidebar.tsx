@@ -17,12 +17,12 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        'fixed left-0 top-0 z-40 h-screen border-r bg-card transition-all duration-300',
+        'fixed inset-y-0 left-0 z-40 flex flex-col border-r bg-background transition-all duration-300 overflow-hidden',
         sidebarOpen ? 'w-[280px]' : 'w-[64px]'
       )}
     >
       {/* Logo & Toggle */}
-      <div className="flex h-16 items-center justify-between border-b px-4">
+      <div className="flex h-16 items-center justify-between border-b px-4 shrink-0">
         {sidebarOpen ? (
           <>
             <div className="flex items-center gap-2">
@@ -113,11 +113,21 @@ export function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="border-t p-4">
+      <div className="border-t p-4 shrink-0">
         {sidebarOpen ? (
-          <div className="rounded-lg bg-muted p-3">
-            <p className="text-xs font-medium">Sistema de Estoque</p>
-            <p className="text-xs text-muted-foreground">Versão 1.0.0</p>
+          <div className="space-y-2">
+            <div className="rounded-lg bg-muted p-3">
+              <p className="text-xs font-medium">Sistema de Estoque</p>
+              <p className="text-xs text-muted-foreground">Versão 1.0.0</p>
+              <p className="text-xs text-muted-foreground">Desenvolvido por <strong>Roberto Chagas</strong></p>
+            </div>
+            {process.env.NODE_ENV === 'development' && (
+              <div className="rounded-lg bg-amber-500/10 border border-amber-500/20 p-2">
+                <p className="text-xs font-medium text-amber-600 dark:text-amber-400">
+                  Ambiente de Desenvolvimento
+                </p>
+              </div>
+            )}
           </div>
         ) : (
           <div className="flex justify-center">

@@ -23,17 +23,17 @@ export default function DashboardPage() {
     : []
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 lg:space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-        <p className="text-muted-foreground">
+        <h1 className="text-2xl lg:text-3xl font-bold tracking-tight">Dashboard</h1>
+        <p className="text-sm lg:text-base text-muted-foreground mt-1">
           Visão geral do sistema de gestão de ativos HSI
         </p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 lg:gap-4 grid-cols-2 lg:grid-cols-4">
         <StatsCard
           title="Total de Ativos"
           value={stats?.totalAssets.toLocaleString('pt-BR') || '0'}
@@ -77,13 +77,12 @@ export default function DashboardPage() {
       </div>
 
       {/* Charts Section */}
-      <div className="grid gap-4 md:grid-cols-2">
-        <AssetsByStatusChart data={chartData} loading={statsLoading} />
-        
-        {/* Placeholder for future chart */}
-        <div className="hidden md:block">
-          <AssetsByStatusChart data={chartData} loading={statsLoading} />
-        </div>
+      <div className="grid gap-3 lg:gap-4">
+        <AssetsByStatusChart 
+          key={stats ? 'loaded' : 'loading'}
+          data={chartData} 
+          loading={statsLoading} 
+        />
       </div>
 
       {/* Recent Activity */}

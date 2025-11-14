@@ -28,12 +28,12 @@ export function StatsCard({
     return (
       <Card className={className}>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <Skeleton className="h-4 w-[120px]" />
-          <Skeleton className="h-4 w-4 rounded" />
+          <Skeleton className="h-3 w-16 lg:h-4 lg:w-[120px]" />
+          <Skeleton className="h-3 w-3 lg:h-4 lg:w-4 rounded" />
         </CardHeader>
-        <CardContent>
-          <Skeleton className="h-8 w-[80px] mb-2" />
-          <Skeleton className="h-3 w-full" />
+        <CardContent className="pt-1">
+          <Skeleton className="h-6 w-12 lg:h-8 lg:w-[80px] mb-1 lg:mb-2" />
+          <Skeleton className="h-2 w-20 lg:h-3 lg:w-full" />
         </CardContent>
       </Card>
     );
@@ -46,15 +46,15 @@ export function StatsCard({
   };
 
   return (
-    <Card className={cn('hover:shadow-md transition-shadow', className)}>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">{title}</CardTitle>
-        <Icon className="h-4 w-4 text-muted-foreground" />
+    <Card className={cn('hover:shadow-md transition-shadow touch-manipulation active:scale-[0.98]', className)}>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 lg:pb-2">
+        <CardTitle className="text-xs lg:text-sm font-medium">{title}</CardTitle>
+        <Icon className="h-3.5 w-3.5 lg:h-4 lg:w-4 text-muted-foreground shrink-0" />
       </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
+      <CardContent className="pt-1">
+        <div className="text-xl lg:text-2xl font-bold">{value}</div>
         {description && (
-          <p className={cn('text-xs mt-1', trendColors[trend])}>
+          <p className={cn('text-[10px] lg:text-xs mt-0.5 lg:mt-1 line-clamp-1', trendColors[trend])}>
             {description}
           </p>
         )}
