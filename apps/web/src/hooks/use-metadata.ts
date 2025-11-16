@@ -8,7 +8,9 @@ export function useCategories() {
     queryKey: ['categories'],
     queryFn: async () => {
       const response = await api.get<Category[]>('/categories')
-      return Array.isArray(response.data) ? response.data : []
+      // API retorna { items: [], total, skip, take }
+      const data = response.data as any
+      return data.items || data.data || (Array.isArray(data) ? data : [])
     },
     staleTime: 1000 * 60 * 10, // 10 minutes
     initialData: [],
@@ -21,7 +23,9 @@ export function useLocations() {
     queryKey: ['locations'],
     queryFn: async () => {
       const response = await api.get<Location[]>('/locations')
-      return Array.isArray(response.data) ? response.data : []
+      // API retorna { items: [], total, skip, take }
+      const data = response.data as any
+      return data.items || data.data || (Array.isArray(data) ? data : [])
     },
     staleTime: 1000 * 60 * 10, // 10 minutes
     initialData: [],
@@ -34,7 +38,9 @@ export function useManufacturers() {
     queryKey: ['manufacturers'],
     queryFn: async () => {
       const response = await api.get<Manufacturer[]>('/manufacturers')
-      return Array.isArray(response.data) ? response.data : []
+      // API retorna { items: [], total, skip, take }
+      const data = response.data as any
+      return data.items || data.data || (Array.isArray(data) ? data : [])
     },
     staleTime: 1000 * 60 * 10, // 10 minutes
     initialData: [],
@@ -47,7 +53,9 @@ export function useSuppliers() {
     queryKey: ['suppliers'],
     queryFn: async () => {
       const response = await api.get<Supplier[]>('/suppliers')
-      return Array.isArray(response.data) ? response.data : []
+      // API retorna { items: [], total, skip, take }
+      const data = response.data as any
+      return data.items || data.data || (Array.isArray(data) ? data : [])
     },
     staleTime: 1000 * 60 * 10, // 10 minutes
     initialData: [],

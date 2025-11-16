@@ -23,17 +23,19 @@ import { formatCurrency } from '@/lib/utils'
 import type { AssetFormData } from '@/lib/validations'
 
 const statusLabels: Record<string, string> = {
-  AVAILABLE: 'Disponível',
-  IN_USE: 'Em Uso',
-  MAINTENANCE: 'Manutenção',
-  RETIRED: 'Inativo',
+  EM_ESTOQUE: 'Disponível',
+  EM_USO: 'Em Uso',
+  EM_MANUTENCAO: 'Manutenção',
+  INATIVO: 'Inativo',
+  DESCARTADO: 'Descartado',
 }
 
 const statusVariants: Record<string, 'default' | 'secondary' | 'destructive' | 'outline'> = {
-  AVAILABLE: 'default',
-  IN_USE: 'secondary',
-  MAINTENANCE: 'outline',
-  RETIRED: 'destructive',
+  EM_ESTOQUE: 'default',
+  EM_USO: 'secondary',
+  EM_MANUTENCAO: 'outline',
+  INATIVO: 'destructive',
+  DESCARTADO: 'destructive',
 }
 
 export default function AssetsPage() {
@@ -74,17 +76,17 @@ export default function AssetsPage() {
     try {
       await deleteAsset.mutateAsync(id)
       toast.success('Ativo excluído com sucesso!')
-    } catch (error) {
+    } catch {
       toast.error('Erro ao excluir ativo')
     }
   }
 
   const columns: ColumnDef<Asset>[] = [
     {
-      accessorKey: 'tag',
+      accessorKey: 'assetTag',
       header: 'Tag',
       cell: ({ row }) => (
-        <div className="font-mono font-medium">{row.getValue('tag')}</div>
+        <div className="font-mono font-medium">{row.getValue('assetTag')}</div>
       ),
     },
     {
@@ -228,7 +230,7 @@ export default function AssetsPage() {
         onSubmit={editingAsset ? handleEdit : handleCreate}
         defaultValues={editingAsset ? {
           name: editingAsset.name,
-          assetTag: editingAsset.tag,
+          assetTag: editingAsset.assetTag,
           serialNumber: editingAsset.serialNumber || '',
           categoryId: editingAsset.categoryId,
           manufacturerId: editingAsset.manufacturerId || '',

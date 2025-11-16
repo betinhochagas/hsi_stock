@@ -49,7 +49,7 @@ export const assetSchema = z.object({
     .optional()
     .or(z.literal('')),
   
-  status: z.enum(['AVAILABLE', 'IN_USE', 'MAINTENANCE', 'RETIRED']),
+  status: z.enum(['EM_ESTOQUE', 'EM_USO', 'EM_MANUTENCAO', 'INATIVO', 'DESCARTADO']),
   
   condition: z.enum(['EXCELLENT', 'GOOD', 'FAIR', 'POOR']),
   

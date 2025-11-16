@@ -25,10 +25,10 @@ interface AssetFormDialogProps {
 }
 
 const statusOptions = [
-  { value: 'AVAILABLE', label: 'Disponível' },
-  { value: 'IN_USE', label: 'Em Uso' },
-  { value: 'MAINTENANCE', label: 'Manutenção' },
-  { value: 'RETIRED', label: 'Inativo' },
+  { value: 'EM_ESTOQUE', label: 'Disponível' },
+  { value: 'EM_USO', label: 'Em Uso' },
+  { value: 'EM_MANUTENCAO', label: 'Manutenção' },
+  { value: 'INATIVO', label: 'Inativo' },
 ]
 
 const conditionOptions = [
@@ -58,14 +58,19 @@ export function AssetFormDialog({
   } = useForm<AssetFormData>({
     resolver: zodResolver(assetSchema),
     defaultValues: defaultValues || {
-      status: 'AVAILABLE',
+      status: 'EM_ESTOQUE',
       condition: 'GOOD',
     },
   })
 
-  const handleFormSubmit = async (data: AssetFormData) => {
+  const handleFormSubmit = async (data: any) => {
     try {
-      await onSubmit(data)
+      // Transform 'none' to empty string for optional fields
+      const cleanedData: AssetFormData = {
+        ...data,
+        manufacturerId: data.manufacturerId === 'none' ? '' : data.manufacturerId,
+      }
+      await onSubmit(cleanedData)
       reset()
       onOpenChange(false)
     } catch (error) {
@@ -84,7 +89,7 @@ export function AssetFormDialog({
   }))
 
   const manufacturerOptions = [
-    { value: '', label: 'Nenhum' },
+    { value: 'none', label: 'Nenhum' },
     ...(manufacturers || []).map((mfr) => ({
       value: mfr.id,
       label: mfr.name,

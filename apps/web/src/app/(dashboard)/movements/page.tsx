@@ -37,7 +37,7 @@ const typeVariants: Record<string, 'default' | 'secondary' | 'destructive' | 'ou
 
 export default function MovementsPage() {
   const [typeFilter, setTypeFilter] = useState<string | undefined>()
-  const { data, isLoading } = useMovements({ type: typeFilter })
+  const { data, isLoading, error, isError } = useMovements({ type: typeFilter })
   const deleteMovement = useDeleteMovement()
 
   const handleDelete = async (id: string) => {
@@ -46,7 +46,7 @@ export default function MovementsPage() {
     try {
       await deleteMovement.mutateAsync(id)
       toast.success('Movimentação excluída com sucesso!')
-    } catch (error) {
+    } catch {
       toast.error('Erro ao excluir movimentação')
     }
   }
@@ -72,9 +72,9 @@ export default function MovementsPage() {
         return (
           <div>
             <div className="font-medium">{asset?.name || '-'}</div>
-            {asset?.tag && (
+            {asset?.assetTag && (
               <div className="text-xs text-muted-foreground font-mono">
-                {asset.tag}
+                {asset.assetTag}
               </div>
             )}
           </div>
@@ -189,7 +189,11 @@ export default function MovementsPage() {
 
       {isLoading ? (
         <div className="text-center py-12">Carregando movimentações...</div>
-      ) : data?.items.length === 0 ? (
+      ) : isError ? (
+        <div className="text-center py-12 text-destructive">
+          Erro ao carregar movimentações: {error?.message || 'Erro desconhecido'}
+        </div>
+      ) : !data || !data.items || data.items.length === 0 ? (
         <EmptyState
           icon={ArrowUpDown}
           title="Nenhuma movimentação registrada"
@@ -204,7 +208,7 @@ export default function MovementsPage() {
       ) : (
         <DataTable
           columns={columns}
-          data={data?.items || []}
+          data={data.items}
           searchColumn="asset"
           searchPlaceholder="Buscar por ativo..."
         />

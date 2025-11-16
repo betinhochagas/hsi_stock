@@ -94,7 +94,7 @@ export interface Supplier {
 
 export interface Asset {
   id: string;
-  tag: string;
+  assetTag: string;
   name: string;
   description: string | null;
   model: string | null;

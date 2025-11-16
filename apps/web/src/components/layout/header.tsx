@@ -3,7 +3,6 @@
 import { useTheme } from 'next-themes';
 import { Moon, Sun, LogOut, User, Settings } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
-import { useUIStore } from '@/store/ui-store';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -15,12 +14,10 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Breadcrumbs } from './breadcrumbs';
-import { cn } from '@/lib/utils';
 
 export function Header() {
   const { theme, setTheme } = useTheme();
   const { user, logout } = useAuth();
-  const { sidebarOpen } = useUIStore();
 
   const getInitials = (name: string) => {
     return name

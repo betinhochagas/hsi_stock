@@ -23,17 +23,21 @@ interface MovementsParams {
 
 export function useMovements(params?: MovementsParams) {
   return useQuery({
-    queryKey: ['movements', params],
+    queryKey: ['movements', params || {}],
     queryFn: async () => {
       const response = await api.get<MovementsResponse>('/movements', { params });
+      // API retorna { data: Movement[], pagination: {...} }
+      const apiData = response.data as any;
       return {
-        items: response.data.data,
-        total: response.data.pagination.total,
-        skip: response.data.pagination.skip,
-        take: response.data.pagination.take,
+        items: apiData.data || apiData.items || [],
+        total: apiData.pagination?.total || apiData.total || 0,
+        skip: apiData.pagination?.skip || apiData.skip || 0,
+        take: apiData.pagination?.take || apiData.take || 50,
       };
     },
     staleTime: 1000 * 60 * 2, // 2 minutos
+    retry: 1,
+    refetchOnMount: true,
   });
 }
 

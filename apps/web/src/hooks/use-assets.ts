@@ -25,21 +25,18 @@ export function useAssets(params?: AssetsParams) {
     queryKey: ['assets', params],
     queryFn: async () => {
       const response = await api.get<{
-        data: Asset[]
-        pagination: {
-          total: number
-          page: number
-          limit: number
-          totalPages: number
-        }
+        items: Asset[]
+        total: number
+        skip: number
+        take: number
       }>('/assets', { params })
       
       return {
-        items: response.data.data,
-        total: response.data.pagination.total,
-        page: response.data.pagination.page,
-        limit: response.data.pagination.limit,
-        totalPages: response.data.pagination.totalPages,
+        items: response.data.items,
+        total: response.data.total,
+        page: Math.floor(response.data.skip / response.data.take) + 1,
+        limit: response.data.take,
+        totalPages: Math.ceil(response.data.total / response.data.take),
       } as AssetsResponse
     },
     staleTime: 1000 * 60 * 5, // 5 minutes
