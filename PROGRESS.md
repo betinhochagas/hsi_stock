@@ -1,8 +1,8 @@
-# 📊 PROGRESS - Sistema HSI Stock Management v7.4.0
+# 📊 PROGRESS - Sistema HSI Stock Management v7.4.1
 
 **Data:** 16 de Novembro de 2025  
-**Commit:** b98596c (HEAD → main, origin/main)  
-**Status:** ✅ **SISTEMA OPERACIONAL E FUNCIONAL**
+**Commit:** 39d67da (HEAD → main, origin/main)  
+**Status:** ✅ **SISTEMA OPERACIONAL E FUNCIONAL + BUILD CI/CD CORRIGIDO**
 
 ---
 
@@ -13,10 +13,10 @@
 ✅ **Database:** 16 tabelas + 60 registros (3 users, 6 categories, 4 locations, 16 assets, 29 movements, 2 licenses)  
 ✅ **Docker:** 3/3 containers UP e healthy (api, db, redis) há 5h  
 ✅ **Acesso Rede Local:** Configurado para IP 10.30.1.8  
+✅ **CI/CD:** Build GitHub Actions corrigido ⭐ NOVO  
 ✅ **Zero erros TypeScript**  
 ✅ **Zero bloqueadores**  
 ✅ **Working tree clean** (tudo commitado)  
-⏳ **Testes:** 0% (Jest configurado, sem implementação)
 
 **Progresso MVP:** ✅ **100% COMPLETO E OPERACIONAL**
 
