@@ -788,7 +788,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 🙏 Agradecimentos
 
-- Hospital Santa Ignês (HSI)
+- Hospital Santa Isabel (HSI)
 - Comunidades Next.js, NestJS, Prisma
 - shadcn/ui e Radix UI
 
@@ -801,4 +801,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ---
 
-**Desenvolvido com ❤️ para gestão eficiente de ativos de TI**
+**Desenvolvido por Roberto Chagas**

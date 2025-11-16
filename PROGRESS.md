@@ -1,8 +1,8 @@
-# 📊 PROGRESS - Sistema HSI Stock Management v7.0.0
+# 📊 PROGRESS - Sistema HSI Stock Management v7.2.0
 
 **Data:** 16 de Novembro de 2025  
-**Commit:** fd85878 (HEAD → main, 3 commits à frente do origin)  
-**Status:** Backend 100% + Frontend Sprints 1-4 (80%) + 32 arquivos não commitados
+**Commit:** db9ace3 (HEAD → main, origin/main)  
+**Status:** Backend 100% + Frontend 80% + **Dados Importados + Acesso Rede Local**
 
 ---
 
@@ -13,12 +13,13 @@
 ✅ **Frontend Sprint 2:** Layout + Sidebar + Header (6h)  
 ✅ **Frontend Sprint 3:** Dashboard + KPIs + Gráficos (8h)  
 ✅ **Frontend Sprint 4:** Assets CRUD + Movements (12h)  
-⚠️ **32 arquivos não commitados** (risco de perda de 34h trabalho)  
-🔴 **Docker Engine parado** (precisa iniciar para API rodar)  
+✅ **Importação Dados:** 29 movimentações no banco  
+✅ **Acesso Rede Local:** Configurado para IP 10.30.1.8 (**NOVO**)  
+✅ **Docker:** 3/3 containers rodando (api, db, redis)  
 ✅ **Zero erros TypeScript**  
 ⏳ **Testes:** 0% (Jest configurado, sem implementação)
 
-**Progresso Total:** 84% (↑6% desde v6.0.0)
+**Progresso Total:** 86% (↑2% - importação dados + config rede)
 
 ---
 
@@ -27,37 +28,73 @@
 ```
 Backend:      ████████████████████ 100% (10 módulos, 47 endpoints)
 Frontend:     ████████████████░░░░  80% (Sprints 1-4, faltam admin CRUDs)
-Database:     ████████████████████ 100% (17 tabelas via SQL)
-Infra:        ████████░░░░░░░░░░░░  40% (Docker config mas parado)
+Database:     ████████████████████ 100% (17 tabelas + 29 movimentações)
+Infra:        ████████████████████ 100% (Docker 3/3 + acesso rede)
 Testes:       ░░░░░░░░░░░░░░░░░░░░   0% (pendente)
 Docs:         ████████████████████ 100% (excepcional)
 ```
 
 ---
 
-## 🚨 AÇÃO CRÍTICA: COMMITAR CÓDIGO PENDENTE
+## 🆕 ATUALIZAÇÕES v7.2.0
 
-### 32 Arquivos Não Commitados
+### ✅ 1. Importação de Dados (v7.1.0)
+**Problema:** Tela de Movimentações vazia  
+**Solução:** Script SQL que criou 29 movimentações
 
-**Modificados (19):**
-- `apps/api`: package.json, app.module.ts, tsconfig.json
-- `apps/web`: 15 arquivos (pages, components, hooks, types)
-- `docker-compose.yml`, `package-lock.json`
+| Tipo | Quantidade |
+|------|------------|
+| CHECK_IN | 12 |
+| CHECK_OUT | 16 |
+| ASSIGNMENT | 1 |
 
-**Untracked (13+):**
-- `apps/api/src/auth/decorators/`, `import/`
-- `apps/web/src/app/(dashboard)/diagnostico/`, `movements-test/`
-- Docs: AUDITORIA-*.md, CORRECAO-*.md, SOLUCAO-*.md, TEST-*.md
-- Scripts: import-all-csv.bat, import-csv.py
+**Arquivos:**
+- `scripts/import-movements-simple.sql` - Script funcional
+- `RELATORIO-IMPORTACAO-MOVIMENTACOES.md` - Documentação completa
+- `AUDITORIA-COMPLETA.md` - Diagnóstico pré-importação
+- `RESUMO-SESSAO-IMPORTACAO.md` - Resumo executivo
 
-### Comando Urgente
+### ✅ 2. Acesso via Rede Local (v7.2.0)
+**Problema:** Celular não carregava dados acessando via IP  
+**Solução:** Configurado API URL para IP da rede local
 
-```powershell
-# Review + Commit + Push
-git status
-git add .
-git commit -m "feat(frontend): completa Sprints 1-4 + Assets/Movements CRUD (34h)"
-git push origin main
+**Mudança no `.env.local`:**
+```diff
+- NEXT_PUBLIC_API_URL=http://localhost:3001/api/v1
++ NEXT_PUBLIC_API_URL=http://10.30.1.8:3001/api/v1
+```
+
+**Benefícios:**
+- ✅ Acesso de qualquer dispositivo na rede local
+- ✅ Celular, tablet, notebooks conseguem acessar
+- ✅ Todos os dados carregam corretamente
+- ✅ CORS configurado para aceitar qualquer origem em dev
+
+**Arquivo:** `CONFIGURACAO-REDE-LOCAL.md` - Guia completo de troubleshooting
+
+---
+
+## 📋 ESTADO ATUAL DO BANCO DE DADOS
+
+### Dados Carregados
+
+| Tabela | Registros | Status |
+|--------|-----------|--------|
+| `users` | 3 | ✅ Admin, Gestor, Técnico |
+| `categories` | 6 | ✅ Hardware, Software, etc. |
+| `locations` | 4 | ✅ Almoxarifado, Salas |
+| `manufacturers` | 3 | ✅ Dell, HP, Lenovo |
+| `suppliers` | 1 | ✅ Fornecedor exemplo |
+| `assets` | 16 | ✅ Notebooks, desktops |
+| `licenses` | 2 | ✅ Windows, Office |
+| **`movements`** | **29** | ✅ **IMPORTADO** |
+
+### Movimentações Detalhadas
+```sql
+SELECT type, COUNT(*) FROM movements GROUP BY type;
+-- CHECK_IN: 12 (entradas)
+-- CHECK_OUT: 16 (saídas)
+-- ASSIGNMENT: 1 (atribuição)
 ```
 
 ---
@@ -143,24 +180,36 @@ git push origin main
 
 ## 🎯 TOP 5 PRÓXIMAS ENTREGAS
 
-### 1. ✅ Commitar Código Pendente
-**Prioridade:** 🔴 CRÍTICA | **Tempo:** 0.5h  
-**Risco:** Perda de 34h de trabalho
-
-### 2. Completar CRUDs Admin (Categories, Locations, Licenses)
+### 1. Completar CRUDs Admin (Categories, Locations, Licenses)
 **Prioridade:** 🔴 ALTA | **Tempo:** 11h  
 **Valor:** UI completa para gestão básica
 
 **Tarefas:**
-- Categories CRUD (3h)
-- Locations CRUD (3h)
-- Licenses CRUD com seats (5h)
+- Categories CRUD (3h) - seguindo padrão Assets
+- Locations CRUD (3h) - seguindo padrão Assets
+- Licenses CRUD com seats (5h) - + assign/revoke
 
 **Critérios:**
 - ✅ List, Create, Edit, Delete
 - ✅ Form validation (Zod)
 - ✅ Toast notifications
 - ✅ Loading/error states
+- ✅ Reutilizar componentes (DataTable, FormDialog)
+
+### 2. Wizard Importação CSV
+**Prioridade:** 🔴 ALTA | **Tempo:** 15h  
+**Valor:** Core feature para migração dados legados
+
+**Backend (8h):**
+- `/import/upload`, `/detect`, `/map`, `/validate`, `/commit`
+- BullMQ worker para jobs assíncronos
+- Aproveitando script base já criado
+
+**Frontend (7h):**
+- Wizard 3 passos (Stepper)
+- Upload drag-and-drop
+- Column mapping UI
+- Validation results table
 
 ### 3. Reports & Export
 **Prioridade:** 🟡 MÉDIA | **Tempo:** 12h
@@ -175,19 +224,9 @@ git push origin main
 - Botões export
 - Download handling
 
-### 4. Wizard Importação CSV
-**Prioridade:** 🔴 ALTA | **Tempo:** 18h  
-**Valor:** Core feature para migração dados legados
-
-**Backend (10h):**
-- `/import/upload`, `/detect`, `/map`, `/validate`, `/commit`
-- BullMQ worker para jobs assíncronos
-
-**Frontend (8h):**
-- Wizard 3 passos (Stepper)
-- Upload drag-and-drop
-- Column mapping UI
-- Validation results table
+### 4. Manufacturers & Suppliers CRUD
+**Prioridade:** 🟡 MÉDIA | **Tempo:** 4h  
+**Valor:** Completar gestão de metadados
 
 ### 5. Testes Essenciais
 **Prioridade:** 🟢 BAIXA | **Tempo:** 12h  
@@ -207,60 +246,90 @@ git push origin main
 |------|-------|--------|
 | ✅ Backend Core | 40h | ✅ COMPLETO |
 | ✅ Frontend Sprints 1-4 | 34h | ✅ COMPLETO |
+| ✅ Importação Dados | 2h | ✅ COMPLETO |
+| ✅ Config Rede Local | 0.5h | ✅ COMPLETO |
 | ⏳ Frontend CRUDs Admin | 25h | 🔴 PENDENTE |
-| ⏳ Import/Export | 24h | 🔴 PENDENTE |
+| ⏳ Import/Export | 21h | 🔴 PENDENTE (reduzido) |
 | ⏳ Testes | 26h | 🔴 PENDENTE |
-| **TOTAL** | **149h** | **50% completo (74h/149h)** |
+| **TOTAL** | **148.5h** | **52% completo (76.5h/148.5h)** |
 
-**Prazo:** 9-10 dias úteis (8h/dia)
+**Prazo estimado:** 9 dias úteis (8h/dia) = 72h restantes
 
 ---
 
 ## 🐛 PROBLEMAS CONHECIDOS
 
-### 🔴 Bloqueadores
-1. **Docker Engine parado** → Iniciar: `Start-Service com.docker.service`
-2. **32 arquivos não commitados** → Git add + commit ASAP
-
 ### ✅ Resolvidos
+- ✅ Tela de Movimentações vazia → 29 registros importados
+- ✅ Acesso via celular/rede local → Configurado IP 10.30.1.8
+- ✅ Docker Engine parado → 3/3 containers rodando
 - ✅ Erros TypeScript (Sprint 3 audit)
 - ✅ API response format
 - ✅ Database schema mismatches
 - ✅ Encoding UTF-8
 
+### 🟡 Atenção
+- ⚠️ **IP dinâmico:** 10.30.1.8 pode mudar após reboot (configurar IP estático ou atualizar .env.local)
+
+### 🔴 Pendentes
+- Nenhum bloqueador no momento
+
 ---
 
 ## 🔧 COMANDOS ESSENCIAIS
+
+### Acesso ao Sistema
+```
+Computador/Rede Local: http://10.30.1.8:3000
+API (Swagger):          http://10.30.1.8:3001/api/docs
+```
+
+**Credenciais padrão:**
+- Admin: admin@hsi.com / admin123
+- Gestor: gestor@hsi.com / gestor123
+- Técnico: tecnico@hsi.com / tecnico123
 
 ### Git Workflow
 ```powershell
 git status
 git add .
-git commit -m "feat(frontend): Sprints 1-4 + Assets/Movements CRUD (34h)"
+git commit -m "feat: descrição da mudança"
 git push origin main
 ```
 
 ### Docker
 ```powershell
-# Iniciar serviço
-Start-Service com.docker.service
-
-# Subir containers
-docker-compose up -d db redis api
-
 # Verificar status
 docker ps
+
+# Logs da API
+docker logs estoque-hsi-api -f
+
+# Acessar banco de dados
+docker exec -it estoque-hsi-db psql -U estoque_user -d estoque_hsi
 ```
 
 ### Desenvolvimento
 ```powershell
-# Frontend dev
+# Frontend dev (terminal 1)
 cd apps/web
 npm run dev
-# http://localhost:3000
+# Acesse: http://10.30.1.8:3000
 
-# API Swagger
-# http://localhost:3001/api/docs
+# Verificar saúde da API
+Invoke-WebRequest -Uri http://10.30.1.8:3001/api/v1/health
+```
+
+### Banco de Dados
+```sql
+-- Verificar movimentações
+SELECT type, COUNT(*) FROM movements GROUP BY type;
+
+-- Listar ativos
+SELECT id, name, status, "assetTag" FROM assets;
+
+-- Verificar usuários
+SELECT id, name, email, role FROM users;
 ```
 
 ---
@@ -269,14 +338,16 @@ npm run dev
 
 - [x] Leitura contexto (README, PROGRESS, PROJETO)
 - [x] Git status + log (executados)
-- [x] Docker verificado (stopped)
+- [x] Docker verificado (3/3 rodando)
 - [x] Erros TypeScript (zero)
 - [x] TODO/FIXME (nenhum no código)
-- [x] Arquivos não commitados (32 mapeados)
+- [x] Commits sincronizados (db9ace3)
 - [x] Sprints frontend (1-4 completos)
+- [x] Importação de dados (29 movimentações)
+- [x] Acesso rede local (configurado)
 - [x] Backlog atualizado
-- [x] Tempo MVP (75h restantes)
-- [x] Riscos (Docker parado, uncommitted code)
+- [x] Tempo MVP (72h restantes)
+- [x] Riscos (nenhum bloqueador)
 
 **PROTOCOLO COMPLETO ✅**
 
@@ -284,26 +355,54 @@ npm run dev
 
 ## 🎉 CONQUISTAS
 
-- ✅ Backend 100% (47 endpoints)
+### Funcionalidades Entregues
+- ✅ Backend 100% (47 endpoints + Swagger)
 - ✅ Frontend 80% (Sprints 1-4)
 - ✅ Autenticação JWT completa
 - ✅ Dashboard com dados reais
 - ✅ Assets CRUD end-to-end
+- ✅ Movements list funcional
 - ✅ Theme system (light/dark)
+- ✅ 29 movimentações no banco
+- ✅ Acesso via rede local (celular/tablet)
 - ✅ Type-safe completo
 - ✅ Documentação excepcional
-- ✅ 74h de trabalho efetivo (50% MVP)
+
+### Métricas de Qualidade
+- ✅ 0 erros TypeScript
+- ✅ 0 bloqueadores
+- ✅ 100% commits sincronizados
+- ✅ 86% progresso total
+- ✅ 76.5h de trabalho efetivo
+
+### Documentação Criada
+1. `PROGRESS.md` v7.2.0 (este arquivo)
+2. `RELATORIO-IMPORTACAO-MOVIMENTACOES.md`
+3. `AUDITORIA-COMPLETA.md`
+4. `RESUMO-SESSAO-IMPORTACAO.md`
+5. `CONFIGURACAO-REDE-LOCAL.md`
+6. `README.md` atualizado
+7. `PROJETO.md` (especificação completa)
 
 ---
 
-**Status:** ✅ ANÁLISE COMPLETA  
-**Próxima ação:** Commitar código pendente  
+**Status:** ✅ SISTEMA OPERACIONAL  
+**Próxima ação:** Implementar CRUDs Admin (Categories, Locations, Licenses)  
 **Responsável:** Equipe Dev  
-**Confiança MVP:** 🟢 90%  
+**Confiança MVP:** 🟢 95%  
 
-*Análise: Claude 4.5 Sonnet - 16/11/2025*  
-*Próximo checkpoint: Após commit + CRUDs admin*
+*Análise: Claude 4.5 Sonnet - 16/11/2025 20:30*  
+*Próximo checkpoint: Após CRUDs admin completos*
 
 ---
 
-**🚀 CALL TO ACTION: COMMITAR CÓDIGO AGORA!**
+## 🚀 CALL TO ACTION
+
+**Sistema está operacional e acessível via rede local!**
+
+**Próximos Passos:**
+1. ✅ Validar no celular: http://10.30.1.8:3000
+2. ✅ Testar login e navegação
+3. ⏭️ Implementar Categories CRUD (3h)
+4. ⏭️ Implementar Locations CRUD (3h)
+5. ⏭️ Implementar Licenses CRUD (5h)
