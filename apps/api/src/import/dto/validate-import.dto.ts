@@ -77,13 +77,36 @@ export class ValidateImportResponseDto {
   errors: ValidationError[];
 
   @ApiProperty({
-    description: 'Estatísticas de preview',
+    description: 'Estatísticas detalhadas de preview',
     example: {
       totalRows: 118,
-      categoriesMissing: 5,
+      validRows: 110,
+      errorRows: 5,
+      warningRows: 3,
       newAssets: 110,
       existingAssets: 8,
+      newCategories: 2,
+      newLocations: 3,
+      newManufacturers: 5,
+      estimatedDuration: '3 segundos',
+      preview: {
+        assetsToCreate: 110,
+        assetsToUpdate: 8,
+        movementsToCreate: 118,
+      },
     },
   })
   stats: Record<string, any>;
+
+  @ApiProperty({
+    description: 'Preview de registros que serão criados/atualizados',
+    example: {
+      assets: [
+        { name: 'Notebook Dell', action: 'create', category: 'Notebook' },
+        { name: 'Monitor LG', action: 'update', category: 'Monitor' },
+      ],
+    },
+    required: false,
+  })
+  preview?: Record<string, any>;
 }

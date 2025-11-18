@@ -572,32 +572,323 @@ A documentação interativa da API está disponível em:
 
 ## 📊 Importação de Dados
 
-### Wizard de Importação (3 Passos)
+### 🎯 Wizard de Importação CSV - Completo e Inteligente
 
-#### Passo 1: Upload e Detecção
+O sistema possui um **wizard inteligente de 4 passos** para importação segura de dados via CSV:
 
-1. Faça upload do arquivo CSV
-2. O sistema detecta automaticamente:
-   - Separador (`;`, `,`, `\t`)
-   - Encoding (`UTF-8`, `latin1`)
-   - Cabeçalhos
-3. Exibe amostra de 100 linhas
+#### 📤 Passo 1: Upload do Arquivo
 
-#### Passo 2: Mapeamento de Colunas
+**Endpoint:** `POST /api/v1/import/upload`
 
-1. **Mapeamento Automático:** O sistema tenta mapear colunas por heurística
-2. **Ajuste Manual:** Corrija mapeamentos incorretos
-3. **Validação:** Defina tipos de dados, obrigatoriedade, transformações
+```bash
+curl -X POST http://localhost:3001/api/v1/import/upload \
+  -H "Authorization: Bearer {token}" \
+  -F "file=@inventario.csv"
+```
 
-#### Passo 3: Pré-visualização e Commit
+**Resposta:**
+```json
+{
+  "filePath": "uploads/temp/inventario-1234567890.csv",
+  "filename": "inventario.csv",
+  "size": 524800
+}
+```
 
-1. **Dry-run:** Simula a importação sem persistir
-2. **Relatório de Inconsistências:** Lista erros (linhas, motivos)
-3. **Confirmação:** Só persiste após revisão
+**Validações:**
+- ✅ Tamanho máximo: 50MB
+- ✅ Formatos aceitos: `.csv`, `.txt`
+- ✅ Armazenamento temporário seguro
 
-### Usando Mapeamentos YAML
+---
 
-Mapeamentos pré-configurados estão em `/data/mappings/*.yaml`. Exemplo:
+#### 🔍 Passo 2: Detecção Automática de Formato
+
+**Endpoint:** `POST /api/v1/import/detect`
+
+```bash
+curl -X POST http://localhost:3001/api/v1/import/detect \
+  -H "Authorization: Bearer {token}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "filePath": "uploads/temp/inventario-1234567890.csv",
+    "skipRows": 0
+  }'
+```
+
+**O sistema detecta automaticamente:**
+- 🔤 **Encoding:** UTF-8, Latin1, etc.
+- 📊 **Delimitador:** `;`, `,`, `\t`, `|`
+- 📋 **Headers:** Extrai nomes das colunas
+- 📁 **Tipo de arquivo:** Reconhece formatos especiais (ex: "HSI Inventário")
+- 🎯 **Sugestões de mapeamento:** Mapeia colunas CSV → campos do sistema
+- 📈 **Estatísticas:** Tempo estimado, linhas vazias, inconsistências
+
+**Resposta:**
+```json
+{
+  "encoding": "utf-8",
+  "delimiter": ";",
+  "headers": ["Localização", "Hostname", "Patrimônio", "Serial Number CPU"],
+  "sample": [
+    {
+      "Localização": "TI - Sala 102",
+      "Hostname": "DESKTOP-001",
+      "Patrimônio": "PAT-12345",
+      "Serial Number CPU": "SN123456789"
+    }
+  ],
+  "totalRows": 1485,
+  "fileType": "hsi-inventario",
+  "suggestedMappings": [
+    { "csvColumn": "Patrimônio", "systemField": "assetTag", "confidence": 1.0 },
+    { "csvColumn": "Hostname", "systemField": "name", "confidence": 1.0 },
+    { "csvColumn": "Serial Number CPU", "systemField": "serialNumber", "confidence": 1.0 }
+  ],
+  "stats": {
+    "hasEmptyRows": false,
+    "hasInconsistentColumns": false,
+    "estimatedProcessingTime": "3 segundos"
+  }
+}
+```
+
+---
+
+#### ✔️ Passo 3: Validação (Dry-Run)
+
+**Endpoint:** `POST /api/v1/import/validate`
+
+```bash
+curl -X POST http://localhost:3001/api/v1/import/validate \
+  -H "Authorization: Bearer {token}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "filePath": "uploads/temp/inventario-1234567890.csv",
+    "fileType": "hsi-inventario",
+    "config": {
+      "encoding": "utf-8",
+      "delimiter": ";"
+    }
+  }'
+```
+
+**O sistema valida SEM persistir dados:**
+- 🔍 Verifica campos obrigatórios
+- 🔢 Valida tipos de dados
+- 🔄 Detecta duplicatas
+- 📊 Conta novos vs. existentes
+- ⚠️ Lista erros e warnings detalhados
+- 📈 Gera preview do que será criado/atualizado
+
+**Resposta:**
+```json
+{
+  "isValid": true,
+  "validRows": 1480,
+  "errorRows": 3,
+  "warningRows": 2,
+  "errors": [
+    {
+      "row": 5,
+      "field": "Patrimônio/Hostname",
+      "message": "Pelo menos um dos campos deve estar preenchido",
+      "severity": "error"
+    }
+  ],
+  "stats": {
+    "totalRows": 1485,
+    "validRows": 1480,
+    "errorRows": 3,
+    "warningRows": 2,
+    "newAssets": 1470,
+    "existingAssets": 10,
+    "newLocations": 45,
+    "newManufacturers": 12,
+    "estimatedDuration": "3 segundos",
+    "preview": {
+      "assetsToCreate": 1470,
+      "assetsToUpdate": 10,
+      "movementsToCreate": 1485
+    }
+  },
+  "preview": {
+    "assetsToCreate": [
+      { "name": "DESKTOP-001", "assetTag": "PAT-12345", "action": "create" },
+      { "name": "DESKTOP-002", "assetTag": "PAT-12346", "action": "create" }
+    ],
+    "assetsToUpdate": [
+      { "name": "DESKTOP-100", "assetTag": "PAT-12444", "action": "update", "existingId": "clx..." }
+    ]
+  }
+}
+```
+
+---
+
+#### 💾 Passo 4: Confirmação (Commit)
+
+**Endpoint:** `POST /api/v1/import/commit`
+
+```bash
+curl -X POST http://localhost:3001/api/v1/import/commit \
+  -H "Authorization: Bearer {token}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "filePath": "uploads/temp/inventario-1234567890.csv",
+    "fileType": "hsi-inventario",
+    "config": {
+      "encoding": "utf-8",
+      "delimiter": ";"
+    }
+  }'
+```
+
+**Processamento:**
+- ✅ Cria registro de auditoria (`ImportLog`)
+- ✅ Processa linha por linha
+- ✅ Cria/atualiza ativos
+- ✅ Registra movimentações
+- ✅ Atualiza estatísticas em tempo real
+
+**Resposta:**
+```json
+{
+  "jobId": "sync_clx123456",
+  "importLogId": "clx123456",
+  "message": "Importação concluída: 1480 registros criados",
+  "status": "COMPLETED",
+  "totalRows": 1485,
+  "successRows": 1480,
+  "errorRows": 5
+}
+```
+
+---
+
+### 🚀 Formatos Suportados
+
+#### 1. HSI Inventário (Detecção Automática)
+
+**Colunas esperadas:**
+- Localização, Hostname, Patrimônio
+- Serial Number CPU, Fabricante, Modelo
+- Tipo de chassi, Monitor 1/2/3, IP, etc.
+
+**Processamento inteligente:**
+- ✅ Identifica desktops vs. notebooks
+- ✅ Vincula monitores aos computadores
+- ✅ Detecta status (EM_USO vs. EM_ESTOQUE)
+- ✅ Cria localizações hierárquicas (Setor - Andar - Prédio)
+- ✅ Normaliza fabricantes e modelos
+- ✅ Registra movimentações automáticas
+
+#### 2. Formato Genérico
+
+Para CSVs personalizados, use mapeamento manual:
+
+```json
+{
+  "columnMapping": {
+    "Nome do Item": "name",
+    "Código": "assetTag",
+    "Número de Série": "serialNumber",
+    "Quantidade": "quantity"
+  }
+}
+```
+
+---
+
+### 📝 Script de Teste Completo
+
+Use o script `test-wizard-full.ts` para testar todo o fluxo:
+
+```bash
+# Dry-run (não persiste dados)
+npm run tsx scripts/test-wizard-full.ts "HSI Inventário.csv"
+
+# Commit real (persiste dados)
+npm run tsx scripts/test-wizard-full.ts "HSI Inventário.csv" --commit
+```
+
+**Saída do teste:**
+```
+═══════════════════════════════════════════════
+🧪 TESTE COMPLETO DO WIZARD DE IMPORTAÇÃO CSV
+═══════════════════════════════════════════════
+
+🔐 Fazendo login...
+✅ Login bem-sucedido (245ms)
+
+📤 Upload do arquivo: HSI Inventário.csv
+✅ Upload concluído (1523ms)
+   - Arquivo: HSI Inventário.csv
+   - Tamanho: 512.34 KB
+   - Path: uploads/temp/HSI-Inventário-1234567890.csv
+
+🔍 Detectando formato do CSV...
+✅ Formato detectado (892ms)
+   - Encoding: utf-8
+   - Delimitador: ";"
+   - Total de linhas: 1485
+   - Tipo detectado: hsi-inventario
+   - Headers (25): Localização, Hostname, Patrimônio...
+   - Tempo estimado: 3 segundos
+
+✔️  Validando importação (dry-run)...
+✅ Validação concluída (4567ms)
+   - Status: ✅ Válido
+   - Linhas válidas: 1480
+   - Linhas com erro: 3
+   - Linhas com warning: 2
+   - Novos ativos: 1470
+   - Ativos existentes: 10
+
+═══════════════════════════════════════════════
+📊 RESUMO DO TESTE
+═══════════════════════════════════════════════
+
+Total de passos: 4
+✅ Sucesso: 4
+❌ Falhou: 0
+⏱️  Tempo total: 7227ms
+```
+
+---
+
+### 🎯 Casos de Uso
+
+#### Caso 1: Migração Inicial de Dados
+
+```bash
+# 1. Upload do inventário completo
+curl -X POST .../upload -F "file=@inventario-completo.csv"
+
+# 2. Detectar formato
+curl -X POST .../detect -d '{"filePath": "..."}'
+
+# 3. Validar (checar erros)
+curl -X POST .../validate -d '{"filePath": "...", "fileType": "hsi-inventario"}'
+
+# 4. Confirmar importação
+curl -X POST .../commit -d '{"filePath": "...", "fileType": "hsi-inventario"}'
+```
+
+#### Caso 2: Atualização Incremental
+
+```bash
+# Mesmo fluxo, mas o sistema:
+# - Detecta ativos existentes (por patrimônio ou serial)
+# - Atualiza apenas campos modificados
+# - Registra movimentações se localização mudou
+```
+
+---
+
+### Usando Mapeamentos YAML (Futuro)
+
+Mapeamentos pré-configurados estarão em `/data/mappings/*.yaml`. Exemplo:
 
 \`\`\`yaml
 # balanco-estoque.yaml

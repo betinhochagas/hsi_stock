@@ -79,6 +79,12 @@ export class ImportService {
     const isHSIInventario = this.isHSIInventarioFormat(headers);
     const detectedFileType = isHSIInventario ? 'hsi-inventario' : 'generic';
 
+    // Gerar sugestões de mapeamento
+    const suggestedMappings = this.suggestColumnMappings(headers, detectedFileType);
+
+    // Calcular estatísticas
+    const stats = this.calculateFileStats(records, rowCount);
+
     return {
       encoding,
       delimiter,
@@ -86,6 +92,8 @@ export class ImportService {
       sample: records,
       totalRows: rowCount,
       fileType: detectedFileType,
+      suggestedMappings,
+      stats,
     };
   }
 
@@ -115,6 +123,103 @@ export class ImportService {
   }
 
   /**
+   * Sugerir mapeamento de colunas baseado em heurística
+   */
+  private suggestColumnMappings(
+    headers: string[],
+    fileType: string,
+  ): Array<{ csvColumn: string; systemField: string; confidence: number }> {
+    const mappings: Array<{ csvColumn: string; systemField: string; confidence: number }> = [];
+
+    // Se é HSI Inventário, mapeamento é direto (não precisa)
+    if (fileType === 'hsi-inventario') {
+      return [
+        { csvColumn: 'Patrimônio', systemField: 'assetTag', confidence: 1.0 },
+        { csvColumn: 'Hostname', systemField: 'name', confidence: 1.0 },
+        { csvColumn: 'Serial Number CPU', systemField: 'serialNumber', confidence: 1.0 },
+        { csvColumn: 'Modelo', systemField: 'model', confidence: 1.0 },
+        { csvColumn: 'Fabricante', systemField: 'manufacturer', confidence: 1.0 },
+        { csvColumn: 'Localização', systemField: 'location', confidence: 1.0 },
+      ];
+    }
+
+    // Mapeamentos genéricos por similaridade
+    const fieldMappings: Record<string, { systemField: string; keywords: string[] }> = {
+      name: { systemField: 'name', keywords: ['nome', 'item', 'descrição', 'descricao', 'produto'] },
+      assetTag: { systemField: 'assetTag', keywords: ['patrimônio', 'patrimonio', 'tag', 'código', 'codigo'] },
+      serialNumber: { systemField: 'serialNumber', keywords: ['serial', 'serial number', 'ns', 'número de série'] },
+      model: { systemField: 'model', keywords: ['modelo', 'model'] },
+      quantity: { systemField: 'quantity', keywords: ['quantidade', 'qtd', 'estoque', 'saldo'] },
+      price: { systemField: 'price', keywords: ['preço', 'preco', 'valor', 'custo'] },
+      manufacturer: { systemField: 'manufacturer', keywords: ['fabricante', 'marca', 'manufacturer'] },
+      location: { systemField: 'location', keywords: ['localização', 'localizacao', 'local', 'setor'] },
+    };
+
+    for (const header of headers) {
+      const normalizedHeader = this.normalizeText(header);
+      
+      for (const [_, mapping] of Object.entries(fieldMappings)) {
+        for (const keyword of mapping.keywords) {
+          const normalizedKeyword = this.normalizeText(keyword);
+          
+          if (normalizedHeader.includes(normalizedKeyword)) {
+            const confidence = normalizedHeader === normalizedKeyword ? 1.0 : 0.8;
+            mappings.push({
+              csvColumn: header,
+              systemField: mapping.systemField,
+              confidence,
+            });
+            break;
+          }
+        }
+      }
+    }
+
+    return mappings;
+  }
+
+  /**
+   * Calcular estatísticas do arquivo
+   */
+  private calculateFileStats(
+    sample: Record<string, string>[],
+    totalRows: number,
+  ): Record<string, any> {
+    const hasEmptyRows = sample.some(row => 
+      Object.values(row).every(val => !val || val.trim() === '')
+    );
+
+    const columnCounts = sample.map(row => Object.keys(row).length);
+    const hasInconsistentColumns = new Set(columnCounts).size > 1;
+
+    // Estimar tempo de processamento (1000 linhas/segundo)
+    const estimatedSeconds = Math.ceil(totalRows / 1000);
+    const estimatedProcessingTime = estimatedSeconds < 1 ? 'menos de 1 segundo' : 
+      estimatedSeconds === 1 ? '1 segundo' : 
+      estimatedSeconds < 60 ? `${estimatedSeconds} segundos` : 
+      `${Math.ceil(estimatedSeconds / 60)} minutos`;
+
+    return {
+      hasEmptyRows,
+      hasInconsistentColumns,
+      estimatedProcessingTime,
+      sampleSize: sample.length,
+      totalRows,
+    };
+  }
+
+  /**
+   * Normalizar texto para comparação
+   */
+  private normalizeText(text: string): string {
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim();
+  }
+
+  /**
    * Validar CSV sem persistir (dry-run)
    */
   async validateImport(
@@ -130,6 +235,17 @@ export class ImportService {
     const encoding = config?.encoding || 'utf-8';
     const delimiter = config?.delimiter || ';';
     const skipRows = config?.skipRows || 0;
+
+    // Estatísticas detalhadas
+    const detailedStats = {
+      newAssets: 0,
+      existingAssets: 0,
+      newCategories: new Set<string>(),
+      newLocations: new Set<string>(),
+      newManufacturers: new Set<string>(),
+      assetsToCreate: [] as any[],
+      assetsToUpdate: [] as any[],
+    };
 
     // Carregar mapeamento YAML se disponível
     const mappingRules = await this.loadMappingRules(fileType);
@@ -147,37 +263,128 @@ export class ImportService {
     );
 
     let rowNumber = skipRows + 1;
+    const isHSIInventario = fileType === 'hsi-inventario';
+
     for await (const record of parser) {
       rowNumber++;
 
-      // Mapear colunas
-      const mappedRecord = this.mapColumns(record, columnMapping);
+      try {
+        if (isHSIInventario) {
+          // Validação específica HSI
+          const patrimonio = record['Patrimônio']?.trim();
+          const hostname = record['Hostname']?.trim();
 
-      // Validar regras
-      const rowErrors = this.validateRecord(
-        mappedRecord,
-        rowNumber,
-        mappingRules,
-      );
+          if (!patrimonio && !hostname) {
+            errors.push({
+              row: rowNumber,
+              field: 'Patrimônio/Hostname',
+              message: 'Pelo menos um dos campos deve estar preenchido',
+              severity: 'error',
+            });
+            errorRows++;
+            continue;
+          }
 
-      if (rowErrors.length > 0) {
-        errors.push(...rowErrors);
-        const hasErrors = rowErrors.some((e) => e.severity === 'error');
-        if (hasErrors) {
-          errorRows++;
+          // Verificar se já existe
+          if (patrimonio || record['Serial Number CPU']) {
+            const existing = await this.prisma.asset.findFirst({
+              where: {
+                OR: [
+                  patrimonio ? { assetTag: patrimonio } : {},
+                  record['Serial Number CPU'] ? { serialNumber: record['Serial Number CPU'].trim() } : {},
+                ].filter(obj => Object.keys(obj).length > 0),
+              },
+              select: { id: true, name: true, assetTag: true },
+            });
+
+            if (existing) {
+              detailedStats.existingAssets++;
+              detailedStats.assetsToUpdate.push({
+                name: hostname || existing.name,
+                assetTag: patrimonio || existing.assetTag,
+                action: 'update',
+                existingId: existing.id,
+              });
+            } else {
+              detailedStats.newAssets++;
+              detailedStats.assetsToCreate.push({
+                name: hostname || `Computador ${patrimonio}`,
+                assetTag: patrimonio,
+                action: 'create',
+              });
+            }
+          }
+
+          // Verificar entidades que serão criadas
+          const location = record['Localização']?.trim();
+          if (location) detailedStats.newLocations.add(location);
+
+          const manufacturer = record['Fabricante']?.trim();
+          if (manufacturer) detailedStats.newManufacturers.add(manufacturer);
+
+          validRows++;
         } else {
-          warningRows++;
+          // Validação genérica
+          const mappedRecord = this.mapColumns(record, columnMapping);
+          const rowErrors = this.validateRecord(mappedRecord, rowNumber, mappingRules);
+
+          if (rowErrors.length > 0) {
+            errors.push(...rowErrors);
+            const hasErrors = rowErrors.some((e) => e.severity === 'error');
+            if (hasErrors) {
+              errorRows++;
+            } else {
+              warningRows++;
+            }
+          } else {
+            validRows++;
+            detailedStats.newAssets++;
+            detailedStats.assetsToCreate.push({
+              name: mappedRecord.name,
+              action: 'create',
+            });
+          }
         }
-      } else {
-        validRows++;
+      } catch (error) {
+        errors.push({
+          row: rowNumber,
+          field: 'general',
+          message: error.message,
+          severity: 'error',
+        });
+        errorRows++;
       }
     }
 
+    // Estimar tempo de processamento
+    const totalRows = validRows + errorRows + warningRows;
+    const estimatedSeconds = Math.ceil(totalRows / 500); // 500 registros/segundo
+    const estimatedDuration = estimatedSeconds < 1 ? 'menos de 1 segundo' : 
+      estimatedSeconds === 1 ? '1 segundo' : 
+      estimatedSeconds < 60 ? `${estimatedSeconds} segundos` : 
+      `${Math.ceil(estimatedSeconds / 60)} minutos`;
+
     const stats = {
-      totalRows: validRows + errorRows + warningRows,
+      totalRows,
       validRows,
       errorRows,
       warningRows,
+      newAssets: detailedStats.newAssets,
+      existingAssets: detailedStats.existingAssets,
+      newCategories: 0, // Calculado durante processamento
+      newLocations: detailedStats.newLocations.size,
+      newManufacturers: detailedStats.newManufacturers.size,
+      estimatedDuration,
+      preview: {
+        assetsToCreate: detailedStats.assetsToCreate.length,
+        assetsToUpdate: detailedStats.assetsToUpdate.length,
+        movementsToCreate: totalRows, // Uma movimentação por linha
+      },
+    };
+
+    const preview = {
+      assetsToCreate: detailedStats.assetsToCreate.slice(0, 5), // Primeiros 5
+      assetsToUpdate: detailedStats.assetsToUpdate.slice(0, 5),
     };
 
     return {
@@ -187,6 +394,7 @@ export class ImportService {
       warningRows,
       errors: errors.slice(0, 100), // Retornar no máximo 100 erros
       stats,
+      preview,
     };
   }
 

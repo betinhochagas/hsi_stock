@@ -20,6 +20,17 @@ export class DetectFormatDto {
   skipRows?: number;
 }
 
+export class ColumnMapping {
+  @ApiProperty({ description: 'Coluna no CSV', example: 'Patrimônio' })
+  csvColumn: string;
+
+  @ApiProperty({ description: 'Campo no sistema', example: 'assetTag' })
+  systemField: string;
+
+  @ApiProperty({ description: 'Nível de confiança (0-1)', example: 0.95 })
+  confidence: number;
+}
+
 export class DetectFormatResponseDto {
   @ApiProperty({ description: 'Encoding detectado', example: 'utf-8' })
   encoding: string;
@@ -50,4 +61,22 @@ export class DetectFormatResponseDto {
     required: false 
   })
   fileType?: string;
+
+  @ApiProperty({
+    description: 'Sugestões de mapeamento de colunas',
+    type: [ColumnMapping],
+    required: false,
+  })
+  suggestedMappings?: ColumnMapping[];
+
+  @ApiProperty({
+    description: 'Estatísticas do arquivo',
+    example: {
+      hasEmptyRows: false,
+      hasInconsistentColumns: false,
+      estimatedProcessingTime: '2 segundos',
+    },
+    required: false,
+  })
+  stats?: Record<string, any>;
 }
