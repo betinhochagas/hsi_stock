@@ -20,15 +20,11 @@ RUN apk add --no-cache openssl openssl-dev
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Generate Prisma Client (skip binary download, use from node_modules)
-ENV PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING=1
-ENV PRISMA_SKIP_POSTINSTALL_GENERATE=1
-ENV PRISMA_CLI_BINARY_TARGETS=native
-RUN npx prisma generate --schema=./packages/db/prisma/schema.prisma || true
+# Generate Prisma Client
+RUN npx prisma generate --schema=./packages/db/prisma/schema.prisma
 
-# Build API
-WORKDIR /app/apps/api
-RUN npm run build
+# Build all packages using Turbo (from monorepo root)
+RUN npm run build -- --filter=@estoque-hsi/api
 
 # Production stage
 FROM node:20-alpine AS runner

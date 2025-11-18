@@ -11,8 +11,11 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-WORKDIR /app/apps/web
-RUN npm run build
+# Generate Prisma Client first (Web depends on @estoque-hsi/db)
+RUN npx prisma generate --schema=./packages/db/prisma/schema.prisma
+
+# Build using Turbo from monorepo root
+RUN npm run build -- --filter=@estoque-hsi/web
 
 FROM node:20-alpine AS runner
 WORKDIR /app
