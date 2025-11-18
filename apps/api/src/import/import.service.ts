@@ -19,12 +19,16 @@ import {
   CommitImportResponseDto,
 } from './dto/commit-import.dto';
 import { HSIInventarioProcessor } from './processors/hsi-inventario.processor';
+import { ImportQueue } from '../queues/import.queue';
 
 @Injectable()
 export class ImportService {
   private hsiProcessor: HSIInventarioProcessor;
 
-  constructor(private prisma: PrismaService) {
+  constructor(
+    private prisma: PrismaService,
+    private importQueue: ImportQueue,
+  ) {
     this.hsiProcessor = new HSIInventarioProcessor(prisma);
   }
 
@@ -406,168 +410,39 @@ export class ImportService {
     userId: string,
   ): Promise<CommitImportResponseDto> {
     const { filePath, fileType, columnMapping = {}, config } = dto;
+    const filename = path.basename(filePath);
 
-    // Criar registro de ImportLog
+    // Create ImportLog with PENDING status
     const importLog = await this.prisma.importLog.create({
       data: {
-        filename: path.basename(filePath),
-        originalName: path.basename(filePath),
+        filename,
+        originalName: filename,
+        fileType,
         status: 'PENDING',
+        totalRows: 0,
+        metadata: JSON.stringify({ columnMapping, config }),
         userId,
-        startedAt: new Date(),
       },
     });
 
-    // TODO: Criar job no BullMQ (próxima etapa)
-    // Por enquanto, processar síncrono para MVP
-    const result = await this.processImportSync(
-      filePath,
-      fileType,
-      columnMapping,
-      config,
-      importLog.id,
-      userId,
-    );
-
-    // Atualizar ImportLog
-    await this.prisma.importLog.update({
-      where: { id: importLog.id },
-      data: {
-        status: result.success ? 'COMPLETED' : 'FAILED',
-        completedAt: new Date(),
-        totalRows: result.totalRows,
-        successRows: result.successRows,
-        errorRows: result.errorRows,
-        errors: result.errors.length > 0 ? JSON.stringify(result.errors) : null,
-      },
-    });
-
-    return {
-      jobId: `sync_${importLog.id}`,
+    // Add job to BullMQ
+    const jobId = await this.importQueue.addJob({
       importLogId: importLog.id,
-      message: result.success
-        ? `Importação concluída: ${result.successRows} registros criados`
-        : `Importação falhou: ${result.errorRows} erros`,
-      status: result.success ? 'COMPLETED' : 'FAILED',
-      ...result,
-    };
-  }
-
-  /**
-   * Processar importação de forma síncrona (temporário para MVP)
-   */
-  private async processImportSync(
-    filePath: string,
-    fileType: string,
-    columnMapping: Record<string, string>,
-    config: any,
-    importLogId: string,
-    userId: string,
-  ): Promise<{
-    success: boolean;
-    totalRows: number;
-    successRows: number;
-    errorRows: number;
-    errors: any[];
-  }> {
-    const encoding = config?.encoding || 'utf-8';
-    const delimiter = config?.delimiter || ';';
-    const skipRows = config?.skipRows || 0;
-
-    let totalRows = 0;
-    let successRows = 0;
-    let errorRows = 0;
-    const errors: any[] = [];
-
-    // Buscar categoria e localização padrão
-    const defaultCategory = await this.findOrCreateCategory(
-      config?.defaultCategory || 'Periféricos',
-    );
-    const defaultLocation = await this.findOrCreateLocation(
-      config?.defaultLocation || 'Almoxarifado TI',
-    );
-
-    const parser = createReadStream(filePath).pipe(
-      parse({
-        delimiter,
-        encoding,
-        columns: true,
-        skip_empty_lines: true,
-        trim: true,
-        from_line: skipRows + 1,
-        relax_column_count: true,
-      }),
-    );
-
-    // Detectar se é arquivo HSI Inventário
-    const isHSIInventario = fileType === 'hsi-inventario' || 
-      config?.isHSIInventario || 
-      filePath.toLowerCase().includes('inventário') ||
-      filePath.toLowerCase().includes('inventario');
-
-    for await (const record of parser) {
-      totalRows++;
-
-      try {
-        if (isHSIInventario) {
-          // Processar usando o processor especializado HSI
-          const result = await this.hsiProcessor.processRow(record, userId);
-          
-          if (result.erros.length > 0) {
-            errorRows++;
-            errors.push({
-              row: totalRows,
-              error: result.erros.join(', '),
-            });
-          } else {
-            successRows++;
-          }
-        } else {
-          // Processamento genérico (original)
-          const mappedRecord = this.mapColumns(record, columnMapping);
-
-          await this.prisma.asset.create({
-            data: {
-              name: mappedRecord.name,
-              description: mappedRecord.notes || null,
-              serialNumber: mappedRecord.serial_number || null,
-              status: 'EM_ESTOQUE',
-              purchasePrice: mappedRecord.price
-                ? parseFloat(mappedRecord.price)
-                : null,
-              categoryId: defaultCategory.id,
-              locationId: defaultLocation.id,
-              createdById: userId,
-            },
-          });
-
-          successRows++;
-        }
-      } catch (error) {
-        errorRows++;
-        errors.push({
-          row: totalRows,
-          error: error.message,
-        });
-      }
-    }
-    
-    // Limpar cache do processor após importação
-    if (isHSIInventario) {
-      this.hsiProcessor.clearCache();
-    }
+      filename,
+      mappings: columnMapping,
+      userId,
+    });
 
     return {
-      success: errorRows === 0,
-      totalRows,
-      successRows,
-      errorRows,
-      errors,
+      jobId,
+      importLogId: importLog.id,
+      message: 'Importação enfileirada para processamento assíncrono',
+      status: 'PENDING',
     };
   }
 
   /**
-   * Detectar delimitador mais provável
+   * Detectar delimitador mais provável (método auxiliar)
    */
   private detectDelimiter(line: string): string {
     const delimiters = [';', ',', '\t', '|'];
@@ -575,11 +450,9 @@ export class ImportService {
       delimiter: d,
       count: (line.match(new RegExp(`\\${d}`, 'g')) || []).length,
     }));
-
     const best = counts.reduce((prev, current) =>
       current.count > prev.count ? current : prev,
     );
-
     return best.count > 0 ? best.delimiter : ';';
   }
 
@@ -591,19 +464,17 @@ export class ImportService {
     mapping: Record<string, string>,
   ): Record<string, string> {
     const mapped: Record<string, string> = {};
-
     for (const [csvColumn, systemField] of Object.entries(mapping)) {
       const value = record[csvColumn];
       if (value !== undefined && value !== null) {
         mapped[systemField] = value.trim();
       }
     }
-
     return mapped;
   }
 
   /**
-   * Validar registro contra regras do mapeamento
+   * Validar registro contra regras
    */
   private validateRecord(
     record: Record<string, string>,
@@ -611,8 +482,6 @@ export class ImportService {
     rules: any,
   ): ValidationError[] {
     const errors: ValidationError[] = [];
-
-    // Validação básica: campo 'name' é obrigatório
     if (!record.name || record.name.trim() === '') {
       errors.push({
         row: rowNumber,
@@ -621,64 +490,44 @@ export class ImportService {
         severity: 'error',
       });
     }
-
-    // Validar quantidade se presente
-    if (record.quantity) {
-      const qty = parseInt(record.quantity, 10);
-      if (isNaN(qty) || qty < 0) {
-        errors.push({
-          row: rowNumber,
-          field: 'quantity',
-          message: 'Quantidade deve ser um número não-negativo',
-          severity: 'error',
-        });
-      }
-    }
-
     return errors;
   }
 
   /**
-   * Carregar regras de mapeamento do arquivo YAML
+   * Carregar regras de mapeamento
    */
   private async loadMappingRules(fileType: string): Promise<any> {
-    // TODO: Implementar parsing de YAML
-    // Por enquanto, retornar regras vazias
-    return {};
+    return {}; // Placeholder
   }
 
-  /**
-   * Buscar ou criar categoria
-   */
-  private async findOrCreateCategory(name: string) {
-    let category = await this.prisma.category.findFirst({
-      where: { name },
-    });
 
-    if (!category) {
-      category = await this.prisma.category.create({
-        data: { name, description: `Auto-criado durante importação` },
-      });
-    }
-
-    return category;
-  }
 
   /**
-   * Buscar ou criar localização
+   * Get import job status
    */
-  private async findOrCreateLocation(name: string) {
-    let location = await this.prisma.location.findFirst({
-      where: { name },
+  async getJobStatus(importLogId: string) {
+    const importLog = await this.prisma.importLog.findUnique({
+      where: { id: importLogId },
     });
 
-    if (!location) {
-      location = await this.prisma.location.create({
-        data: { name, description: `Auto-criado durante importação` },
-      });
+    if (!importLog) {
+      throw new NotFoundException('Import log not found');
     }
 
-    return location;
+    return {
+      id: importLog.id,
+      filename: importLog.filename,
+      status: importLog.status,
+      progress: importLog.progress,
+      totalRows: importLog.totalRows,
+      successRows: importLog.successRows,
+      errorRows: importLog.errorRows,
+      stats: importLog.stats ? JSON.parse(importLog.stats) : null,
+      errors: importLog.errors ? JSON.parse(importLog.errors) : null,
+      startedAt: importLog.startedAt,
+      completedAt: importLog.completedAt,
+      duration: importLog.duration,
+    };
   }
 
   /**

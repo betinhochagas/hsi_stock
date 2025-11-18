@@ -11,6 +11,7 @@ import { SuppliersModule } from './suppliers/suppliers.module';
 import { LicensesModule } from './licenses/licenses.module';
 import { MovementsModule } from './movements/movements.module';
 import { ImportModule } from './import/import.module';
+import { QueuesModule } from './queues/queues.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { HealthController } from './health/health.controller';
 
@@ -26,6 +27,7 @@ import { HealthController } from './health/health.controller';
       },
     ]),
     PrismaModule,
+    QueuesModule,
     AuthModule,
     UsersModule,
     AssetsModule,

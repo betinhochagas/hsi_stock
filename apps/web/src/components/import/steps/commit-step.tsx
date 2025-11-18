@@ -1,8 +1,9 @@
 'use client'
 
-import { CheckCircle2, Package, TrendingUp, Clock } from 'lucide-react'
+import { CheckCircle2, Package, TrendingUp, Clock, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Progress } from '@/components/ui/progress'
 import Link from 'next/link'
 import type { useImportWizard } from '@/hooks/use-import-wizard'
 
@@ -11,15 +12,31 @@ interface CommitStepProps {
 }
 
 export function CommitStep({ wizard }: CommitStepProps) {
-  if (wizard.isLoading) {
+  // Loading/Processing state with real-time progress
+  if (wizard.isLoading || wizard.isPolling) {
+    const progress = wizard.jobStatus?.progress || 0
+    const status = wizard.jobStatus?.status || 'PENDING'
+    
     return (
-      <div className="flex flex-col items-center justify-center py-12 space-y-4">
-        <div className="h-16 w-16 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-        <div className="text-center">
-          <p className="text-lg font-medium">Processando importação...</p>
-          <p className="text-sm text-muted-foreground mt-1">
-            Por favor aguarde enquanto os dados são importados
+      <div className="flex flex-col items-center justify-center py-12 space-y-6">
+        <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
+          <Loader2 className="h-8 w-8 text-primary animate-spin" />
+        </div>
+        
+        <div className="text-center space-y-2 w-full max-w-md">
+          <p className="text-lg font-medium">
+            {status === 'PENDING' && 'Iniciando importação...'}
+            {status === 'PROCESSING' && 'Processando importação...'}
           </p>
+          <p className="text-sm text-muted-foreground">
+            {status === 'PENDING' && 'Aguardando processamento'}
+            {status === 'PROCESSING' && `${wizard.jobStatus?.successRows || 0} de ${wizard.jobStatus?.totalRows || 0} registros processados`}
+          </p>
+          
+          <div className="space-y-2 pt-4">
+            <Progress value={progress} className="h-2" />
+            <p className="text-xs text-muted-foreground">{progress}%</p>
+          </div>
         </div>
       </div>
     )
@@ -67,7 +84,7 @@ export function CommitStep({ wizard }: CommitStepProps) {
         </p>
       </div>
 
-      {/* Stats - mock data since CommitResult is not persisted in wizard state */}
+      {/* Real-time Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="rounded-lg border bg-card p-6">
           <div className="flex items-center gap-3">
@@ -77,7 +94,7 @@ export function CommitStep({ wizard }: CommitStepProps) {
             <div>
               <p className="text-sm text-muted-foreground">Ativos Criados</p>
               <p className="text-2xl font-bold">
-                {wizard.validationResult?.stats.newAssets || 0}
+                {wizard.jobStatus?.stats?.assetsCreated || 0}
               </p>
             </div>
           </div>
@@ -91,7 +108,7 @@ export function CommitStep({ wizard }: CommitStepProps) {
             <div>
               <p className="text-sm text-muted-foreground">Ativos Atualizados</p>
               <p className="text-2xl font-bold">
-                {wizard.validationResult?.stats.existingAssets || 0}
+                {wizard.jobStatus?.stats?.assetsUpdated || 0}
               </p>
             </div>
           </div>
@@ -105,7 +122,7 @@ export function CommitStep({ wizard }: CommitStepProps) {
             <div>
               <p className="text-sm text-muted-foreground">Tempo de Processamento</p>
               <p className="text-2xl font-bold">
-                {wizard.validationResult?.stats.estimatedDuration || 0}s
+                {wizard.jobStatus?.duration || 0}s
               </p>
             </div>
           </div>

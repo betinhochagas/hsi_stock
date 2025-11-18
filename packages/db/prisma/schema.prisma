@@ -370,23 +370,31 @@ enum ImportStatus {
   PROCESSING
   COMPLETED
   FAILED
+  CANCELLED
 }
 
 model ImportLog {
   id          String       @id @default(cuid())
   filename    String
   originalName String
+  fileType    String?      // "hsi_inventario", "generic"
   status      ImportStatus @default(PENDING)
+  
+  progress    Int          @default(0)  // 0-100
   
   totalRows   Int          @default(0)
   successRows Int          @default(0)
   errorRows   Int          @default(0)
   
+  // Stats detalhadas (JSON)
+  stats       String?      @db.Text  // { assetsCreated, assetsUpdated, movementsCreated, etc }
+  
   errors      String?      @db.Text  // JSON com lista de erros
-  metadata    String?      @db.Text  // JSON com metadados
+  metadata    String?      @db.Text  // JSON com metadados (mappings, detectResult, etc)
   
   startedAt   DateTime     @default(now())
   completedAt DateTime?
+  duration    Int?                      // Duração em segundos
   
   userId      String?
   user        User?        @relation(fields: [userId], references: [id])

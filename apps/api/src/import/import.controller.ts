@@ -171,23 +171,25 @@ export class ImportController {
     description: 'Status do job',
     schema: {
       example: {
-        id: 'sync_uuid-123',
-        status: 'COMPLETED',
-        progress: 100,
-        totalRows: 118,
-        successRows: 115,
-        errorRows: 3,
-        errors: [],
+        id: 'cljk123456',
+        filename: 'HSI Inventário.csv',
+        status: 'PROCESSING',
+        progress: 45,
+        totalRows: 1485,
+        successRows: 668,
+        errorRows: 2,
+        stats: {
+          assetsCreated: 650,
+          assetsUpdated: 18,
+          movementsCreated: 668,
+        },
+        startedAt: '2025-11-18T10:00:00Z',
+        completedAt: null,
+        duration: null,
       },
     },
   })
   async getJobStatus(@Param('id') id: string) {
-    // TODO: Implementar consulta de job do BullMQ
-    return {
-      id,
-      status: 'NOT_IMPLEMENTED',
-      message:
-        'Consulta de jobs assíncronos será implementada na próxima etapa',
-    };
+    return this.importService.getJobStatus(id);
   }
 }

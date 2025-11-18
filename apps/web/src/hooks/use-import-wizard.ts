@@ -66,14 +66,29 @@ export interface AssetPreview {
 }
 
 export interface CommitResult {
-  success: boolean
+  jobId: string
+  importLogId: string
   message: string
-  stats: {
-    assetsCreated: number
-    assetsUpdated: number
-    movementsCreated: number
-    duration: number
+  status: string
+}
+
+export interface JobStatus {
+  id: string
+  filename: string
+  status: 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED'
+  progress: number
+  totalRows: number
+  successRows: number
+  errorRows: number
+  stats?: {
+    assetsCreated?: number
+    assetsUpdated?: number
+    movementsCreated?: number
   }
+  errors?: any
+  startedAt?: string
+  completedAt?: string
+  duration?: number
 }
 
 export function useImportWizard() {
@@ -84,6 +99,8 @@ export function useImportWizard() {
   const [customMappings, setCustomMappings] = useState<Record<string, string>>({})
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [jobStatus, setJobStatus] = useState<JobStatus | null>(null)
+  const [isPolling, setIsPolling] = useState(false)
 
   const uploadFile = async (file: File) => {
     setIsLoading(true)
@@ -176,6 +193,10 @@ export function useImportWizard() {
 
       setCurrentStep(4)
       toast.success(response.data.message)
+      
+      // Start polling job status
+      startPolling(response.data.importLogId)
+      
       return response.data
     } catch (err: any) {
       const message = err.response?.data?.message || 'Erro ao executar importação'
@@ -185,6 +206,47 @@ export function useImportWizard() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const pollJobStatus = async (importLogId: string) => {
+    try {
+      const response = await api.get<JobStatus>(`/import/jobs/${importLogId}`)
+      setJobStatus(response.data)
+      
+      // Stop polling if job is completed or failed
+      if (response.data.status === 'COMPLETED' || response.data.status === 'FAILED') {
+        setIsPolling(false)
+        setIsLoading(false)
+        
+        if (response.data.status === 'COMPLETED') {
+          toast.success('Importação concluída com sucesso!')
+        } else {
+          setError('Falha na importação')
+          toast.error('Falha na importação')
+        }
+      }
+      
+      return response.data
+    } catch (err: any) {
+      console.error('Erro ao consultar status do job:', err)
+      // Don't throw - keep polling
+    }
+  }
+
+  const startPolling = (importLogId: string) => {
+    setIsPolling(true)
+    setIsLoading(true)
+    
+    const interval = setInterval(async () => {
+      const status = await pollJobStatus(importLogId)
+      
+      if (status && (status.status === 'COMPLETED' || status.status === 'FAILED')) {
+        clearInterval(interval)
+      }
+    }, 2000) // Poll every 2 seconds
+    
+    // Store interval ID for cleanup
+    return () => clearInterval(interval)
   }
 
   const updateMapping = (csvColumn: string, systemField: string) => {
@@ -201,6 +263,8 @@ export function useImportWizard() {
     setValidationResult(null)
     setCustomMappings({})
     setError(null)
+    setJobStatus(null)
+    setIsPolling(false)
   }
 
   return {
@@ -212,10 +276,13 @@ export function useImportWizard() {
     customMappings,
     isLoading,
     error,
+    jobStatus,
+    isPolling,
     uploadFile,
     detectFormat,
     validateImport,
     commitImport,
+    pollJobStatus,
     updateMapping,
     reset,
   }
