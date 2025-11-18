@@ -43,4 +43,11 @@ export class DetectFormatResponseDto {
 
   @ApiProperty({ description: 'Total de linhas (aproximado)', example: 118 })
   totalRows: number;
+
+  @ApiProperty({ 
+    description: 'Tipo de arquivo detectado', 
+    example: 'hsi-inventario',
+    required: false 
+  })
+  fileType?: string;
 }

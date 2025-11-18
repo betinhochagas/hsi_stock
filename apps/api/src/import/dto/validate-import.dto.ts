@@ -19,15 +19,16 @@ export class ValidateImportDto {
   fileType: string;
 
   @ApiProperty({
-    description: 'Mapeamento de colunas CSV para campos do sistema',
+    description: 'Mapeamento de colunas CSV para campos do sistema (opcional para tipos especializados)',
     example: {
       Item: 'name',
       'Quantidade em estoque': 'quantity',
     },
+    required: false,
   })
   @IsObject()
-  @IsNotEmpty()
-  columnMapping: Record<string, string>;
+  @IsOptional()
+  columnMapping?: Record<string, string>;
 
   @ApiProperty({
     description: 'Configuração de encoding e delimiter',

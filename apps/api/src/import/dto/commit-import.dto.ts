@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsObject } from 'class-validator';
+import { IsString, IsNotEmpty, IsObject, IsOptional } from 'class-validator';
 
 export class CommitImportDto {
   @ApiProperty({
@@ -19,17 +19,19 @@ export class CommitImportDto {
   fileType: string;
 
   @ApiProperty({
-    description: 'Mapeamento de colunas',
+    description: 'Mapeamento de colunas (opcional para tipos especializados como hsi-inventario)',
+    required: false,
   })
   @IsObject()
-  @IsNotEmpty()
-  columnMapping: Record<string, string>;
+  @IsOptional()
+  columnMapping?: Record<string, string>;
 
   @ApiProperty({
     description: 'Configuração adicional',
     required: false,
   })
   @IsObject()
+  @IsOptional()
   config?: {
     encoding?: string;
     delimiter?: string;
@@ -37,6 +39,7 @@ export class CommitImportDto {
     createMovements?: boolean;
     defaultCategory?: string;
     defaultLocation?: string;
+    isHSIInventario?: boolean;
   };
 }
 

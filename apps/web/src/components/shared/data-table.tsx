@@ -180,10 +180,16 @@ export function DataTable<TData, TValue>({
       {/* Pagination */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="text-xs lg:text-sm text-muted-foreground order-2 sm:order-1">
-          {table.getFilteredSelectedRowModel().rows.length > 0 && (
+          {table.getFilteredSelectedRowModel().rows.length > 0 ? (
             <span>
               {table.getFilteredSelectedRowModel().rows.length} de{' '}
               {table.getFilteredRowModel().rows.length} linha(s) selecionada(s)
+            </span>
+          ) : (
+            <span>
+              Mostrando {table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1} a{' '}
+              {Math.min((table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize, table.getFilteredRowModel().rows.length)} de{' '}
+              {table.getFilteredRowModel().rows.length} item(s)
             </span>
           )}
         </div>

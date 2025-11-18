@@ -158,7 +158,7 @@ export class ImportController {
     @Body() dto: CommitImportDto,
     @CurrentUser() user: any,
   ): Promise<CommitImportResponseDto> {
-    return this.importService.commitImport(dto, user.id);
+    return this.importService.commitImport(dto, user.userId);
   }
 
   @Get('jobs/:id/status')

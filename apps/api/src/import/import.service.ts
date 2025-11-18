@@ -18,10 +18,15 @@ import {
   CommitImportDto,
   CommitImportResponseDto,
 } from './dto/commit-import.dto';
+import { HSIInventarioProcessor } from './processors/hsi-inventario.processor';
 
 @Injectable()
 export class ImportService {
-  constructor(private prisma: PrismaService) {}
+  private hsiProcessor: HSIInventarioProcessor;
+
+  constructor(private prisma: PrismaService) {
+    this.hsiProcessor = new HSIInventarioProcessor(prisma);
+  }
 
   /**
    * Detectar formato do CSV: encoding, delimiter, headers, sample
@@ -70,13 +75,43 @@ export class ImportService {
 
     const headers = records.length > 0 ? Object.keys(records[0]) : [];
 
+    // Detectar se é arquivo HSI Inventário pelas colunas características
+    const isHSIInventario = this.isHSIInventarioFormat(headers);
+    const detectedFileType = isHSIInventario ? 'hsi-inventario' : 'generic';
+
     return {
       encoding,
       delimiter,
       headers,
       sample: records,
       totalRows: rowCount,
+      fileType: detectedFileType,
     };
+  }
+
+  /**
+   * Detecta se o CSV é do formato HSI Inventário
+   */
+  private isHSIInventarioFormat(headers: string[]): boolean {
+    const hsiColumns = [
+      'Localização',
+      'Hostname',
+      'Patrimônio',
+      'Serial Number CPU',
+      'Fabricante',
+      'Modelo',
+      'Tipo de chassi',
+      'Monitor 1',
+      'Monitor 2',
+      'Monitor 3',
+    ];
+
+    // Se tem pelo menos 6 das colunas características, é HSI
+    const matchCount = hsiColumns.filter(col => 
+      headers.some(h => h.trim() === col)
+    ).length;
+
+    return matchCount >= 6;
   }
 
   /**
@@ -85,7 +120,7 @@ export class ImportService {
   async validateImport(
     dto: ValidateImportDto,
   ): Promise<ValidateImportResponseDto> {
-    const { filePath, fileType, columnMapping, config } = dto;
+    const { filePath, fileType, columnMapping = {}, config } = dto;
 
     const errors: ValidationError[] = [];
     let validRows = 0;
@@ -162,7 +197,7 @@ export class ImportService {
     dto: CommitImportDto,
     userId: string,
   ): Promise<CommitImportResponseDto> {
-    const { filePath, fileType, columnMapping, config } = dto;
+    const { filePath, fileType, columnMapping = {}, config } = dto;
 
     // Criar registro de ImportLog
     const importLog = await this.prisma.importLog.create({
@@ -195,7 +230,7 @@ export class ImportService {
         totalRows: result.totalRows,
         successRows: result.successRows,
         errorRows: result.errorRows,
-        errors: result.errors as any,
+        errors: result.errors.length > 0 ? JSON.stringify(result.errors) : null,
       },
     });
 
@@ -206,6 +241,7 @@ export class ImportService {
         ? `Importação concluída: ${result.successRows} registros criados`
         : `Importação falhou: ${result.errorRows} erros`,
       status: result.success ? 'COMPLETED' : 'FAILED',
+      ...result,
     };
   }
 
@@ -255,29 +291,50 @@ export class ImportService {
       }),
     );
 
+    // Detectar se é arquivo HSI Inventário
+    const isHSIInventario = fileType === 'hsi-inventario' || 
+      config?.isHSIInventario || 
+      filePath.toLowerCase().includes('inventário') ||
+      filePath.toLowerCase().includes('inventario');
+
     for await (const record of parser) {
       totalRows++;
 
       try {
-        const mappedRecord = this.mapColumns(record, columnMapping);
+        if (isHSIInventario) {
+          // Processar usando o processor especializado HSI
+          const result = await this.hsiProcessor.processRow(record, userId);
+          
+          if (result.erros.length > 0) {
+            errorRows++;
+            errors.push({
+              row: totalRows,
+              error: result.erros.join(', '),
+            });
+          } else {
+            successRows++;
+          }
+        } else {
+          // Processamento genérico (original)
+          const mappedRecord = this.mapColumns(record, columnMapping);
 
-        // Criar ativo
-        await this.prisma.asset.create({
-          data: {
-            name: mappedRecord.name,
-            description: mappedRecord.notes || null,
-            serialNumber: mappedRecord.serial_number || null,
-            status: 'EM_ESTOQUE',
-            purchasePrice: mappedRecord.price
-              ? parseFloat(mappedRecord.price)
-              : null,
-            categoryId: defaultCategory.id,
-            locationId: defaultLocation.id,
-            createdById: userId,
-          },
-        });
+          await this.prisma.asset.create({
+            data: {
+              name: mappedRecord.name,
+              description: mappedRecord.notes || null,
+              serialNumber: mappedRecord.serial_number || null,
+              status: 'EM_ESTOQUE',
+              purchasePrice: mappedRecord.price
+                ? parseFloat(mappedRecord.price)
+                : null,
+              categoryId: defaultCategory.id,
+              locationId: defaultLocation.id,
+              createdById: userId,
+            },
+          });
 
-        successRows++;
+          successRows++;
+        }
       } catch (error) {
         errorRows++;
         errors.push({
@@ -285,6 +342,11 @@ export class ImportService {
           error: error.message,
         });
       }
+    }
+    
+    // Limpar cache do processor após importação
+    if (isHSIInventario) {
+      this.hsiProcessor.clearCache();
     }
 
     return {
