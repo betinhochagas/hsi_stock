@@ -6,6 +6,7 @@ import {
   FileKey,
   Settings,
   BarChart3,
+  Upload,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -54,6 +55,12 @@ export const navigation: NavGroup[] = [
         href: '/licenses',
         icon: FileKey,
         description: 'Licenças de software',
+      },
+      {
+        title: 'Importar CSV',
+        href: '/import',
+        icon: Upload,
+        description: 'Importar dados de CSV',
       },
     ],
   },
