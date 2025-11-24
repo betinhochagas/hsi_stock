@@ -8,8 +8,6 @@
  *   tsx scripts/test-sse-progress.ts abc123
  */
 
-import axios from 'axios';
-
 const API_BASE_URL = process.env.API_URL || 'http://localhost:3001/api/v1';
 
 async function testSSEProgress(importLogId: string) {
