@@ -7,6 +7,8 @@ import {
   Settings,
   BarChart3,
   Upload,
+  Factory,
+  Truck,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -78,6 +80,18 @@ export const navigation: NavGroup[] = [
         href: '/locations',
         icon: MapPin,
         description: 'Gerenciar localizações',
+      },
+      {
+        title: 'Fabricantes',
+        href: '/manufacturers',
+        icon: Factory,
+        description: 'Gerenciar fabricantes',
+      },
+      {
+        title: 'Fornecedores',
+        href: '/suppliers',
+        icon: Truck,
+        description: 'Gerenciar fornecedores',
       },
     ],
   },

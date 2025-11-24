@@ -121,11 +121,52 @@ export function useManufacturers() {
     queryFn: async () => {
       const response = await api.get<Manufacturer[]>('/manufacturers')
       // API retorna { items: [], total, skip, take }
-      const data = response.data as any
-      return data.items || data.data || (Array.isArray(data) ? data : [])
+      const data = response.data as unknown as { items?: Manufacturer[]; data?: Manufacturer[] }
+      return data.items || data.data || (Array.isArray(data) ? data as Manufacturer[] : [])
     },
     staleTime: 1000 * 60 * 10, // 10 minutes
     initialData: [],
+  })
+}
+
+export function useCreateManufacturer() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (data: { name: string; website?: string; supportEmail?: string; supportPhone?: string }) => {
+      const response = await api.post<Manufacturer>('/manufacturers', data)
+      return response.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['manufacturers'] })
+    },
+  })
+}
+
+export function useUpdateManufacturer(id: string) {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (data: { name: string; website?: string; supportEmail?: string; supportPhone?: string }) => {
+      const response = await api.patch<Manufacturer>(`/manufacturers/${id}`, data)
+      return response.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['manufacturers'] })
+    },
+  })
+}
+
+export function useDeleteManufacturer() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (id: string) => {
+      await api.delete(`/manufacturers/${id}`)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['manufacturers'] })
+    },
   })
 }
 
@@ -136,10 +177,51 @@ export function useSuppliers() {
     queryFn: async () => {
       const response = await api.get<Supplier[]>('/suppliers')
       // API retorna { items: [], total, skip, take }
-      const data = response.data as any
-      return data.items || data.data || (Array.isArray(data) ? data : [])
+      const data = response.data as unknown as { items?: Supplier[]; data?: Supplier[] }
+      return data.items || data.data || (Array.isArray(data) ? data as Supplier[] : [])
     },
     staleTime: 1000 * 60 * 10, // 10 minutes
     initialData: [],
+  })
+}
+
+export function useCreateSupplier() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (data: { name: string; cnpj?: string; contact?: string; email?: string; phone?: string; address?: string }) => {
+      const response = await api.post<Supplier>('/suppliers', data)
+      return response.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['suppliers'] })
+    },
+  })
+}
+
+export function useUpdateSupplier(id: string) {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (data: { name: string; cnpj?: string; contact?: string; email?: string; phone?: string; address?: string }) => {
+      const response = await api.patch<Supplier>(`/suppliers/${id}`, data)
+      return response.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['suppliers'] })
+    },
+  })
+}
+
+export function useDeleteSupplier() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (id: string) => {
+      await api.delete(`/suppliers/${id}`)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['suppliers'] })
+    },
   })
 }
