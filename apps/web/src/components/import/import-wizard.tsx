@@ -13,6 +13,8 @@ export function ImportWizard() {
 
   // Protect against losing uncommitted changes
   useEffect(() => {
+    const UNCOMMITTED_CHANGES_MESSAGE = 'Uncommitted changes detected'
+    
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       // Show warning if user has uploaded a file but hasn't committed the import
       // Steps 2 and 3 have uncommitted changes (detect/validate but not committed)
@@ -25,8 +27,8 @@ export function ImportWizard() {
       
       if (hasUncommittedChanges || isProcessing) {
         e.preventDefault()
-        e.returnValue = 'Uncommitted changes detected'
-        return 'Uncommitted changes detected'
+        e.returnValue = UNCOMMITTED_CHANGES_MESSAGE
+        return UNCOMMITTED_CHANGES_MESSAGE
       }
     }
 
