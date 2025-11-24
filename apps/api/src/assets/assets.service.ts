@@ -1,8 +1,13 @@
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import { Prisma, AssetStatus } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateAssetDto } from './dto/create-asset.dto';
 import { UpdateAssetDto } from './dto/update-asset.dto';
 import { DashboardStatsDto } from './dto/stats-response.dto';
+
+type StatusCounts = {
+  [K in AssetStatus]: number;
+};
 
 @Injectable()
 export class AssetsService {
@@ -20,7 +25,7 @@ export class AssetsService {
       },
     });
 
-    const statusCounts = {
+    const statusCounts: StatusCounts = {
       EM_ESTOQUE: 0,
       EM_USO: 0,
       EM_MANUTENCAO: 0,
@@ -85,7 +90,7 @@ export class AssetsService {
   async findAll(params?: { skip?: number; take?: number; search?: string; status?: string }) {
     const { skip = 0, take = 50, search, status } = params || {};
     
-    const where: any = {};
+    const where: Prisma.AssetWhereInput = {};
     if (search) {
       where.OR = [
         { name: { contains: search, mode: 'insensitive' } },
@@ -94,7 +99,7 @@ export class AssetsService {
       ];
     }
     if (status) {
-      where.status = status;
+      where.status = status as AssetStatus;
     }
 
     const [items, total] = await Promise.all([

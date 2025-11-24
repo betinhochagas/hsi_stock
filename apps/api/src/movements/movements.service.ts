@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateMovementDto } from './dto/create-movement.dto';
-import { MovementType, AssetStatus } from '@prisma/client';
+import { MovementType, AssetStatus, Prisma } from '@prisma/client';
 
 @Injectable()
 export class MovementsService {
@@ -96,7 +96,7 @@ export class MovementsService {
   }) {
     const { skip = 0, take = 50, assetId, userId, type, startDate, endDate } = params || {};
 
-    const where: any = {};
+    const where: Prisma.MovementWhereInput = {};
 
     if (assetId) {
       where.assetId = assetId;
@@ -335,32 +335,32 @@ export class MovementsService {
   }
 
   private async updateAssetAfterMovement(dto: CreateMovementDto) {
-    const updateData: any = {};
+    const updateData: Prisma.AssetUpdateInput = {};
 
     // Atualizar status baseado no tipo de movimentação
     switch (dto.type) {
       case MovementType.CHECK_OUT:
         updateData.status = AssetStatus.EM_USO;
         if (dto.userId) {
-          updateData.assignedToId = dto.userId;
+          updateData.assignedTo = { connect: { id: dto.userId } };
         }
         break;
 
       case MovementType.CHECK_IN:
         updateData.status = AssetStatus.EM_ESTOQUE;
-        updateData.assignedToId = null;
+        updateData.assignedTo = { disconnect: true };
         break;
 
       case MovementType.ASSIGNMENT:
         updateData.status = AssetStatus.EM_USO;
         if (dto.userId) {
-          updateData.assignedToId = dto.userId;
+          updateData.assignedTo = { connect: { id: dto.userId } };
         }
         break;
 
       case MovementType.RETURN:
         updateData.status = AssetStatus.EM_ESTOQUE;
-        updateData.assignedToId = null;
+        updateData.assignedTo = { disconnect: true };
         break;
 
       case MovementType.TRANSFER:

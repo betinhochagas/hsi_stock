@@ -78,5 +78,5 @@ export class DetectFormatResponseDto {
     },
     required: false,
   })
-  stats?: Record<string, any>;
+  stats?: Record<string, unknown>;
 }

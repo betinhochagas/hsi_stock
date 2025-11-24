@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateManufacturerDto } from './dto/create-manufacturer.dto';
 import { UpdateManufacturerDto } from './dto/update-manufacturer.dto';
@@ -27,7 +28,7 @@ export class ManufacturersService {
   async findAll(params?: { skip?: number; take?: number; search?: string }) {
     const { skip = 0, take = 50, search } = params || {};
 
-    const where: any = {};
+    const where: Prisma.ManufacturerWhereInput = {};
     if (search) {
       where.OR = [
         { name: { contains: search, mode: 'insensitive' } },

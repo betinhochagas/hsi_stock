@@ -156,7 +156,7 @@ export class ImportController {
   })
   async commitImport(
     @Body() dto: CommitImportDto,
-    @CurrentUser() user: any,
+    @CurrentUser() user: { userId: string },
   ): Promise<CommitImportResponseDto> {
     return this.importService.commitImport(dto, user.userId);
   }
