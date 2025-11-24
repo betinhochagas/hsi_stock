@@ -82,6 +82,21 @@ jobs:
       - name: Run tests
         run: npm run test
       
+      - name: Check for uncommitted changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Error: Uncommitted changes detected after tests"
+            echo "Please ensure all generated files are properly gitignored"
+            echo ""
+            echo "Changed files:"
+            git status --porcelain
+            echo ""
+            echo "Diff:"
+            git diff
+            exit 1
+          fi
+          echo "✓ No uncommitted changes detected"
+      
       - name: Upload coverage
         uses: codecov/codecov-action@v3
         with:
@@ -110,6 +125,21 @@ jobs:
         run: npm run build
         env:
           DATABASE_URL: postgresql://test_user:test_pass@localhost:5432/test_db
+      
+      - name: Check for uncommitted changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Error: Uncommitted changes detected after build"
+            echo "Please ensure all generated files are properly gitignored"
+            echo ""
+            echo "Changed files:"
+            git status --porcelain
+            echo ""
+            echo "Diff:"
+            git diff
+            exit 1
+          fi
+          echo "✓ No uncommitted changes detected"
 
   docker:
     name: Build Docker Images
