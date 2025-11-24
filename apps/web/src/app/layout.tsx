@@ -1,11 +1,11 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { QueryProvider } from '@/lib/query-provider';
 import { ThemeProvider } from '@/components/theme-provider';
 
-const inter = Inter({ subsets: ['latin'] });
+// Using system font stack as fallback when Google Fonts are not available
+const fontClass = 'font-sans';
 
 export const metadata: Metadata = {
   title: 'Estoque TI HSI - Sistema de Gestão de Ativos',
@@ -45,7 +45,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="HSI Estoque" />
       </head>
-      <body className={inter.className}>
+      <body className={fontClass}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
