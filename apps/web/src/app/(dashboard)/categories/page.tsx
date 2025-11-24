@@ -5,7 +5,6 @@ import { Folder, Plus, Pencil, Trash2, MoreHorizontal } from 'lucide-react'
 import { ColumnDef } from '@tanstack/react-table'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import {
   DropdownMenu,
   DropdownMenuContent,
