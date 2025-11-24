@@ -2,6 +2,29 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import api from '@/lib/api'
 import { License } from '@/types'
 
+interface LicenseCreateData {
+  name: string
+  licenseKey?: string
+  totalSeats: number
+  purchaseDate?: string
+  expirationDate?: string
+  cost?: number
+  vendor?: string
+  notes?: string
+}
+
+interface LicenseUpdateData {
+  name?: string
+  licenseKey?: string
+  totalSeats?: number
+  purchaseDate?: string
+  expirationDate?: string
+  cost?: number
+  vendor?: string
+  notes?: string
+  status?: string
+}
+
 export function useLicenses() {
   return useQuery({
     queryKey: ['licenses'],
@@ -16,7 +39,7 @@ export function useCreateLicense() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data: LicenseCreateData) => {
       const { data: license } = await api.post<License>('/licenses', data)
       return license
     },
@@ -30,7 +53,7 @@ export function useUpdateLicense(id: string) {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data: LicenseUpdateData) => {
       const { data: license } = await api.patch<License>(`/licenses/${id}`, data)
       return license
     },
