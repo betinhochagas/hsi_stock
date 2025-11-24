@@ -7,7 +7,9 @@ import {
   UploadedFile,
   BadRequestException,
   Get,
+  MessageEvent,
   Param,
+  Sse,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -17,6 +19,7 @@ import {
   ApiConsumes,
   ApiBody,
 } from '@nestjs/swagger';
+import { Observable, interval, map, switchMap, takeWhile } from 'rxjs';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -191,5 +194,54 @@ export class ImportController {
   })
   async getJobStatus(@Param('id') id: string) {
     return this.importService.getJobStatus(id);
+  }
+
+  @Sse('jobs/:id/progress')
+  @ApiOperation({
+    summary: 'Acompanhar progresso em tempo real (SSE)',
+    description: 'Stream de eventos com atualizações de progresso do job de importação',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Stream de eventos SSE',
+    schema: {
+      type: 'object',
+      properties: {
+        data: {
+          type: 'object',
+          example: {
+            id: 'cljk123456',
+            status: 'PROCESSING',
+            progress: 45,
+            totalRows: 1485,
+            successRows: 668,
+          },
+        },
+      },
+    },
+  })
+  streamJobProgress(@Param('id') id: string): Observable<MessageEvent> {
+    return interval(1000).pipe(
+      switchMap(() => this.importService.getJobStatus(id)),
+      takeWhile((status) => {
+        // Continue streaming while job is not in final state
+        return status.status === 'PENDING' || status.status === 'PROCESSING';
+      }, true), // Include the final emission
+      map((status) => ({
+        data: {
+          id: status.id,
+          filename: status.filename,
+          status: status.status,
+          progress: status.progress,
+          totalRows: status.totalRows,
+          successRows: status.successRows,
+          errorRows: status.errorRows,
+          stats: status.stats,
+          startedAt: status.startedAt,
+          completedAt: status.completedAt,
+          duration: status.duration,
+        },
+      })),
+    );
   }
 }
