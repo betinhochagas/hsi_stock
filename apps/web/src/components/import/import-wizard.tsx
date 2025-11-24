@@ -18,7 +18,12 @@ export function ImportWizard() {
       // Steps 2 and 3 have uncommitted changes (detect/validate but not committed)
       const hasUncommittedChanges = wizard.uploadedFile && wizard.currentStep >= 2 && wizard.currentStep < 4
       
-      if (hasUncommittedChanges && !wizard.jobStatus) {
+      // Also check if we're on step 4 but the job is still processing
+      const isProcessing = wizard.currentStep === 4 && 
+        wizard.jobStatus && 
+        (wizard.jobStatus.status === 'PENDING' || wizard.jobStatus.status === 'PROCESSING')
+      
+      if (hasUncommittedChanges || isProcessing) {
         e.preventDefault()
         e.returnValue = 'Uncommitted changes detected'
         return 'Uncommitted changes detected'
