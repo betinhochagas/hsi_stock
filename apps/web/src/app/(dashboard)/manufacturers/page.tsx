@@ -23,7 +23,6 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
 import { DataTable } from '@/components/shared/data-table'
 import { EmptyState } from '@/components/shared/empty-state'
 import { useManufacturers, useCreateManufacturer, useUpdateManufacturer, useDeleteManufacturer } from '@/hooks/use-metadata'
@@ -32,7 +31,12 @@ import { Manufacturer } from '@/types'
 export default function ManufacturersPage() {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [editingManufacturer, setEditingManufacturer] = useState<Manufacturer | null>(null)
-  const [formData, setFormData] = useState({ name: '', description: '' })
+  const [formData, setFormData] = useState({ 
+    name: '', 
+    website: '', 
+    supportEmail: '', 
+    supportPhone: '' 
+  })
   
   const { data: manufacturers = [], isLoading } = useManufacturers()
   const createManufacturer = useCreateManufacturer()
@@ -43,16 +47,22 @@ export default function ManufacturersPage() {
     e.preventDefault()
     
     try {
+      const submitData = {
+        name: formData.name,
+        website: formData.website || undefined,
+        supportEmail: formData.supportEmail || undefined,
+        supportPhone: formData.supportPhone || undefined,
+      }
       if (editingManufacturer) {
-        await updateManufacturer.mutateAsync(formData)
+        await updateManufacturer.mutateAsync(submitData)
         toast.success('Fabricante atualizado com sucesso!')
       } else {
-        await createManufacturer.mutateAsync(formData)
+        await createManufacturer.mutateAsync(submitData)
         toast.success('Fabricante criado com sucesso!')
       }
       setDialogOpen(false)
       setEditingManufacturer(null)
-      setFormData({ name: '', description: '' })
+      setFormData({ name: '', website: '', supportEmail: '', supportPhone: '' })
     } catch {
       toast.error(editingManufacturer ? 'Erro ao atualizar fabricante' : 'Erro ao criar fabricante')
     }
@@ -73,14 +83,16 @@ export default function ManufacturersPage() {
     setEditingManufacturer(manufacturer)
     setFormData({
       name: manufacturer.name,
-      description: manufacturer.description || '',
+      website: manufacturer.website || '',
+      supportEmail: manufacturer.supportEmail || '',
+      supportPhone: manufacturer.supportPhone || '',
     })
     setDialogOpen(true)
   }
 
   const openCreateDialog = () => {
     setEditingManufacturer(null)
-    setFormData({ name: '', description: '' })
+    setFormData({ name: '', website: '', supportEmail: '', supportPhone: '' })
     setDialogOpen(true)
   }
 
@@ -93,21 +105,31 @@ export default function ManufacturersPage() {
       ),
     },
     {
-      accessorKey: 'description',
-      header: 'Descrição',
+      accessorKey: 'website',
+      header: 'Website',
       cell: ({ row }) => (
-        <div className="max-w-[400px] truncate text-muted-foreground">
-          {row.getValue('description') || '-'}
+        <div className="text-muted-foreground">
+          {row.getValue('website') || '-'}
         </div>
       ),
     },
     {
-      accessorKey: '_count',
-      header: 'Ativos',
-      cell: ({ row }) => {
-        const count = row.original._count?.assets || 0
-        return <span className="text-muted-foreground">{count}</span>
-      },
+      accessorKey: 'supportEmail',
+      header: 'E-mail Suporte',
+      cell: ({ row }) => (
+        <div className="text-muted-foreground">
+          {row.getValue('supportEmail') || '-'}
+        </div>
+      ),
+    },
+    {
+      accessorKey: 'supportPhone',
+      header: 'Telefone Suporte',
+      cell: ({ row }) => (
+        <div className="text-muted-foreground">
+          {row.getValue('supportPhone') || '-'}
+        </div>
+      ),
     },
     {
       id: 'actions',
@@ -179,10 +201,10 @@ export default function ManufacturersPage() {
         setDialogOpen(open)
         if (!open) {
           setEditingManufacturer(null)
-          setFormData({ name: '', description: '' })
+          setFormData({ name: '', website: '', supportEmail: '', supportPhone: '' })
         }
       }}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>
             <DialogTitle>
               {editingManufacturer ? 'Editar Fabricante' : 'Novo Fabricante'}
@@ -206,14 +228,35 @@ export default function ManufacturersPage() {
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="description">Descrição</Label>
-                <Textarea
-                  id="description"
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Descrição opcional do fabricante"
-                  rows={3}
+                <Label htmlFor="website">Website</Label>
+                <Input
+                  id="website"
+                  type="url"
+                  value={formData.website}
+                  onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                  placeholder="https://www.exemplo.com"
                 />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="supportEmail">E-mail Suporte</Label>
+                  <Input
+                    id="supportEmail"
+                    type="email"
+                    value={formData.supportEmail}
+                    onChange={(e) => setFormData({ ...formData, supportEmail: e.target.value })}
+                    placeholder="suporte@fabricante.com"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="supportPhone">Telefone Suporte</Label>
+                  <Input
+                    id="supportPhone"
+                    value={formData.supportPhone}
+                    onChange={(e) => setFormData({ ...formData, supportPhone: e.target.value })}
+                    placeholder="(11) 99999-9999"
+                  />
+                </div>
               </div>
             </div>
             <DialogFooter>

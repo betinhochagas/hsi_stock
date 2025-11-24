@@ -133,7 +133,7 @@ export function useCreateManufacturer() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: { name: string; description?: string }) => {
+    mutationFn: async (data: { name: string; website?: string; supportEmail?: string; supportPhone?: string }) => {
       const response = await api.post<Manufacturer>('/manufacturers', data)
       return response.data
     },
@@ -147,7 +147,7 @@ export function useUpdateManufacturer(id: string) {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: { name: string; description?: string }) => {
+    mutationFn: async (data: { name: string; website?: string; supportEmail?: string; supportPhone?: string }) => {
       const response = await api.patch<Manufacturer>(`/manufacturers/${id}`, data)
       return response.data
     },
@@ -189,7 +189,7 @@ export function useCreateSupplier() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: { name: string; contactEmail?: string; contactPhone?: string; address?: string }) => {
+    mutationFn: async (data: { name: string; cnpj?: string; contact?: string; email?: string; phone?: string; address?: string }) => {
       const response = await api.post<Supplier>('/suppliers', data)
       return response.data
     },
@@ -203,7 +203,7 @@ export function useUpdateSupplier(id: string) {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: { name: string; contactEmail?: string; contactPhone?: string; address?: string }) => {
+    mutationFn: async (data: { name: string; cnpj?: string; contact?: string; email?: string; phone?: string; address?: string }) => {
       const response = await api.patch<Supplier>(`/suppliers/${id}`, data)
       return response.data
     },

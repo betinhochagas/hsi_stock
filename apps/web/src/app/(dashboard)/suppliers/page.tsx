@@ -34,8 +34,10 @@ export default function SuppliersPage() {
   const [editingSupplier, setEditingSupplier] = useState<Supplier | null>(null)
   const [formData, setFormData] = useState({ 
     name: '', 
-    contactEmail: '', 
-    contactPhone: '', 
+    cnpj: '',
+    contact: '',
+    email: '', 
+    phone: '', 
     address: '' 
   })
   
@@ -48,16 +50,24 @@ export default function SuppliersPage() {
     e.preventDefault()
     
     try {
+      const submitData = {
+        name: formData.name,
+        cnpj: formData.cnpj || undefined,
+        contact: formData.contact || undefined,
+        email: formData.email || undefined,
+        phone: formData.phone || undefined,
+        address: formData.address || undefined,
+      }
       if (editingSupplier) {
-        await updateSupplier.mutateAsync(formData)
+        await updateSupplier.mutateAsync(submitData)
         toast.success('Fornecedor atualizado com sucesso!')
       } else {
-        await createSupplier.mutateAsync(formData)
+        await createSupplier.mutateAsync(submitData)
         toast.success('Fornecedor criado com sucesso!')
       }
       setDialogOpen(false)
       setEditingSupplier(null)
-      setFormData({ name: '', contactEmail: '', contactPhone: '', address: '' })
+      setFormData({ name: '', cnpj: '', contact: '', email: '', phone: '', address: '' })
     } catch {
       toast.error(editingSupplier ? 'Erro ao atualizar fornecedor' : 'Erro ao criar fornecedor')
     }
@@ -78,8 +88,10 @@ export default function SuppliersPage() {
     setEditingSupplier(supplier)
     setFormData({
       name: supplier.name,
-      contactEmail: supplier.contactEmail || '',
-      contactPhone: supplier.contactPhone || '',
+      cnpj: supplier.cnpj || '',
+      contact: supplier.contactPerson || '',
+      email: supplier.email || '',
+      phone: supplier.phone || '',
       address: supplier.address || '',
     })
     setDialogOpen(true)
@@ -87,7 +99,7 @@ export default function SuppliersPage() {
 
   const openCreateDialog = () => {
     setEditingSupplier(null)
-    setFormData({ name: '', contactEmail: '', contactPhone: '', address: '' })
+    setFormData({ name: '', cnpj: '', contact: '', email: '', phone: '', address: '' })
     setDialogOpen(true)
   }
 
@@ -100,29 +112,29 @@ export default function SuppliersPage() {
       ),
     },
     {
-      accessorKey: 'contactEmail',
+      accessorKey: 'cnpj',
+      header: 'CNPJ',
+      cell: ({ row }) => (
+        <div className="text-muted-foreground">
+          {row.getValue('cnpj') || '-'}
+        </div>
+      ),
+    },
+    {
+      accessorKey: 'email',
       header: 'E-mail',
       cell: ({ row }) => (
         <div className="text-muted-foreground">
-          {row.getValue('contactEmail') || '-'}
+          {row.getValue('email') || '-'}
         </div>
       ),
     },
     {
-      accessorKey: 'contactPhone',
+      accessorKey: 'phone',
       header: 'Telefone',
       cell: ({ row }) => (
         <div className="text-muted-foreground">
-          {row.getValue('contactPhone') || '-'}
-        </div>
-      ),
-    },
-    {
-      accessorKey: 'address',
-      header: 'Endereço',
-      cell: ({ row }) => (
-        <div className="max-w-[300px] truncate text-muted-foreground">
-          {row.getValue('address') || '-'}
+          {row.getValue('phone') || '-'}
         </div>
       ),
     },
@@ -196,7 +208,7 @@ export default function SuppliersPage() {
         setDialogOpen(open)
         if (!open) {
           setEditingSupplier(null)
-          setFormData({ name: '', contactEmail: '', contactPhone: '', address: '' })
+          setFormData({ name: '', cnpj: '', contact: '', email: '', phone: '', address: '' })
         }
       }}>
         <DialogContent className="sm:max-w-[500px]">
@@ -224,21 +236,41 @@ export default function SuppliersPage() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="contactEmail">E-mail</Label>
+                  <Label htmlFor="cnpj">CNPJ</Label>
                   <Input
-                    id="contactEmail"
+                    id="cnpj"
+                    value={formData.cnpj}
+                    onChange={(e) => setFormData({ ...formData, cnpj: e.target.value })}
+                    placeholder="00.000.000/0001-00"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="contact">Contato</Label>
+                  <Input
+                    id="contact"
+                    value={formData.contact}
+                    onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                    placeholder="Nome do contato"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="email">E-mail</Label>
+                  <Input
+                    id="email"
                     type="email"
-                    value={formData.contactEmail}
-                    onChange={(e) => setFormData({ ...formData, contactEmail: e.target.value })}
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="contato@fornecedor.com"
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="contactPhone">Telefone</Label>
+                  <Label htmlFor="phone">Telefone</Label>
                   <Input
-                    id="contactPhone"
-                    value={formData.contactPhone}
-                    onChange={(e) => setFormData({ ...formData, contactPhone: e.target.value })}
+                    id="phone"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="(11) 99999-9999"
                   />
                 </div>
