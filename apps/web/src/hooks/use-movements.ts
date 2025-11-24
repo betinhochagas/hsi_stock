@@ -21,18 +21,24 @@ interface MovementsParams {
   assetId?: string;
 }
 
+interface ProcessedMovementsData {
+  items: Movement[];
+  total: number;
+  skip: number;
+  take: number;
+}
+
 export function useMovements(params?: MovementsParams) {
   return useQuery({
     queryKey: ['movements', params || {}],
-    queryFn: async () => {
+    queryFn: async (): Promise<ProcessedMovementsData> => {
       const response = await api.get<MovementsResponse>('/movements', { params });
-      // API retorna { data: Movement[], pagination: {...} }
-      const apiData = response.data as any;
+      const apiData = response.data;
       return {
-        items: apiData.data || apiData.items || [],
-        total: apiData.pagination?.total || apiData.total || 0,
-        skip: apiData.pagination?.skip || apiData.skip || 0,
-        take: apiData.pagination?.take || apiData.take || 50,
+        items: apiData.data || [],
+        total: apiData.pagination?.total || 0,
+        skip: apiData.pagination?.skip || 0,
+        take: apiData.pagination?.take || 50,
       };
     },
     staleTime: 1000 * 60 * 2, // 2 minutos

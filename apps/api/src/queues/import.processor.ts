@@ -1,6 +1,7 @@
 import { Processor, WorkerHost } from '@nestjs/bullmq';
 import { Job } from 'bullmq';
 import { Injectable, Logger } from '@nestjs/common';
+import { AssetStatus } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { ImportJobData } from './import.queue';
 import { parse } from 'csv-parse';
@@ -20,8 +21,8 @@ export class ImportProcessor extends WorkerHost {
     this.hsiProcessor = new HSIInventarioProcessor(prisma);
   }
 
-  async process(job: Job<ImportJobData>): Promise<any> {
-    const { importLogId, filename, mappings, userId } = job.data;
+  async process(job: Job<ImportJobData>): Promise<{ stats: Record<string, number>; errors: { message: string; stack?: string }[] | null }> {
+    const { importLogId, filename, mappings, userId: _userId } = job.data;
     const filePath = `./uploads/${filename}`;
 
     this.logger.log(`Processing import job ${job.id} for ${filename}`);
@@ -57,7 +58,7 @@ export class ImportProcessor extends WorkerHost {
         }),
       );
 
-      for await (const _ of countParser) {
+      for await (const _record of countParser) {
         totalRows++;
       }
 
@@ -67,7 +68,7 @@ export class ImportProcessor extends WorkerHost {
       });
 
       // Detect file type
-      const firstRecords: any[] = [];
+      const firstRecords: Record<string, string>[] = [];
       const sampleParser = createReadStream(filePath).pipe(
         parse({
           delimiter,
@@ -80,7 +81,7 @@ export class ImportProcessor extends WorkerHost {
 
       let count = 0;
       for await (const record of sampleParser) {
-        firstRecords.push(record);
+        firstRecords.push(record as Record<string, string>);
         count++;
         if (count >= 5) break;
       }
@@ -89,7 +90,7 @@ export class ImportProcessor extends WorkerHost {
       const isHSI = this.isHSIInventarioFormat(headers);
 
       // Process the file
-      let result: any;
+      let result: { stats: Record<string, number>; errors: { record?: Record<string, string>; message: string }[] | null };
       if (isHSI) {
         result = await this.processHSIInventario(filePath, job, importLogId, totalRows);
       } else {
@@ -172,13 +173,13 @@ export class ImportProcessor extends WorkerHost {
     let processed = 0;
     let created = 0;
     let updated = 0;
-    const errors: any[] = [];
+    const errors: { record?: Record<string, string>; message: string }[] = [];
 
     const chunkSize = 50;
-    let chunk: any[] = [];
+    let chunk: Record<string, string>[] = [];
 
     for await (const record of parser) {
-      chunk.push(record);
+      chunk.push(record as Record<string, string>);
 
       if (chunk.length >= chunkSize) {
         const batchResult = await this.processChunk(chunk, mappings, userId);
@@ -219,14 +220,14 @@ export class ImportProcessor extends WorkerHost {
     };
   }
 
-  private async processChunk(chunk: any[], mappings: Record<string, string>, userId: string) {
+  private async processChunk(chunk: Record<string, string>[], mappings: Record<string, string>, userId: string) {
     let created = 0;
     let updated = 0;
-    const errors: any[] = [];
+    const errors: { record?: Record<string, string>; message: string }[] = [];
 
     for (const record of chunk) {
       try {
-        const mappedData: any = {};
+        const mappedData: Record<string, string> = {};
         for (const [csvColumn, systemField] of Object.entries(mappings)) {
           if (systemField !== 'ignore' && record[csvColumn]) {
             mappedData[systemField] = record[csvColumn];
@@ -283,7 +284,7 @@ export class ImportProcessor extends WorkerHost {
               name: mappedData.name,
               serialNumber: mappedData.serialNumber,
               model: mappedData.model,
-              status: mappedData.status || 'EM_ESTOQUE',
+              status: (mappedData.status as AssetStatus) || AssetStatus.EM_ESTOQUE,
               description: mappedData.notes || null,
               categoryId,
               locationId,

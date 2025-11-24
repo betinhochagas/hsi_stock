@@ -58,7 +58,6 @@ export function LicenseFormDialog({
     formState: { errors, isSubmitting },
     reset,
     setValue,
-    watch,
   } = useForm<LicenseFormData>({
     resolver: zodResolver(licenseSchema),
     defaultValues: {
@@ -80,7 +79,7 @@ export function LicenseFormDialog({
       await onSubmit(submitData)
       reset()
       onOpenChange(false)
-    } catch (error) {
+    } catch {
       // Error handling is done in parent component
     }
   }
@@ -138,7 +137,7 @@ export function LicenseFormDialog({
               <Label htmlFor="status">Status</Label>
               <Select
                 defaultValue={defaultValues?.status || 'ATIVA'}
-                onValueChange={(value) => setValue('status', value as any)}
+                onValueChange={(value) => setValue('status', value as 'ATIVA' | 'EXPIRADA' | 'CANCELADA')}
                 disabled={isSubmitting}
               >
                 <SelectTrigger>

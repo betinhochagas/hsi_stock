@@ -5,7 +5,6 @@ import { Folder, Plus, Pencil, Trash2, MoreHorizontal } from 'lucide-react'
 import { ColumnDef } from '@tanstack/react-table'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +19,11 @@ import { CategoryFormDialog } from '@/components/forms/category-form-dialog'
 import { useCategories, useCreateCategory, useUpdateCategory, useDeleteCategory } from '@/hooks/use-metadata'
 import { Category } from '@/types'
 
+interface CategoryFormData {
+  name: string
+  description?: string
+}
+
 export default function CategoriesPage() {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [editingCategory, setEditingCategory] = useState<Category | null>(null)
@@ -29,7 +33,7 @@ export default function CategoriesPage() {
   const updateCategory = useUpdateCategory(editingCategory?.id || '')
   const deleteCategory = useDeleteCategory()
 
-  const handleCreate = async (data: any) => {
+  const handleCreate = async (data: CategoryFormData) => {
     try {
       await createCategory.mutateAsync(data)
       toast.success('Categoria criada com sucesso!')
@@ -40,7 +44,7 @@ export default function CategoriesPage() {
     }
   }
 
-  const handleEdit = async (data: any) => {
+  const handleEdit = async (data: CategoryFormData) => {
     if (!editingCategory) return
     
     try {

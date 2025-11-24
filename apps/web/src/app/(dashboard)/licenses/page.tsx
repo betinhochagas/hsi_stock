@@ -22,6 +22,17 @@ import { License } from '@/types'
 import { formatCurrency } from '@/lib/utils'
 import { format, isPast } from 'date-fns'
 
+interface LicenseFormData {
+  name: string
+  licenseKey?: string
+  totalSeats: number
+  purchaseDate?: string
+  expirationDate?: string
+  cost?: number
+  vendor?: string
+  notes?: string
+}
+
 const statusLabels: Record<string, string> = {
   ATIVA: 'Ativa',
   EXPIRADA: 'Expirada',
@@ -43,7 +54,7 @@ export default function LicensesPage() {
   const updateLicense = useUpdateLicense(editingLicense?.id || '')
   const deleteLicense = useDeleteLicense()
 
-  const handleCreate = async (data: any) => {
+  const handleCreate = async (data: LicenseFormData) => {
     try {
       await createLicense.mutateAsync(data)
       toast.success('Licença criada com sucesso!')
@@ -54,7 +65,7 @@ export default function LicensesPage() {
     }
   }
 
-  const handleEdit = async (data: any) => {
+  const handleEdit = async (data: LicenseFormData) => {
     if (!editingLicense) return
     
     try {
