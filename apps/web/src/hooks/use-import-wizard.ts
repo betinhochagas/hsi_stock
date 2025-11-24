@@ -1,6 +1,11 @@
 import { useState } from 'react'
+import { AxiosError } from 'axios'
 import { api } from '@/lib/api'
 import { toast } from 'sonner'
+
+interface ApiErrorResponse {
+  message?: string
+}
 
 export interface UploadedFile {
   filename: string
@@ -122,8 +127,9 @@ export function useImportWizard() {
       // Auto-detect format
       await detectFormat(response.data.filename)
     } catch (err) {
-      const axiosError = err as { response?: { data?: { message?: string } } }
-      const message = axiosError.response?.data?.message || 'Erro ao fazer upload do arquivo'
+      const message = err instanceof AxiosError 
+        ? (err.response?.data as ApiErrorResponse)?.message || 'Erro ao fazer upload do arquivo'
+        : 'Erro ao fazer upload do arquivo'
       setError(message)
       toast.error(message)
       throw err
@@ -147,8 +153,9 @@ export function useImportWizard() {
       })
       setCustomMappings(mappings)
     } catch (err) {
-      const axiosError = err as { response?: { data?: { message?: string } } }
-      const message = axiosError.response?.data?.message || 'Erro ao detectar formato do arquivo'
+      const message = err instanceof AxiosError 
+        ? (err.response?.data as ApiErrorResponse)?.message || 'Erro ao detectar formato do arquivo'
+        : 'Erro ao detectar formato do arquivo'
       setError(message)
       toast.error(message)
       throw err
@@ -172,8 +179,9 @@ export function useImportWizard() {
       setValidationResult(response.data)
       setCurrentStep(3)
     } catch (err) {
-      const axiosError = err as { response?: { data?: { message?: string } } }
-      const message = axiosError.response?.data?.message || 'Erro ao validar importação'
+      const message = err instanceof AxiosError 
+        ? (err.response?.data as ApiErrorResponse)?.message || 'Erro ao validar importação'
+        : 'Erro ao validar importação'
       setError(message)
       toast.error(message)
       throw err
@@ -202,8 +210,9 @@ export function useImportWizard() {
       
       return response.data
     } catch (err) {
-      const axiosError = err as { response?: { data?: { message?: string } } }
-      const message = axiosError.response?.data?.message || 'Erro ao executar importação'
+      const message = err instanceof AxiosError 
+        ? (err.response?.data as ApiErrorResponse)?.message || 'Erro ao executar importação'
+        : 'Erro ao executar importação'
       setError(message)
       toast.error(message)
       throw err
