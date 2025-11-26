@@ -3,13 +3,33 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+interface DiagnosticoStatus {
+  temToken: boolean
+  tokenPreview: string | null
+  apiUrl: string | undefined
+  timestamp: string
+  apiResponse?: {
+    data?: unknown[]
+    pagination?: {
+      total?: number
+    }
+  }
+  apiError?: string
+  apiStatus?: string
+}
+
 export default function DiagnosticoPage() {
-  const [status, setStatus] = useState<any>({})
+  const [status, setStatus] = useState<DiagnosticoStatus>({
+    temToken: false,
+    tokenPreview: null,
+    apiUrl: undefined,
+    timestamp: ''
+  })
   const router = useRouter()
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    const diagnostico = {
+    const diagnostico: DiagnosticoStatus = {
       temToken: !!token,
       tokenPreview: token ? token.substring(0, 50) + '...' : null,
       apiUrl: process.env.NEXT_PUBLIC_API_URL,
@@ -25,10 +45,10 @@ export default function DiagnosticoPage() {
       })
         .then(r => r.json())
         .then(data => {
-          setStatus((s: any) => ({ ...s, apiResponse: data, apiStatus: 'OK' }))
+          setStatus((s) => ({ ...s, apiResponse: data, apiStatus: 'OK' }))
         })
         .catch(err => {
-          setStatus((s: any) => ({ ...s, apiError: err.message, apiStatus: 'ERRO' }))
+          setStatus((s) => ({ ...s, apiError: err.message, apiStatus: 'ERRO' }))
         })
     }
   }, [])

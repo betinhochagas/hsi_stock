@@ -109,10 +109,12 @@ export default function LoginPage() {
               )}
             </Button>
 
-            <div className="text-center text-sm text-muted-foreground">
-              <p>Credenciais padrão para teste:</p>
-              <p className="font-mono text-xs">admin@hsi.com / admin123</p>
-            </div>
+            {process.env.NODE_ENV === 'development' && (
+              <div className="text-center text-sm text-muted-foreground">
+                <p>Credenciais padrão para teste:</p>
+                <p className="font-mono text-xs">admin@hsi.com / admin123</p>
+              </div>
+            )}
           </form>
         </CardContent>
       </Card>
