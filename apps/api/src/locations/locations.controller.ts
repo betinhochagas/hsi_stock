@@ -22,15 +22,19 @@ import { LocationsService } from './locations.service';
 import { CreateLocationDto } from './dto/create-location.dto';
 import { UpdateLocationDto } from './dto/update-location.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { UserRole } from '@estoque-hsi/db';
 
 @ApiTags('locations')
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('locations')
 export class LocationsController {
   constructor(private readonly locationsService: LocationsService) {}
 
   @Post()
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @ApiOperation({ summary: 'Criar nova localização' })
   @ApiResponse({ status: 201, description: 'Localização criada com sucesso' })
   @ApiResponse({ status: 409, description: 'Localização com esse nome já existe' })
@@ -40,6 +44,7 @@ export class LocationsController {
   }
 
   @Get()
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Listar todas as localizações com paginação' })
   @ApiQuery({ name: 'skip', required: false, type: Number })
   @ApiQuery({ name: 'take', required: false, type: Number })
@@ -58,6 +63,7 @@ export class LocationsController {
   }
 
   @Get(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Buscar localização por ID' })
   @ApiResponse({ status: 200, description: 'Localização encontrada' })
   @ApiResponse({ status: 404, description: 'Localização não encontrada' })
@@ -66,6 +72,7 @@ export class LocationsController {
   }
 
   @Patch(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @ApiOperation({ summary: 'Atualizar localização' })
   @ApiResponse({ status: 200, description: 'Localização atualizada com sucesso' })
   @ApiResponse({ status: 404, description: 'Localização não encontrada' })
@@ -75,6 +82,7 @@ export class LocationsController {
   }
 
   @Delete(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Remover localização' })
   @ApiResponse({ status: 200, description: 'Localização removida com sucesso' })

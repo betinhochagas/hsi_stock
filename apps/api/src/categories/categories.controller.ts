@@ -22,15 +22,19 @@ import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { UserRole } from '@estoque-hsi/db';
 
 @ApiTags('categories')
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Post()
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @ApiOperation({ summary: 'Criar nova categoria' })
   @ApiResponse({ status: 201, description: 'Categoria criada com sucesso' })
   @ApiResponse({ status: 409, description: 'Categoria com esse nome já existe' })
@@ -40,6 +44,7 @@ export class CategoriesController {
   }
 
   @Get()
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Listar todas as categorias com paginação' })
   @ApiQuery({ name: 'skip', required: false, type: Number })
   @ApiQuery({ name: 'take', required: false, type: Number })
@@ -58,6 +63,7 @@ export class CategoriesController {
   }
 
   @Get(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Buscar categoria por ID' })
   @ApiResponse({ status: 200, description: 'Categoria encontrada' })
   @ApiResponse({ status: 404, description: 'Categoria não encontrada' })
@@ -66,6 +72,7 @@ export class CategoriesController {
   }
 
   @Patch(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @ApiOperation({ summary: 'Atualizar categoria' })
   @ApiResponse({ status: 200, description: 'Categoria atualizada com sucesso' })
   @ApiResponse({ status: 404, description: 'Categoria não encontrada' })
@@ -75,6 +82,7 @@ export class CategoriesController {
   }
 
   @Delete(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Remover categoria' })
   @ApiResponse({ status: 200, description: 'Categoria removida com sucesso' })

@@ -14,15 +14,19 @@ import { SuppliersService } from './suppliers.service';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
 import { UpdateSupplierDto } from './dto/update-supplier.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { UserRole } from '@estoque-hsi/db';
 
 @ApiTags('suppliers')
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('suppliers')
 export class SuppliersController {
   constructor(private readonly suppliersService: SuppliersService) {}
 
   @Post()
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @ApiOperation({ summary: 'Criar novo fornecedor' })
   @ApiResponse({ status: 201, description: 'Fornecedor criado com sucesso' })
   @ApiResponse({ status: 409, description: 'Fornecedor com esse nome ou CNPJ já existe' })
@@ -31,6 +35,7 @@ export class SuppliersController {
   }
 
   @Get()
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Listar todos os fornecedores' })
   @ApiQuery({ name: 'skip', required: false, type: Number, description: 'Número de registros a pular' })
   @ApiQuery({ name: 'take', required: false, type: Number, description: 'Número de registros a retornar' })
@@ -49,6 +54,7 @@ export class SuppliersController {
   }
 
   @Get(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Buscar fornecedor por ID' })
   @ApiResponse({ status: 200, description: 'Fornecedor encontrado' })
   @ApiResponse({ status: 404, description: 'Fornecedor não encontrado' })
@@ -57,6 +63,7 @@ export class SuppliersController {
   }
 
   @Patch(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @ApiOperation({ summary: 'Atualizar fornecedor' })
   @ApiResponse({ status: 200, description: 'Fornecedor atualizado com sucesso' })
   @ApiResponse({ status: 404, description: 'Fornecedor não encontrado' })
@@ -66,6 +73,7 @@ export class SuppliersController {
   }
 
   @Delete(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @ApiOperation({ summary: 'Remover fornecedor' })
   @ApiResponse({ status: 200, description: 'Fornecedor removido com sucesso' })
   @ApiResponse({ status: 404, description: 'Fornecedor não encontrado' })

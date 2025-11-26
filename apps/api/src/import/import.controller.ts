@@ -21,6 +21,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { UserRole } from '@estoque-hsi/db';
 import { ImportService } from './import.service';
 import {
   DetectFormatDto,
@@ -38,12 +41,13 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 
 @ApiTags('import')
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('import')
 export class ImportController {
   constructor(private readonly importService: ImportService) {}
 
   @Post('upload')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO)
   @ApiOperation({
     summary: 'Upload de arquivo CSV',
     description:
@@ -111,6 +115,7 @@ export class ImportController {
   }
 
   @Post('detect')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO)
   @ApiOperation({
     summary: 'Detectar formato do CSV',
     description:
@@ -128,6 +133,7 @@ export class ImportController {
   }
 
   @Post('validate')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO)
   @ApiOperation({
     summary: 'Validar CSV (dry-run)',
     description:
@@ -145,6 +151,7 @@ export class ImportController {
   }
 
   @Post('commit')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @ApiOperation({
     summary: 'Confirmar importação',
     description: 'Cria job assíncrono para processar e persistir os dados',
@@ -156,12 +163,13 @@ export class ImportController {
   })
   async commitImport(
     @Body() dto: CommitImportDto,
-    @CurrentUser() user: any,
+    @CurrentUser() user: { userId: string; email: string; role: string },
   ): Promise<CommitImportResponseDto> {
     return this.importService.commitImport(dto, user.userId);
   }
 
   @Get('jobs/:id/status')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({
     summary: 'Consultar status de importação',
     description: 'Retorna o status e progresso de um job de importação',
