@@ -5,15 +5,19 @@ import { CreateAssetDto } from './dto/create-asset.dto';
 import { UpdateAssetDto } from './dto/update-asset.dto';
 import { DashboardStatsDto } from './dto/stats-response.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { UserRole } from '@estoque-hsi/db';
 
 @ApiTags('assets')
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('assets')
 export class AssetsController {
   constructor(private assetsService: AssetsService) {}
 
   @Get('stats/dashboard')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Obter estatísticas do dashboard' })
   @ApiResponse({ status: 200, description: 'Estatísticas retornadas com sucesso', type: DashboardStatsDto })
   async getDashboardStats(): Promise<DashboardStatsDto> {
@@ -21,6 +25,7 @@ export class AssetsController {
   }
 
   @Get()
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Listar ativos com paginação e filtros' })
   @ApiQuery({ name: 'skip', required: false, type: Number })
   @ApiQuery({ name: 'take', required: false, type: Number })
@@ -41,6 +46,7 @@ export class AssetsController {
   }
 
   @Get(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Buscar ativo por ID' })
   @ApiResponse({ status: 200, description: 'Ativo encontrado' })
   @ApiResponse({ status: 404, description: 'Ativo não encontrado' })
@@ -49,6 +55,7 @@ export class AssetsController {
   }
 
   @Post()
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO)
   @ApiOperation({ summary: 'Criar novo ativo' })
   @ApiResponse({ status: 201, description: 'Ativo criado com sucesso' })
   @ApiResponse({ status: 400, description: 'Dados inválidos' })
@@ -59,6 +66,7 @@ export class AssetsController {
   }
 
   @Patch(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO)
   @ApiOperation({ summary: 'Atualizar ativo existente' })
   @ApiResponse({ status: 200, description: 'Ativo atualizado com sucesso' })
   @ApiResponse({ status: 400, description: 'Dados inválidos' })
@@ -69,6 +77,7 @@ export class AssetsController {
   }
 
   @Delete(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @ApiOperation({ summary: 'Remover ativo' })
   @ApiResponse({ status: 200, description: 'Ativo removido com sucesso' })
   @ApiResponse({ status: 404, description: 'Ativo não encontrado' })

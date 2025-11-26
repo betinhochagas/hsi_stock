@@ -15,15 +15,19 @@ import { CreateLicenseDto } from './dto/create-license.dto';
 import { UpdateLicenseDto } from './dto/update-license.dto';
 import { AssignLicenseDto } from './dto/assign-license.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { UserRole } from '@estoque-hsi/db';
 
 @ApiTags('licenses')
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('licenses')
 export class LicensesController {
   constructor(private readonly licensesService: LicensesService) {}
 
   @Post()
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @ApiOperation({ summary: 'Criar nova licença' })
   @ApiResponse({ status: 201, description: 'Licença criada com sucesso' })
   @ApiResponse({ status: 400, description: 'Dados inválidos' })
@@ -32,6 +36,7 @@ export class LicensesController {
   }
 
   @Get()
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Listar todas as licenças' })
   @ApiQuery({ name: 'skip', required: false, type: Number, description: 'Número de registros a pular' })
   @ApiQuery({ name: 'take', required: false, type: Number, description: 'Número de registros a retornar' })
@@ -50,6 +55,7 @@ export class LicensesController {
   }
 
   @Get('expiring')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Listar licenças expirando em X dias' })
   @ApiQuery({ name: 'days', required: false, type: Number, description: 'Número de dias (padrão: 30)' })
   @ApiResponse({ status: 200, description: 'Licenças expirando' })
@@ -58,6 +64,7 @@ export class LicensesController {
   }
 
   @Get(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Buscar licença por ID' })
   @ApiResponse({ status: 200, description: 'Licença encontrada' })
   @ApiResponse({ status: 404, description: 'Licença não encontrada' })
@@ -66,6 +73,7 @@ export class LicensesController {
   }
 
   @Patch(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @ApiOperation({ summary: 'Atualizar licença' })
   @ApiResponse({ status: 200, description: 'Licença atualizada com sucesso' })
   @ApiResponse({ status: 404, description: 'Licença não encontrada' })
@@ -75,6 +83,7 @@ export class LicensesController {
   }
 
   @Delete(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR)
   @ApiOperation({ summary: 'Remover licença' })
   @ApiResponse({ status: 200, description: 'Licença removida com sucesso' })
   @ApiResponse({ status: 404, description: 'Licença não encontrada' })
@@ -84,6 +93,7 @@ export class LicensesController {
   }
 
   @Post(':id/assign')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO)
   @ApiOperation({ summary: 'Atribuir seat de licença' })
   @ApiResponse({ status: 201, description: 'Seat atribuído com sucesso' })
   @ApiResponse({ status: 404, description: 'Licença não encontrada' })
@@ -93,6 +103,7 @@ export class LicensesController {
   }
 
   @Delete(':id/assignments/:assignmentId')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO)
   @ApiOperation({ summary: 'Revogar atribuição de seat' })
   @ApiResponse({ status: 200, description: 'Atribuição revogada com sucesso' })
   @ApiResponse({ status: 404, description: 'Atribuição não encontrada' })

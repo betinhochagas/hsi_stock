@@ -33,10 +33,27 @@ export class ImportService {
   }
 
   /**
+   * Valida se o caminho do arquivo é seguro (previne path traversal)
+   */
+  private isPathSafe(filePath: string): boolean {
+    const uploadDir = path.resolve('./uploads');
+    const resolvedPath = path.resolve(filePath);
+    
+    // Verifica se o caminho resolvido está dentro do diretório de uploads
+    // e não contém sequências de path traversal
+    return resolvedPath.startsWith(uploadDir) && !filePath.includes('..');
+  }
+
+  /**
    * Detectar formato do CSV: encoding, delimiter, headers, sample
    */
   async detectFormat(dto: DetectFormatDto): Promise<DetectFormatResponseDto> {
     const { filePath, skipRows = 0 } = dto;
+
+    // Validar caminho do arquivo para prevenir path traversal
+    if (!this.isPathSafe(filePath)) {
+      throw new BadRequestException('Caminho de arquivo inválido ou não permitido');
+    }
 
     // Verificar se arquivo existe
     try {
@@ -231,6 +248,11 @@ export class ImportService {
   ): Promise<ValidateImportResponseDto> {
     const { filePath, fileType, columnMapping = {}, config } = dto;
 
+    // Validar caminho do arquivo para prevenir path traversal
+    if (!this.isPathSafe(filePath)) {
+      throw new BadRequestException('Caminho de arquivo inválido ou não permitido');
+    }
+
     const errors: ValidationError[] = [];
     let validRows = 0;
     let errorRows = 0;
@@ -410,6 +432,12 @@ export class ImportService {
     userId: string,
   ): Promise<CommitImportResponseDto> {
     const { filePath, fileType, columnMapping = {}, config } = dto;
+
+    // Validar caminho do arquivo para prevenir path traversal
+    if (!this.isPathSafe(filePath)) {
+      throw new BadRequestException('Caminho de arquivo inválido ou não permitido');
+    }
+
     const filename = path.basename(filePath);
 
     // Create ImportLog with PENDING status

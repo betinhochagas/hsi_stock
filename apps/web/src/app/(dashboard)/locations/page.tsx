@@ -18,6 +18,7 @@ import { EmptyState } from '@/components/shared/empty-state'
 import { LocationFormDialog } from '@/components/forms/location-form-dialog'
 import { useLocations, useCreateLocation, useUpdateLocation, useDeleteLocation } from '@/hooks/use-metadata'
 import { Location } from '@/types'
+import { LocationFormData } from '@/lib/validations'
 
 export default function LocationsPage() {
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -28,18 +29,17 @@ export default function LocationsPage() {
   const updateLocation = useUpdateLocation(editingLocation?.id || '')
   const deleteLocation = useDeleteLocation()
 
-  const handleCreate = async (data: any) => {
+  const handleCreate = async (data: LocationFormData) => {
     try {
       await createLocation.mutateAsync(data)
       toast.success('Localização criada com sucesso!')
       setDialogOpen(false)
-    } catch (error) {
+    } catch {
       toast.error('Erro ao criar localização')
-      throw error
     }
   }
 
-  const handleEdit = async (data: any) => {
+  const handleEdit = async (data: LocationFormData) => {
     if (!editingLocation) return
     
     try {
@@ -47,9 +47,8 @@ export default function LocationsPage() {
       toast.success('Localização atualizada com sucesso!')
       setEditingLocation(null)
       setDialogOpen(false)
-    } catch (error) {
+    } catch {
       toast.error('Erro ao atualizar localização')
-      throw error
     }
   }
 

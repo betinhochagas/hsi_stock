@@ -11,16 +11,19 @@ import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@ne
 import { MovementsService } from './movements.service';
 import { CreateMovementDto } from './dto/create-movement.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { MovementType } from '@prisma/client';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { MovementType, UserRole } from '@estoque-hsi/db';
 
 @ApiTags('movements')
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('movements')
 export class MovementsController {
   constructor(private readonly movementsService: MovementsService) {}
 
   @Post()
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO)
   @ApiOperation({ summary: 'Registrar nova movimentação' })
   @ApiResponse({ status: 201, description: 'Movimentação registrada com sucesso' })
   @ApiResponse({ status: 400, description: 'Dados inválidos ou regras de negócio violadas' })
@@ -30,6 +33,7 @@ export class MovementsController {
   }
 
   @Get()
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Listar todas as movimentações' })
   @ApiQuery({ name: 'skip', required: false, type: Number, description: 'Número de registros a pular' })
   @ApiQuery({ name: 'take', required: false, type: Number, description: 'Número de registros a retornar' })
@@ -60,6 +64,7 @@ export class MovementsController {
   }
 
   @Get('asset/:assetId')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Buscar histórico de movimentações de um ativo' })
   @ApiQuery({ name: 'skip', required: false, type: Number })
   @ApiQuery({ name: 'take', required: false, type: Number })
@@ -77,6 +82,7 @@ export class MovementsController {
   }
 
   @Get('user/:userId')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Buscar movimentações realizadas por/para um usuário' })
   @ApiQuery({ name: 'skip', required: false, type: Number })
   @ApiQuery({ name: 'take', required: false, type: Number })
@@ -94,6 +100,7 @@ export class MovementsController {
   }
 
   @Get(':id')
+  @Roles(UserRole.ADMIN, UserRole.GESTOR, UserRole.TECNICO, UserRole.LEITOR)
   @ApiOperation({ summary: 'Buscar movimentação por ID' })
   @ApiResponse({ status: 200, description: 'Movimentação encontrada' })
   @ApiResponse({ status: 404, description: 'Movimentação não encontrada' })

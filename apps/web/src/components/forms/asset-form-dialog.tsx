@@ -63,7 +63,7 @@ export function AssetFormDialog({
     },
   })
 
-  const handleFormSubmit = async (data: any) => {
+  const handleFormSubmit = async (data: AssetFormData) => {
     try {
       // Transform 'none' to empty string for optional fields
       const cleanedData: AssetFormData = {
@@ -73,8 +73,8 @@ export function AssetFormDialog({
       await onSubmit(cleanedData)
       reset()
       onOpenChange(false)
-    } catch (error) {
-      console.error('Error submitting form:', error)
+    } catch {
+      console.error('Error submitting form')
     }
   }
 

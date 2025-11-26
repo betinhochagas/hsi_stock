@@ -5,13 +5,17 @@ import api from '@/lib/api';
 import { Movement } from '@/types/entities';
 import type { MovementFormData } from '@/lib/validations';
 
-interface MovementsResponse {
-  data: Movement[];
-  pagination: {
+interface MovementsApiResponse {
+  data?: Movement[];
+  items?: Movement[];
+  pagination?: {
     total: number;
     skip: number;
     take: number;
   };
+  total?: number;
+  skip?: number;
+  take?: number;
 }
 
 interface MovementsParams {
@@ -25,9 +29,9 @@ export function useMovements(params?: MovementsParams) {
   return useQuery({
     queryKey: ['movements', params || {}],
     queryFn: async () => {
-      const response = await api.get<MovementsResponse>('/movements', { params });
+      const response = await api.get<MovementsApiResponse>('/movements', { params });
       // API retorna { data: Movement[], pagination: {...} }
-      const apiData = response.data as any;
+      const apiData = response.data;
       return {
         items: apiData.data || apiData.items || [],
         total: apiData.pagination?.total || apiData.total || 0,
