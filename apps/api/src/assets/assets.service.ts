@@ -91,6 +91,10 @@ export class AssetsService {
         { name: { contains: search, mode: 'insensitive' } },
         { assetTag: { contains: search, mode: 'insensitive' } },
         { serialNumber: { contains: search, mode: 'insensitive' } },
+        { model: { contains: search, mode: 'insensitive' } },
+        { category: { name: { contains: search, mode: 'insensitive' } } },
+        { manufacturer: { name: { contains: search, mode: 'insensitive' } } },
+        { location: { name: { contains: search, mode: 'insensitive' } } },
       ];
     }
     if (status) {

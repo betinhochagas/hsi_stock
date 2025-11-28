@@ -25,10 +25,8 @@ export default function MovementsTestPage() {
         const response = await fetch('http://localhost:3001/api/v1/movements', {
           headers: { 'Authorization': `Bearer ${token}` }
         })
-        
-        console.log('[MANUAL TEST] Response status:', response.status)
+
         const data = await response.json()
-        console.log('[MANUAL TEST] Response data:', data)
         setManualData(data)
       } catch (err: any) {
         console.error('[MANUAL TEST] Error:', err)

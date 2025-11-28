@@ -79,13 +79,17 @@ jobs:
       - name: Run migrations
         run: npm run db:migrate:deploy --workspace=@estoque-hsi/db
       
-      - name: Run tests
-        run: npm run test
+      - name: Run unit tests
+        run: npm run test --workspace=@estoque-hsi/api
+      
+      - name: Run tests with coverage
+        run: npm run test:cov --workspace=@estoque-hsi/api
       
       - name: Upload coverage
         uses: codecov/codecov-action@v3
         with:
-          files: ./coverage/lcov.info
+          files: ./apps/api/coverage/lcov.info
+          flags: backend
 
   build:
     name: Build

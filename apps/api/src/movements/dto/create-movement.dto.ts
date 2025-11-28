@@ -16,7 +16,7 @@ export class CreateMovementDto {
     example: '550e8400-e29b-41d4-a716-446655440000', 
     description: 'ID do ativo' 
   })
-  @IsUUID('4', { message: 'ID do ativo deve ser um UUID válido' })
+  @IsString({ message: 'ID do ativo deve ser uma string' })
   @IsNotEmpty({ message: 'ID do ativo é obrigatório' })
   assetId: string;
 
@@ -26,7 +26,7 @@ export class CreateMovementDto {
     required: false 
   })
   @IsOptional()
-  @IsUUID('4', { message: 'ID do usuário deve ser um UUID válido' })
+  @IsString({ message: 'ID do usuário deve ser uma string' })
   userId?: string;
 
   @ApiProperty({ 
@@ -35,7 +35,7 @@ export class CreateMovementDto {
     required: false 
   })
   @IsOptional()
-  @IsUUID('4', { message: 'ID da localização de origem deve ser um UUID válido' })
+  @IsString({ message: 'ID da localização de origem deve ser uma string' })
   fromLocationId?: string;
 
   @ApiProperty({ 

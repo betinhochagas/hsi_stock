@@ -108,7 +108,7 @@ export class CreateAssetDto {
     example: 'clm1234567890',
   })
   @IsOptional()
-  @IsUUID('4', { message: 'ID da localização inválido' })
+  @IsString({ message: 'ID da localização deve ser uma string' })
   locationId?: string;
 
   @ApiPropertyOptional({
@@ -116,7 +116,7 @@ export class CreateAssetDto {
     example: 'clm1234567890',
   })
   @IsOptional()
-  @IsUUID('4', { message: 'ID do usuário inválido' })
+  @IsString({ message: 'ID do usuário deve ser uma string' })
   assignedToId?: string;
 
   @ApiPropertyOptional({
@@ -133,7 +133,7 @@ export class CreateAssetDto {
     example: 'clm1234567890',
   })
   @IsNotEmpty({ message: 'Categoria é obrigatória' })
-  @IsUUID('4', { message: 'ID da categoria inválido' })
+  @IsString({ message: 'ID da categoria deve ser uma string' })
   categoryId: string;
 
   @ApiPropertyOptional({
@@ -141,7 +141,7 @@ export class CreateAssetDto {
     example: 'clm1234567890',
   })
   @IsOptional()
-  @IsUUID('4', { message: 'ID do fabricante inválido' })
+  @IsString({ message: 'ID do fabricante deve ser uma string' })
   manufacturerId?: string;
 
   @ApiPropertyOptional({
@@ -149,7 +149,7 @@ export class CreateAssetDto {
     example: 'clm1234567890',
   })
   @IsOptional()
-  @IsUUID('4', { message: 'ID do fornecedor inválido' })
+  @IsString({ message: 'ID do fornecedor deve ser uma string' })
   supplierId?: string;
 
   @ApiProperty({
@@ -157,6 +157,6 @@ export class CreateAssetDto {
     example: 'clm1234567890',
   })
   @IsNotEmpty({ message: 'Usuário criador é obrigatório' })
-  @IsUUID('4', { message: 'ID do usuário criador inválido' })
+  @IsString({ message: 'ID do usuário criador deve ser uma string' })
   createdById: string;
 }

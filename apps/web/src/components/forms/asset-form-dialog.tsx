@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
@@ -31,13 +32,6 @@ const statusOptions = [
   { value: 'INATIVO', label: 'Inativo' },
 ]
 
-const conditionOptions = [
-  { value: 'EXCELLENT', label: 'Excelente' },
-  { value: 'GOOD', label: 'Bom' },
-  { value: 'FAIR', label: 'Regular' },
-  { value: 'POOR', label: 'Ruim' },
-]
-
 export function AssetFormDialog({
   open,
   onOpenChange,
@@ -59,18 +53,23 @@ export function AssetFormDialog({
     resolver: zodResolver(assetSchema),
     defaultValues: defaultValues || {
       status: 'EM_ESTOQUE',
-      condition: 'GOOD',
     },
   })
 
+  // Reset form when defaultValues change (for edit mode)
+  useEffect(() => {
+    if (open && defaultValues) {
+      reset(defaultValues)
+    } else if (open && !defaultValues) {
+      reset({
+        status: 'EM_ESTOQUE',
+      })
+    }
+  }, [open, defaultValues, reset])
+
   const handleFormSubmit = async (data: any) => {
     try {
-      // Transform 'none' to empty string for optional fields
-      const cleanedData: AssetFormData = {
-        ...data,
-        manufacturerId: data.manufacturerId === 'none' ? '' : data.manufacturerId,
-      }
-      await onSubmit(cleanedData)
+      await onSubmit(data)
       reset()
       onOpenChange(false)
     } catch (error) {
@@ -83,13 +82,16 @@ export function AssetFormDialog({
     label: cat.name,
   }))
 
-  const locationOptions = (locations || []).map((loc) => ({
-    value: loc.id,
-    label: loc.name,
-  }))
+  const locationOptions = [
+    { value: '', label: 'Nenhuma' },
+    ...(locations || []).map((loc) => ({
+      value: loc.id,
+      label: loc.name,
+    })),
+  ]
 
   const manufacturerOptions = [
-    { value: 'none', label: 'Nenhum' },
+    { value: '', label: 'Nenhum' },
     ...(manufacturers || []).map((mfr) => ({
       value: mfr.id,
       label: mfr.name,
@@ -123,9 +125,8 @@ export function AssetFormDialog({
 
             <FormInput
               name="assetTag"
-              label="Tag do Ativo"
+              label="Patrimônio"
               placeholder="HSI-001"
-              required
               register={register}
               errors={errors}
             />
@@ -205,7 +206,7 @@ export function AssetFormDialog({
 
           <div className="grid grid-cols-2 gap-4">
             <FormInput
-              name="warrantyEndDate"
+              name="warrantyUntil"
               label="Fim da Garantia"
               type="date"
               register={register}
@@ -245,26 +246,10 @@ export function AssetFormDialog({
                 />
               )}
             />
-
-            <Controller
-              name="condition"
-              control={control}
-              render={({ field }) => (
-                <FormSelect
-                  name="condition"
-                  label="Condição"
-                  options={conditionOptions}
-                  required
-                  errors={errors}
-                  onValueChange={field.onChange}
-                  value={field.value}
-                />
-              )}
-            />
           </div>
 
           <FormTextarea
-            name="notes"
+            name="observations"
             label="Observações"
             placeholder="Informações adicionais sobre o ativo..."
             rows={3}

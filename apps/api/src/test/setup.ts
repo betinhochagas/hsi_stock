@@ -1,0 +1,196 @@
+import { PrismaClient } from '@estoque-hsi/db';
+
+// Mock PrismaClient for unit tests
+export const mockPrismaClient = () => {
+  const prisma = {
+    user: {
+      findUnique: jest.fn(),
+      findMany: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      count: jest.fn(),
+    },
+    asset: {
+      findUnique: jest.fn(),
+      findMany: jest.fn(),
+      findFirst: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      count: jest.fn(),
+      groupBy: jest.fn(),
+      aggregate: jest.fn(),
+    },
+    category: {
+      findUnique: jest.fn(),
+      findMany: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      count: jest.fn(),
+    },
+    location: {
+      findUnique: jest.fn(),
+      findMany: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      count: jest.fn(),
+    },
+    manufacturer: {
+      findUnique: jest.fn(),
+      findMany: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      count: jest.fn(),
+    },
+    supplier: {
+      findUnique: jest.fn(),
+      findMany: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      count: jest.fn(),
+    },
+    contract: {
+      findUnique: jest.fn(),
+      findMany: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      count: jest.fn(),
+    },
+    license: {
+      findUnique: jest.fn(),
+      findMany: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      count: jest.fn(),
+    },
+    licenseAssignment: {
+      findUnique: jest.fn(),
+      findMany: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      count: jest.fn(),
+    },
+    movement: {
+      findUnique: jest.fn(),
+      findMany: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      count: jest.fn(),
+    },
+    maintenance: {
+      findUnique: jest.fn(),
+      findMany: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      count: jest.fn(),
+    },
+    $transaction: jest.fn(),
+  } as any;
+
+  return prisma;
+};
+
+// Test data factories
+export const testData = {
+  user: {
+    id: 'test-user-id',
+    email: 'test@example.com',
+    name: 'Test User',
+    password: '$2a$10$hashedPassword',
+    role: 'ADMIN',
+    active: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  asset: {
+    id: 'test-asset-id',
+    assetTag: 'HSI-001',
+    name: 'Test Asset',
+    description: 'Test Description',
+    serialNumber: 'SN123456',
+    model: 'Model X',
+    status: 'EM_ESTOQUE',
+    purchaseDate: new Date('2024-01-01'),
+    purchasePrice: 1000,
+    warrantyUntil: new Date('2025-01-01'),
+    observations: null,
+    locationId: 'test-location-id',
+    assignedToId: null,
+    assignedAt: null,
+    categoryId: 'test-category-id',
+    manufacturerId: 'test-manufacturer-id',
+    supplierId: null,
+    createdById: 'test-user-id',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  category: {
+    id: 'test-category-id',
+    name: 'Test Category',
+    description: 'Test Category Description',
+    icon: 'laptop',
+    color: '#0088FE',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  location: {
+    id: 'test-location-id',
+    name: 'Test Location',
+    description: 'Test Location Description',
+    building: 'Main Building',
+    floor: '1',
+    room: '101',
+    address: '123 Test St',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  manufacturer: {
+    id: 'test-manufacturer-id',
+    name: 'Test Manufacturer',
+    website: 'https://example.com',
+    contactEmail: 'contact@example.com',
+    contactPhone: '+1234567890',
+    address: '123 Manufacturer St',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  license: {
+    id: 'test-license-id',
+    name: 'Microsoft Office 365',
+    licenseKey: 'XXXXX-XXXXX-XXXXX',
+    totalSeats: 10,
+    usedSeats: 5,
+    purchaseDate: new Date('2024-01-01'),
+    expirationDate: new Date('2025-12-31'),
+    cost: 1000,
+    vendor: 'Microsoft',
+    notes: null,
+    status: 'ATIVA',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+};
+
+// JWT mock helper
+export const mockJwtService = () => ({
+  sign: jest.fn().mockReturnValue('mock-jwt-token'),
+  verify: jest.fn().mockReturnValue({ userId: testData.user.id }),
+  signAsync: jest.fn().mockResolvedValue('mock-jwt-token'),
+  verifyAsync: jest.fn().mockResolvedValue({ userId: testData.user.id }),
+});
+
+// Bcrypt mock helper
+export const mockBcryptService = () => ({
+  hash: jest.fn().mockResolvedValue('$2a$10$hashedPassword'),
+  compare: jest.fn().mockResolvedValue(true),
+});

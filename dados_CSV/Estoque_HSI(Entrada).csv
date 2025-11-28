@@ -19,8 +19,8 @@
 ;Cabo HDMI;N/A;N/A;90;22/05/2025;N/A;Entrada de Estoque;Encontrado
 ;Cabo Impressora;N/A;N/A;14;22/05/2025;N/A;Entrada de Estoque;Encontrado
 ;Cabo VGA;N/A;N/A;148;22/05/2025;N/A;Entrada de Estoque;Encontrado
-;;N/A;N/A;5;12/09/2025;N/A;Cabo USB x AXB 5 M;Não encontrado
-;;N/A;N/A;30;12/09/2025;N/A;Cabo USB x AXB  3 M;Não encontrado
+;Cabo USB x AXB 5 M;N/A;N/A;5;12/09/2025;N/A;Cabo USB x AXB 5 M;Encontrado
+;Cabo USB x AXB  3 M;N/A;N/A;30;12/09/2025;N/A;Cabo USB x AXB  3 M;Encontrado
 ;Capa p/ Smartphone  A55 5G;N/A;N/A;1;13/08/2025;N/A;Capa p/ Smartphone  A55 5G;Encontrado
 ;Smartphone Samsung;N/A;N/A;1;06/08/2025;N/A;CELULAR SANSUNG;Encontrado
 ;Carregador USB x Indução;N/A;N/A;1;07/08/2025;N/A;carregador por indução;Encontrado
@@ -317,7 +317,7 @@
 ;Monitor DELL E2222HSI;1047TM2;158788;1;31/07/2025;N/A;Monitor P2016(Aguardando Tomadas para ser secundário da Maria Ambulatório de Especialidades(Sala da Coordenação));Encontrado
 ;Pelicula FOR A35/A55;N/A;N/A;2;13/08/2025;;Pelicula FOR A35/A55;Encontrado
 ;Pilhas AAA;N/A;N/A;8;06/08/2025;N/A;PILHAS;Encontrado
-;;N/A;N/A;10;08/09/2025;N/A;Pilhas AA;Não encontrado
+;Pilhas AA;N/A;N/A;10;08/09/2025;N/A;Pilhas AA;Encontrado
 ;Projetor ;N/A;192092;1;07/08/2025;N/A;Projetor ;Encontrado
 ;Projetor Epson ;N/A;10765;1;05/09/2025;NA;Entrada de Estoque;Encontrado
 ;Headset;N/A;N/A;5;14/08/2025;N/A;Entrada de Estoque;Encontrado
@@ -392,15 +392,15 @@
 ;Desktop OptiPlex 3000;3166YY3;188842;1;27/08/2025;N/A;Eduardo Nones;Encontrado
 ;Monitor LG FLATRON 19EB13P-B;305SPWQ0B929;9956;1;27/08/2025;PS - Escrituração;Monitor LG FLATRON 19EB13P-B;Encontrado
 ;Notebook DELL Latitude 5480;9PS6QK2;189697;1;28/08/2025;N/A;Rafael Muller;Encontrado
-;;N/A;N/A;2;28/08/2025;N/A;Cooler Latitude 3490;Não encontrado
-;;N/A;N/A;1;28/08/2025;N/A;Speakers interno Latitude 3490;Não encontrado
-;;N/A;N/A;2;28/08/2025;N/A;Adaptador Wireless Notebook;Não encontrado
-;;N/A;N/A;2;28/08/2025;N/A;Pilha 2032;Não encontrado
-;;N/A;N/A;2;28/08/2025;N/A;NVME M2 256gb;Não encontrado
-;;N/A;N/A;1;28/08/2025;N/A;Adaptador VGA Latitude 3490;Não encontrado
+;Cooler Latitude 3490;N/A;N/A;2;28/08/2025;N/A;Cooler Latitude 3490;Encontrado
+;Speakers interno Latitude 3490;N/A;N/A;1;28/08/2025;N/A;Speakers interno Latitude 3490;Encontrado
+;Adaptador Wireless Notebook;N/A;N/A;2;28/08/2025;N/A;Adaptador Wireless Notebook;Encontrado
+;Pilha 2032;N/A;N/A;2;28/08/2025;N/A;Pilha 2032;Encontrado
+;NVME M2 256gb;N/A;N/A;2;28/08/2025;N/A;NVME M2 256gb;Encontrado
+;Adaptador VGA Latitude 3490;N/A;N/A;1;28/08/2025;N/A;Adaptador VGA Latitude 3490;Encontrado
 ;Bateria WDXOR DELL;N/A;N/A;1;28/08/2025;N/A;Guilherme Flores;Encontrado
-;;N/A;N/A;1;28/08/2025;N/A;Bateria 93FTF Dell;Não encontrado
-;;N/A;N/A;1;28/08/2025;N/A;Conector Carregador Bateria Latitude 5480;Não encontrado
+;Bateria 93FTF Dell;N/A;N/A;1;28/08/2025;N/A;Bateria 93FTF Dell;Encontrado
+;Conector Carregador Bateria Latitude 5480;N/A;N/A;1;28/08/2025;N/A;Conector Carregador Bateria Latitude 5480;Encontrado
 ;HP 402 G1 SFF BUSINESS PC;BRJ524SS9C;149611;1;29/08/2025;Educação Continuada;Eduardo Nones;Encontrado
 ;HP 402 G1 SFF BUSINESS PC;BRJ55034FK;208378;1;29/08/2025;DML - Sta Luzia;Eduardo Nones;Encontrado
 ;HP 402 G1 SFF BUSINESS PC;BRJ524SRT4;149614;1;29/08/2025;DML - N.S. Aparecida;Eduardo Nones;Encontrado
@@ -408,12 +408,12 @@
 ;HP Prodesk 600 G1 SFF;BRJ527TQ8L;149451;1;29/08/2025;Sl Descanso Médicos;Eduardo Nones;Encontrado
 ;Desktop OptiPlex 3000;G04W5T3;197008;1;29/05/2025;PS Enfermagem;Eduardo Nones;Encontrado
 ;Monitor LG E19418X;303SPNY0Y103;9865;1;29/05/2025;Práticas Assistenciais;Eduardo Nones;Encontrado
-;;FMQRHK2;158550;1;30/08/2025;UTI (Lado A);Desktop Dell Optiplex 5050;Não encontrado
+;Desktop Dell Optiplex 5050;FMQRHK2;158550;1;30/08/2025;UTI (Lado A);Desktop Dell Optiplex 5050;Encontrado
 ;Notebook DELL Latitude 5480;3SR6CD2;189737;1;01/09/2025;N/A;Rafael Muller;Encontrado
 ;Antena WIFI6 AX1800;N/A;N/A;1;01/09/2025;N/A;Rafael Muller;Encontrado
 ;Cabo de Energia;N/A;N/A;1;03/09/2025;N/A;Rafael Muller;Encontrado
 ;Cabo VGA;N/A;N/A;1;03/09/2025;N/A;Rafael Muller;Encontrado
-;Monitor LG E2011;3058PWQ1J273;10158;1;03/09/2025;N/A;Rafael Muller;Não encontrado
+;Monitor LG E2011;3058PWQ1J273;10158;1;03/09/2025;N/A;Rafael Muller;Encontrado
 ;Fonte Fortek 200W;N/A;N/A;1;03/09/2025;N/A;Rafael Muller;Encontrado
 ;Monitor DELL P2018H;6TD5463;182869;1;07/07/2025;N/A;Entrada de Estoque;Encontrado
 ;Monitor DELL P2018H;6T96463;182872;1;07/07/2025;N/A;Entrada de Estoque;Encontrado
@@ -552,43 +552,43 @@
 ;Adaptador HDMI x VGA;N/A;N/A;43;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
 ;Adaptador Wifi;N/A;N/A;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
 ;Antena WIFI6 AX1800;N/A;N/A;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Cabo Impressora;N/A;;40;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Capa p/ Smartphone  A55 5G;N/A;;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Fonte Fortek 200W;N/A;;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Fonte Carregador Smartphone (sem cabo USB);N/A;;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Leitor Código de Barras C/ Auxiliar;N/A;;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Leitor de cod de barras;N/A;;12;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Memória RAM 16 GB DDR4;N/A;;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Memória RAM 4 GB DDR3;N/A;;4;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Mouse;N/A;;62;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Notebook DELL Latitude 5480;N/A;;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Desktop OPTIPLEX 7010;N/A;;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Pilhas AAA;N/A;;3;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Projetor Epson ;N/A;;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Smartphone Samsung;N/A;;6;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;SSD 120GB;N/A;;6;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;SSD 128GB;N/A;;12;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Headset;N/A;;3;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Armazenamento M2 NVME 128gb;N/A;;8;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Pilhas AA;N/A;;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Monitor Aoc E2270S;N/A;;17;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;Monitor P2422H;N/A;;11;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
-;;;;;;;;Não encontrado
+;Cabo Impressora;N/A;N/A;40;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Capa p/ Smartphone  A55 5G;N/A;N/A;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Fonte Fortek 200W;N/A;N/A;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Fonte Carregador Smartphone (sem cabo USB);N/A;N/A;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Leitor Código de Barras C/ Auxiliar;N/A;N/A;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Leitor de cod de barras;N/A;N/A;12;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Memória RAM 16 GB DDR4;N/A;N/A;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Memória RAM 4 GB DDR3;N/A;N/A;4;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Mouse;N/A;N/A;62;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Notebook DELL Latitude 5480;N/A;N/A;1;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Desktop OPTIPLEX 7010;N/A;N/A;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Pilhas AAA;N/A;N/A;3;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Projetor Epson ;N/A;N/A;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Smartphone Samsung;N/A;N/A;6;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;SSD 120GB;N/A;N/A;6;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;SSD 128GB;N/A;N/A;12;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Headset;N/A;N/A;3;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Armazenamento M2 NVME 128gb;N/A;N/A;8;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Pilhas AA;N/A;N/A;2;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Monitor Aoc E2270S;N/A;N/A;17;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Monitor P2422H;N/A;N/A;11;10/11/2025;N/A;Luiz Roberto(Ajuste de estoque);Encontrado
+;Monitor Aoc E2270S;GYVN1XA005692;188772;1;12/11/2025;N/A;Rafael Muller;Encontrado
+;Desktop OPTIPLEX 3040;BJRCMD2;207874;1;12/11/2025;N/A;Rafael Muller;Encontrado
+;Cabo de Energia;N/A;N/A;1;12/11/2025;N/A;Rafael Muller;Encontrado
+;Cabo de Energia;N/A;N/A;1;12/11/2025;N/A;Rafael Muller;Encontrado
+;Cabo de Rede;N/A;N/A;1;12/11/2025;N/A;Rafael Muller;Encontrado
+;Cabo HDMI;N/A;N/A;1;12/11/2025;N/A;Rafael Muller;Encontrado
+;Teclado;N/A;N/A;1;12/11/2025;N/A;Rafael Muller;Encontrado
+;Mouse;N/A;N/A;1;12/11/2025;N/A;Rafael Muller;Encontrado
+;Mouse Pad;N/A;N/A;1;12/11/2025;N/A;Rafael Muller;Encontrado
+;Desktop OPTIPLEX 3000;114W5T3;197007;1;13/11/2025;N/A;Luiz Roberto;Encontrado
+;Cabo de Rede;N/A;N/A;1;13/11/2025;N/A;Luiz Roberto;Encontrado
+;Cabo de Energia;N/A;N/A;1;13/11/2025;N/A;Luiz Roberto;Encontrado
+;Teclado Beira Leito;N/A;N/A;3;13/11/2025;N/A;Luiz Roberto;Encontrado
+;Mouse;N/A;N/A;1;18/11/2025;N/A;Rafael Muller;Encontrado
+;Cabo DisplayPort;N/A;N/A;1;19/11/2025;N/A;Tiago abreu;Encontrado
+;Access Point;N/A;N/A;9;21/nov;N/A;Jefferson Freier - Remover equipamentos Clausura;Encontrado
 ;;;;;;;;Não encontrado
 ;;;;;;;;Não encontrado
 ;;;;;;;;Não encontrado

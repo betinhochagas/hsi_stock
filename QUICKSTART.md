@@ -73,6 +73,12 @@ Isso vai criar as tabelas e popular com dados iniciais, incluindo usuários de t
 # Iniciar API em Docker (recomendado)
 docker-compose up api -d --build
 
+# Verificar se API está rodando
+docker ps
+
+# Ver logs da API (Ctrl+C para sair)
+docker logs estoque-hsi-api -f
+
 # OU desenvolvimento local (requer Node.js)
 npm run dev
 \`\`\`

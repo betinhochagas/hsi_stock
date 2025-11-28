@@ -56,40 +56,36 @@ export function ValidateStep({ wizard }: ValidateStepProps) {
       )}
 
       {/* Statistics */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="rounded-lg border bg-card p-4">
           <p className="text-sm text-muted-foreground">Total de Linhas</p>
-          <p className="text-2xl font-bold">{validationResult.stats.totalRows}</p>
+          <p className="text-2xl font-bold">{validationResult.stats.totalRows || 0}</p>
         </div>
         <div className="rounded-lg border bg-green-50 dark:bg-green-950/20 p-4">
           <p className="text-sm text-muted-foreground">Linhas Válidas</p>
-          <p className="text-2xl font-bold text-green-600">{validationResult.stats.validRows}</p>
+          <p className="text-2xl font-bold text-green-600">{validationResult.validRows || 0}</p>
         </div>
         <div className="rounded-lg border bg-red-50 dark:bg-red-950/20 p-4">
           <p className="text-sm text-muted-foreground">Com Erros</p>
-          <p className="text-2xl font-bold text-red-600">{validationResult.stats.invalidRows}</p>
-        </div>
-        <div className="rounded-lg border bg-blue-50 dark:bg-blue-950/20 p-4">
-          <p className="text-sm text-muted-foreground">Novos Ativos</p>
-          <p className="text-2xl font-bold text-blue-600">{validationResult.stats.newAssets}</p>
+          <p className="text-2xl font-bold text-red-600">{validationResult.errorRows || 0}</p>
         </div>
         <div className="rounded-lg border bg-amber-50 dark:bg-amber-950/20 p-4">
-          <p className="text-sm text-muted-foreground">Atualizações</p>
-          <p className="text-2xl font-bold text-amber-600">{validationResult.stats.existingAssets}</p>
+          <p className="text-sm text-muted-foreground">Com Avisos</p>
+          <p className="text-2xl font-bold text-amber-600">{validationResult.warningRows || 0}</p>
         </div>
       </div>
 
       {/* Validation Status */}
-      <Alert variant={validationResult.valid ? 'default' : 'destructive'}>
+      <Alert variant={validationResult.isValid ? 'default' : 'destructive'}>
         <div className="flex items-start gap-3">
-          {validationResult.valid ? (
+          {validationResult.isValid ? (
             <CheckCircle2 className="h-5 w-5 text-green-600" />
           ) : (
             <XCircle className="h-5 w-5" />
           )}
           <div className="flex-1">
             <p className="font-medium">
-              {validationResult.valid
+              {validationResult.isValid
                 ? 'Validação aprovada - pronto para importar!'
                 : `Encontrados ${errorCount} erro(s) que precisam ser corrigidos`}
             </p>
@@ -106,7 +102,7 @@ export function ValidateStep({ wizard }: ValidateStepProps) {
       <Tabs defaultValue="preview" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="preview">
-            Preview ({validationResult.preview.assetsToCreate.length + validationResult.preview.assetsToUpdate.length})
+            Preview ({validationResult.preview?.assets?.length || 0})
           </TabsTrigger>
           <TabsTrigger value="errors">
             Erros e Avisos ({validationResult.errors.length})
@@ -114,81 +110,44 @@ export function ValidateStep({ wizard }: ValidateStepProps) {
         </TabsList>
 
         <TabsContent value="preview" className="space-y-4 mt-4">
-          {validationResult.preview.assetsToCreate.length > 0 && (
+          {validationResult.preview?.assets && validationResult.preview.assets.length > 0 ? (
             <div>
               <h3 className="text-sm font-medium mb-2">
-                Ativos a Criar ({validationResult.preview.assetsToCreate.length})
+                Ativos ({validationResult.preview.assets.length})
               </h3>
               <div className="rounded-lg border">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Tag</TableHead>
                       <TableHead>Nome</TableHead>
+                      <TableHead>Ação</TableHead>
                       <TableHead>Categoria</TableHead>
-                      <TableHead>Localização</TableHead>
-                      <TableHead>Status</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {validationResult.preview.assetsToCreate.slice(0, 10).map((asset, index) => (
+                    {validationResult.preview.assets.slice(0, 10).map((asset: any, index: number) => (
                       <TableRow key={index}>
-                        <TableCell className="font-mono text-sm">{asset.assetTag}</TableCell>
                         <TableCell>{asset.name}</TableCell>
-                        <TableCell>{asset.category || '-'}</TableCell>
-                        <TableCell>{asset.location || '-'}</TableCell>
                         <TableCell>
-                          <Badge variant="default">{asset.status || 'EM_ESTOQUE'}</Badge>
+                          <Badge variant={asset.action === 'create' ? 'default' : 'secondary'}>
+                            {asset.action === 'create' ? 'Criar' : 'Atualizar'}
+                          </Badge>
                         </TableCell>
+                        <TableCell>{asset.category || '-'}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
                 </Table>
               </div>
-              {validationResult.preview.assetsToCreate.length > 10 && (
+              {validationResult.preview.assets.length > 10 && (
                 <p className="text-sm text-muted-foreground text-center mt-2">
-                  ... e mais {validationResult.preview.assetsToCreate.length - 10} ativos
+                  ... e mais {validationResult.preview.assets.length - 10} ativos
                 </p>
               )}
             </div>
-          )}
-
-          {validationResult.preview.assetsToUpdate.length > 0 && (
-            <div>
-              <h3 className="text-sm font-medium mb-2">
-                Ativos a Atualizar ({validationResult.preview.assetsToUpdate.length})
-              </h3>
-              <div className="rounded-lg border">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Tag</TableHead>
-                      <TableHead>Nome</TableHead>
-                      <TableHead>Categoria</TableHead>
-                      <TableHead>Localização</TableHead>
-                      <TableHead>Status</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {validationResult.preview.assetsToUpdate.slice(0, 10).map((asset, index) => (
-                      <TableRow key={index}>
-                        <TableCell className="font-mono text-sm">{asset.assetTag}</TableCell>
-                        <TableCell>{asset.name}</TableCell>
-                        <TableCell>{asset.category || '-'}</TableCell>
-                        <TableCell>{asset.location || '-'}</TableCell>
-                        <TableCell>
-                          <Badge variant="secondary">{asset.status || 'EM_ESTOQUE'}</Badge>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-              {validationResult.preview.assetsToUpdate.length > 10 && (
-                <p className="text-sm text-muted-foreground text-center mt-2">
-                  ... e mais {validationResult.preview.assetsToUpdate.length - 10} ativos
-                </p>
-              )}
+          ) : (
+            <div className="text-center text-muted-foreground py-8">
+              Nenhum preview disponível
             </div>
           )}
         </TabsContent>
@@ -240,7 +199,7 @@ export function ValidateStep({ wizard }: ValidateStepProps) {
                   <TableBody>
                     {filteredErrors.map((error, index) => (
                       <TableRow key={index}>
-                        <TableCell className="font-mono">{error.line}</TableCell>
+                        <TableCell className="font-mono">{error.row}</TableCell>
                         <TableCell className="font-mono text-sm">{error.field}</TableCell>
                         <TableCell>{error.message}</TableCell>
                         <TableCell>
@@ -274,7 +233,7 @@ export function ValidateStep({ wizard }: ValidateStepProps) {
         </Button>
         <Button
           onClick={() => wizard.commitImport()}
-          disabled={wizard.isLoading || !validationResult.valid}
+          disabled={wizard.isLoading || !validationResult.isValid}
         >
           {wizard.isLoading ? (
             <>

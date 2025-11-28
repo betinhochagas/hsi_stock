@@ -35,7 +35,7 @@ Desktop OPTIPLEX 7010;5C66K34;219277;1;24/07/2025; 325.025 ; Ambulatório Esp ;Sa
 Desktop OPTIPLEX 7020;5MTVSB4;230277;1;24/07/2025; N/A ; Ambulatório Esp ;Sala 105 - Troca Obsoleto - HSI2672D10204;Guilherme Flores;Encontrado
 Monitor P2425H;C5ZQM64;230242;1;24/07/2025; N/A ; Ambulatório Esp ;Sala 105 - Troca Obsoleto - HSI2672D10204;Guilherme Flores;Encontrado
 Monitor P2425H;CRNRM64;230243;1;25/07/2025; N/A ; TI ;Computador Eduardo/Rafael;;Encontrado
-;N/A;N/A;1;29/07/2025; 333.664 ; SCIRRAS ;Scirras;???;Não encontrado
+Cabo de Energia;N/A;N/A;1;29/07/2025; 333.664 ; SCIRRAS ;Scirras;???;Encontrado
 Cabo de Energia;N/A;N/A;1;29/07/2025; 333.664 ; SCIRRAS ;Scirras;;Encontrado
 Monitor DELL E970SWNL;CRMVL63;188730;1;29/07/2025; 333.664 ; SCIRRAS ;Scirras;;Encontrado
 Suporte Notebook;N/A;N/A;1;31/07/2025; 338.896 ; Diretoria ;Diretoria - Yara;;Encontrado
@@ -236,7 +236,7 @@ Desktop OptiPlex 3090;HD83LQ3;196842;1;26/09/2025; N/A ; Sala dos Farmaceuticos 
 Desktop OptiPlex 3090;3F83LQ3;196851;1;26/09/2025; N/A ; Sala dos Farmaceuticos ;Obsolescência;Guilherme Flores;Encontrado
 Desktop OptiPlex 3090;PGNNHQ3;196821;1;26/09/2025; N/A ; Sala dos Farmaceuticos ;Obsolescência;Guilherme Flores;Encontrado
 Desktop OPTIPLEX 7010;6H66K34;219375;1;29/09/2025; N/A ; Sala de Laudos ;Obsolescência;Guilherme Flores;Encontrado
-;N/A;N/A;1;29/09/2025; 388.893 ; PS ;Colocado pois ponto está com problema;Antena Multilaser ;Não encontrado
+Antena Multilaser ;N/A;N/A;1;29/09/2025; 388.893 ; PS ;Colocado pois ponto está com problema;Antena Multilaser ;Encontrado
 Fita para rotulador;N/A;N/A;1;29/09/2025; N/A ; TI ;Reposição;Rafael Muller;Encontrado
 Desktop OPTIPLEX 7020;4NTVSB4;230250;1;29/09/2025; N/A ; Farmácia Clínica ;Obsolescência;Rafael Muller;Encontrado
 Desktop OPTIPLEX 7020;5NTVSB4;230259;1;29/09/2025; N/A ; Farmácia Clínica ;Obsolescência;Rafael Muller;Encontrado
@@ -467,68 +467,67 @@ Monitor SAM S19C301F;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Rob
 Monitor W19438V;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
 Notebook DELL Vostro 3401;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
 Notebook DELL Latitude 3040;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
-;;;;;;;;;
 Notebook DELL Latitude 3440;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
 Scanner portátil USB;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
 SSD 240GB;N/A;N/A;4;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
 SSD 500GB;N/A;N/A;4;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
-Teclado;N/A;N/A;32;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Teclado;N/A;N/A;67;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
 Teclado Beira Leito;N/A;N/A;2;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
 HP ProDesk 400 G7;N/A;N/A;1;10/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
-;;;;;;;;;Não encontrado
+Pilhas AA;N/A;N/A;3;10/11/2025; N/A ; Jefferson TI ;;Luiz Roberto;Encontrado
+Teclado;N/A;N/A;1;12/11/2025; 436.857 ; Joane Zaghini ;;Luiz Roberto;Encontrado
+Mouse;N/A;N/A;86;13/11/2025;; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Mouse;N/A;N/A;1;14/11/2025; 439.392 ; CDI ;;Rafael Muller;Encontrado
+Cabo de Rede;N/A;N/A;1;14/11/2025; 439.312 ; Maternidade ;;Luiz Roberto;Encontrado
+Mouse Pad;N/A;N/A;112;14/11/2025; N/A ; N/A ;Ajuste de estoque;Luiz Roberto;Encontrado
+Mouse;N/A;N/A;1;17/11/2025; 441.177 ; PS ;Troca;Tiago Abreu;Encontrado
+Mouse;N/A;N/A;1;17/11/2025; 438.496 ; Agencia Transfusional ;Aquisição;Tiago Abreu;Encontrado
+Teclado;N/A;N/A;1;17/11/2025; 438.496 ; Agencia Transfusional ;Aquisição;Tiago Abreu;Encontrado
+Cabo de Rede;N/A;N/A;1;17/11/2025; 438.496 ; Agencia Transfusional ;Aquisição;Tiago Abreu;Encontrado
+Cabo de Energia;N/A;N/A;1;17/11/2025; 438.496 ; Agencia Transfusional ;Aquisição;Tiago Abreu;Encontrado
+Desktop OPTIPLEX 3040;BJWDMD2;149936;1;17/11/2025; 438.496 ; Agencia Transfusional ;Aquisição;Tiago Agreu;Encontrado
+Mouse;N/A;N/A;1;18/11/2025;N/A; Recrutamento de seleção ;Troca;Lucas Mendes;Encontrado
+Cabo DisplayPort;N/A;N/A;1;18/11/2025;N/A; Recrutamento de seleção ;Aquisição;Lucas Mendes;Encontrado
+Cabo HDMI;N/A;N/A;1;18/11/2025;; Recrutamento de seleção ;Aquisição;Lucas Mendes;Encontrado
+Cabo HDMI;N/A;N/A;1;19/11/2025; N/A ; Praticas Assistenciais ;Troca;Tiago Abreu;Encontrado
+Mouse;N/A;N/A;1;19/11/2025; 444.139 ; CME ;Troca;Rafael Muller;Encontrado
+Cabo HDMI;N/A;N/A;1;19/11/2025;; Recrutamento de seleção ;Aquisição;Lucas Mendes;Encontrado
+Projetor ;;;1;21/11/2025;; Bianca ;Empréstimo até 24/12/2025;Jeferson Cantarelli;Encontrado
+Teclado;N/A;N/A;1;21/11/2025; 445.098 ; internação ;Troca;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Ambulatório de Transplante ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; PS - Consultório 2 ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; PS - Posto de Enfermagem ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; NIR ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Recepção Convênio ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Ambulatório 106 ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; SND ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; CDI - Posto de Enfermagem ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; CDI - Recepção ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; UTI - Posto de Enfermagem ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Residentes ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Centro Obstétrico ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Maternidade ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Hemodinâmica ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Menino Deus ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; UCO - Prescrição Medica ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Nossa Senhora  Aparecida ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Nossa Senhora das Graças ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; VIP ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; São Josè ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; CC - Escrituração ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; CC  -Sala de Preparo ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; CC- Sala de Recuperação ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Luizita 1 ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Santa Luzia ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Agencia Transfusional ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; CME ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Hemodinâmica ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; Coração de Jesus ;Cabos para computador de Crise;Tiago Abreu;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; UTI - Prescrição Médica ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Cabo Impressora;N/A;N/A;1;21/11/2025; N/A ; FURB ;Cabos para computador de Crise;Rafael Muller;Encontrado
+Teclado;N/A;N/A;1;25/11/2025; 447.883 ; Centro Cirugico ;Troca;Tiago Abreu;Encontrado
+Teclado Beira Leito;N/A;N/A;1;25/11/2025; 448.057 ; UCO ;Troca;Tiago Abreu;Encontrado
+Teclado;N/A;N/A;1;26/11/2025; 449.669 ; UTI - Farmácia ;Troca;Rafael Muller;Encontrado
 ;;;;;;;;;Não encontrado
 ;;;;;;;;;Não encontrado
 ;;;;;;;;;Não encontrado

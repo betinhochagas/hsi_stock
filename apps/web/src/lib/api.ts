@@ -56,4 +56,26 @@ export async function fetcher<T>(url: string, config?: AxiosRequestConfig): Prom
   return response.data;
 }
 
+// Utilitário para download de arquivos
+export async function downloadFile(url: string, filename: string): Promise<void> {
+  const response = await api.get(url, {
+    responseType: 'blob',
+  });
+  
+  // Criar URL do blob
+  const blob = new Blob([response.data]);
+  const blobUrl = window.URL.createObjectURL(blob);
+  
+  // Criar link temporário e clicar
+  const link = document.createElement('a');
+  link.href = blobUrl;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  
+  // Limpar
+  document.body.removeChild(link);
+  window.URL.revokeObjectURL(blobUrl);
+}
+
 export default api;

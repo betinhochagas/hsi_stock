@@ -11,6 +11,8 @@ import { SuppliersModule } from './suppliers/suppliers.module';
 import { LicensesModule } from './licenses/licenses.module';
 import { MovementsModule } from './movements/movements.module';
 import { ImportModule } from './import/import.module';
+import { ReportsModule } from './reports/reports.module';
+import { ExportModule } from './export/export.module';
 import { QueuesModule } from './queues/queues.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { HealthController } from './health/health.controller';
@@ -38,6 +40,8 @@ import { HealthController } from './health/health.controller';
     LicensesModule,
     MovementsModule,
     ImportModule,
+    ReportsModule,
+    ExportModule,
   ],
   controllers: [HealthController],
 })

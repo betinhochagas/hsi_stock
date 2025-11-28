@@ -7,11 +7,12 @@ export const assetSchema = z.object({
     .max(255, 'Nome deve ter no máximo 255 caracteres'),
   
   assetTag: z.string()
-    .min(3, 'Tag deve ter no mínimo 3 caracteres')
-    .max(50, 'Tag deve ter no máximo 50 caracteres'),
+    .max(100, 'Patrimônio deve ter no máximo 100 caracteres')
+    .optional()
+    .or(z.literal('')),
   
   serialNumber: z.string()
-    .max(100, 'Número de série deve ter no máximo 100 caracteres')
+    .max(255, 'Número de série deve ter no máximo 255 caracteres')
     .optional()
     .or(z.literal('')),
   
@@ -31,13 +32,15 @@ export const assetSchema = z.object({
     .optional()
     .or(z.literal('')),
   
-  purchasePrice: z.coerce
-    .number()
-    .positive('Preço deve ser positivo')
-    .optional()
-    .or(z.literal('')),
+  purchasePrice: z.preprocess(
+    (val) => {
+      if (val === '' || val === null || val === undefined) return undefined
+      return Number(val)
+    },
+    z.number().positive('Preço deve ser positivo').optional()
+  ),
   
-  warrantyEndDate: z.string()
+  warrantyUntil: z.string()
     .optional()
     .or(z.literal('')),
   
@@ -51,10 +54,8 @@ export const assetSchema = z.object({
   
   status: z.enum(['EM_ESTOQUE', 'EM_USO', 'EM_MANUTENCAO', 'INATIVO', 'DESCARTADO']),
   
-  condition: z.enum(['EXCELLENT', 'GOOD', 'FAIR', 'POOR']),
-  
-  notes: z.string()
-    .max(1000, 'Notas devem ter no máximo 1000 caracteres')
+  observations: z.string()
+    .max(1000, 'Observações devem ter no máximo 1000 caracteres')
     .optional()
     .or(z.literal('')),
 })

@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Package, Plus, Pencil, Trash2, Eye, MoreHorizontal } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { Package, Plus, Pencil, Trash2, Eye, MoreHorizontal, Download } from 'lucide-react'
 import { ColumnDef } from '@tanstack/react-table'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -17,10 +18,12 @@ import {
 import { DataTable } from '@/components/shared/data-table'
 import { EmptyState } from '@/components/shared/empty-state'
 import { AssetFormDialog } from '@/components/forms/asset-form-dialog'
+import { AssetDetailsDialog } from '@/components/dialogs/asset-details-dialog'
 import { useAssets, useCreateAsset, useUpdateAsset, useDeleteAsset } from '@/hooks/use-assets'
 import { Asset } from '@/types'
 import { formatCurrency } from '@/lib/utils'
 import type { AssetFormData } from '@/lib/validations'
+import { downloadFile } from '@/lib/api'
 
 const statusLabels: Record<string, string> = {
   EM_ESTOQUE: 'Disponível',
@@ -38,14 +41,40 @@ const statusVariants: Record<string, 'default' | 'secondary' | 'destructive' | '
   DESCARTADO: 'destructive',
 }
 
+// Helper function to convert ISO date to yyyy-MM-dd format
+const formatDateForInput = (isoDate: string | null): string => {
+  if (!isoDate) return ''
+  try {
+    const date = new Date(isoDate)
+    return date.toISOString().split('T')[0]
+  } catch {
+    return ''
+  }
+}
+
 export default function AssetsPage() {
   const [dialogOpen, setDialogOpen] = useState(false)
+  const [detailsOpen, setDetailsOpen] = useState(false)
   const [editingAsset, setEditingAsset] = useState<Asset | null>(null)
+  const [viewingAsset, setViewingAsset] = useState<Asset | null>(null)
+  const [isExporting, setIsExporting] = useState(false)
   
   const { data, isLoading } = useAssets()
   const createAsset = useCreateAsset()
-  const updateAsset = useUpdateAsset(editingAsset?.id || '')
+  const updateAsset = useUpdateAsset()
   const deleteAsset = useDeleteAsset()
+
+  const handleExport = async (format: 'csv' | 'xlsx') => {
+    setIsExporting(true)
+    try {
+      await downloadFile(`/export/assets?format=${format}`, `assets_${new Date().toISOString().split('T')[0]}.${format}`)
+      toast.success(`Ativos exportados em ${format.toUpperCase()} com sucesso!`)
+    } catch (error) {
+      toast.error('Erro ao exportar ativos')
+    } finally {
+      setIsExporting(false)
+    }
+  }
 
   const handleCreate = async (data: AssetFormData) => {
     try {
@@ -61,7 +90,7 @@ export default function AssetsPage() {
     if (!editingAsset) return
     
     try {
-      await updateAsset.mutateAsync(data)
+      await updateAsset.mutateAsync({ id: editingAsset.id, data })
       toast.success('Ativo atualizado com sucesso!')
       setEditingAsset(null)
     } catch (error) {
@@ -147,7 +176,13 @@ export default function AssetsPage() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
               <DropdownMenuLabel>Ações</DropdownMenuLabel>
-              <DropdownMenuItem className="touch-manipulation">
+              <DropdownMenuItem 
+                onClick={() => {
+                  setViewingAsset(asset)
+                  setDetailsOpen(true)
+                }}
+                className="touch-manipulation"
+              >
                 <Eye className="mr-2 h-4 w-4" />
                 Ver detalhes
               </DropdownMenuItem>
@@ -185,16 +220,36 @@ export default function AssetsPage() {
             Gerencie todos os ativos de TI do hospital
           </p>
         </div>
-        <Button 
-          onClick={() => {
-            setEditingAsset(null)
-            setDialogOpen(true)
-          }}
-          className="w-full sm:w-auto touch-manipulation"
-        >
-          <Plus className="mr-2 h-4 w-4" />
-          Novo Ativo
-        </Button>
+        <div className="flex gap-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" disabled={isExporting} className="touch-manipulation">
+                <Download className="mr-2 h-4 w-4" />
+                {isExporting ? 'Exportando...' : 'Exportar'}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Formato de Exportação</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleExport('csv')}>
+                Exportar como CSV
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport('xlsx')}>
+                Exportar como XLSX
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Button 
+            onClick={() => {
+              setEditingAsset(null)
+              setDialogOpen(true)
+            }}
+            className="w-full sm:w-auto touch-manipulation"
+          >
+            <Plus className="mr-2 h-4 w-4" />
+            Novo Ativo
+          </Button>
+        </div>
       </div>
 
       {isLoading ? (
@@ -217,7 +272,7 @@ export default function AssetsPage() {
           columns={columns}
           data={data?.items || []}
           searchColumn="name"
-          searchPlaceholder="Buscar por nome..."
+          searchPlaceholder="Buscar por nome, modelo, categoria, marca ou localização..."
         />
       )}
 
@@ -230,20 +285,28 @@ export default function AssetsPage() {
         onSubmit={editingAsset ? handleEdit : handleCreate}
         defaultValues={editingAsset ? {
           name: editingAsset.name,
-          assetTag: editingAsset.assetTag,
+          assetTag: editingAsset.assetTag || '',
           serialNumber: editingAsset.serialNumber || '',
           categoryId: editingAsset.categoryId,
           manufacturerId: editingAsset.manufacturerId || '',
           model: editingAsset.model || '',
-          purchaseDate: editingAsset.purchaseDate || '',
+          purchaseDate: formatDateForInput(editingAsset.purchaseDate),
           purchasePrice: editingAsset.purchasePrice || undefined,
-          warrantyEndDate: editingAsset.warrantyEnd || '',
+          warrantyUntil: formatDateForInput(editingAsset.warrantyUntil),
           locationId: editingAsset.locationId || '',
           status: editingAsset.status,
-          condition: 'GOOD',
-          notes: editingAsset.notes || '',
+          observations: editingAsset.notes || '',
         } : undefined}
         isEdit={!!editingAsset}
+      />
+
+      <AssetDetailsDialog
+        asset={viewingAsset}
+        open={detailsOpen}
+        onOpenChange={(open) => {
+          setDetailsOpen(open)
+          if (!open) setViewingAsset(null)
+        }}
       />
     </div>
   )

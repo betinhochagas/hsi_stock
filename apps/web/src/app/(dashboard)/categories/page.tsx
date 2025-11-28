@@ -19,6 +19,7 @@ import { EmptyState } from '@/components/shared/empty-state'
 import { CategoryFormDialog } from '@/components/forms/category-form-dialog'
 import { useCategories, useCreateCategory, useUpdateCategory, useDeleteCategory } from '@/hooks/use-metadata'
 import { Category } from '@/types'
+import { extractErrorMessage } from '@/lib/error-handler'
 
 export default function CategoriesPage() {
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -35,7 +36,8 @@ export default function CategoriesPage() {
       toast.success('Categoria criada com sucesso!')
       setDialogOpen(false)
     } catch (error) {
-      toast.error('Erro ao criar categoria')
+      const message = extractErrorMessage(error, 'Erro ao criar categoria')
+      toast.error(message)
       throw error
     }
   }
@@ -49,7 +51,8 @@ export default function CategoriesPage() {
       setEditingCategory(null)
       setDialogOpen(false)
     } catch (error) {
-      toast.error('Erro ao atualizar categoria')
+      const message = extractErrorMessage(error, 'Erro ao atualizar categoria')
+      toast.error(message)
       throw error
     }
   }
@@ -60,8 +63,9 @@ export default function CategoriesPage() {
     try {
       await deleteCategory.mutateAsync(id)
       toast.success('Categoria excluída com sucesso!')
-    } catch {
-      toast.error('Erro ao excluir categoria')
+    } catch (error) {
+      const message = extractErrorMessage(error, 'Erro ao excluir categoria')
+      toast.error(message)
     }
   }
 

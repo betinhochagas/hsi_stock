@@ -4,7 +4,6 @@ import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { ImportJobData } from './import.queue';
 import { parse } from 'csv-parse';
-import { createReadStream } from 'fs';
 import * as chardet from 'chardet';
 import { promises as fs } from 'fs';
 import { HSIInventarioProcessor } from '../import/processors/hsi-inventario.processor';
@@ -22,7 +21,8 @@ export class ImportProcessor extends WorkerHost {
 
   async process(job: Job<ImportJobData>): Promise<any> {
     const { importLogId, filename, mappings, userId } = job.data;
-    const filePath = `./uploads/${filename}`;
+    // filename já contém o caminho completo (uploads/temp/...)
+    const filePath = filename.startsWith('./') ? filename : `./${filename}`;
 
     this.logger.log(`Processing import job ${job.id} for ${filename}`);
 
@@ -37,25 +37,41 @@ export class ImportProcessor extends WorkerHost {
 
       // Detect encoding
       const buffer = await fs.readFile(filePath);
-      const detectedEncoding = chardet.detect(buffer) || 'utf-8';
-      const encoding = (detectedEncoding.toLowerCase() === 'utf-8' ? 'utf-8' : 'latin1') as BufferEncoding;
+      const detectedEncoding = chardet.detect(buffer);
+      
+      // Mapear encoding detectado para valores válidos do Node.js
+      let encoding: BufferEncoding = 'utf-8';
+      if (detectedEncoding) {
+        const encodingLower = detectedEncoding.toLowerCase();
+        if (encodingLower.includes('utf-8') || encodingLower.includes('utf8')) {
+          encoding = 'utf-8';
+        } else if (encodingLower.includes('iso-8859') || encodingLower.includes('latin')) {
+          encoding = 'latin1';
+        } else if (encodingLower.includes('windows-1252') || encodingLower.includes('cp1252')) {
+          encoding = 'latin1'; // Windows-1252 é superset de latin1
+        }
+      }
+      
+      this.logger.log(`Detected encoding: ${detectedEncoding} -> using ${encoding}`);
 
+      // Read file with correct encoding
+      const fileContent = await fs.readFile(filePath, encoding);
+      
       // Detect delimiter
-      const lines = buffer.toString(encoding).split('\n');
+      const lines = fileContent.split('\n');
       const headerLine = lines[0];
       const delimiter = this.detectDelimiter(headerLine);
 
       // Parse and count total rows first
       let totalRows = 0;
-      const countParser = createReadStream(filePath).pipe(
-        parse({
-          delimiter,
-          columns: true,
-          skip_empty_lines: true,
-          trim: true,
-          relax_column_count: true,
-        }),
-      );
+      const countParser = parse(fileContent, {
+        delimiter,
+        columns: true,
+        skip_empty_lines: true,
+        skip_records_with_empty_values: true,
+        trim: true,
+        relax_column_count: true,
+      });
 
       for await (const _ of countParser) {
         totalRows++;
@@ -68,15 +84,14 @@ export class ImportProcessor extends WorkerHost {
 
       // Detect file type
       const firstRecords: any[] = [];
-      const sampleParser = createReadStream(filePath).pipe(
-        parse({
-          delimiter,
-          columns: true,
-          skip_empty_lines: true,
-          trim: true,
-          relax_column_count: true,
-        }),
-      );
+      const sampleParser = parse(fileContent, {
+        delimiter,
+        columns: true,
+        skip_empty_lines: true,
+        skip_records_with_empty_values: true,
+        trim: true,
+        relax_column_count: true,
+      });
 
       let count = 0;
       for await (const record of sampleParser) {
@@ -91,9 +106,9 @@ export class ImportProcessor extends WorkerHost {
       // Process the file
       let result: any;
       if (isHSI) {
-        result = await this.processHSIInventario(filePath, job, importLogId, totalRows);
+        result = await this.processHSIInventario(fileContent, delimiter, job, importLogId, totalRows);
       } else {
-        result = await this.processGenericCSV(filePath, mappings, job, importLogId, totalRows);
+        result = await this.processGenericCSV(fileContent, delimiter, mappings, job, importLogId, totalRows);
       }
 
       const duration = Math.floor((Date.now() - startTime) / 1000);
@@ -135,39 +150,34 @@ export class ImportProcessor extends WorkerHost {
   }
 
   private async processHSIInventario(
-    filePath: string,
+    fileContent: string,
+    delimiter: string,
     job: Job,
     importLogId: string,
     totalRows: number,
   ) {
     // Process HSI Inventário using chunk-based streaming
-    return await this.processGenericCSV(filePath, {}, job, importLogId, totalRows);
+    return await this.processGenericCSV(fileContent, delimiter, {}, job, importLogId, totalRows);
   }
 
   private async processGenericCSV(
-    filePath: string,
+    fileContent: string,
+    delimiter: string,
     mappings: Record<string, string>,
     job: Job,
     importLogId: string,
     totalRows: number,
   ) {
     const userId = job.data.userId;
-    const buffer = await fs.readFile(filePath);
-    const detectedEncoding = chardet.detect(buffer) || 'utf-8';
-    const encoding = (detectedEncoding.toLowerCase() === 'utf-8' ? 'utf-8' : 'latin1') as BufferEncoding;
 
-    const lines = buffer.toString(encoding).split('\n');
-    const delimiter = this.detectDelimiter(lines[0]);
-
-    const parser = createReadStream(filePath).pipe(
-      parse({
-        delimiter,
-        columns: true,
-        skip_empty_lines: true,
-        trim: true,
-        relax_column_count: true,
-      }),
-    );
+    const parser = parse(fileContent, {
+      delimiter,
+      columns: true,
+      skip_empty_lines: true,
+      skip_records_with_empty_values: true,
+      trim: true,
+      relax_column_count: true,
+    });
 
     let processed = 0;
     let created = 0;
@@ -226,6 +236,14 @@ export class ImportProcessor extends WorkerHost {
 
     for (const record of chunk) {
       try {
+        // Verificar se a linha está completamente vazia ou só tem dados irrelevantes
+        const values = Object.values(record).filter(value => value && String(value).trim() !== '');
+        
+        // Se não tem nenhum valor OU só tem "Não encontrado", ignora
+        if (values.length === 0 || (values.length === 1 && String(values[0]).includes('encontrado'))) {
+          continue; // Ignora linha vazia ou inválida sem gerar erro
+        }
+
         const mappedData: any = {};
         for (const [csvColumn, systemField] of Object.entries(mappings)) {
           if (systemField !== 'ignore' && record[csvColumn]) {

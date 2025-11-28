@@ -13,7 +13,7 @@ async function bootstrap() {
   // CORS - permitir acesso de qualquer origem em desenvolvimento
   const corsOrigins = process.env.CORS_ORIGIN 
     ? process.env.CORS_ORIGIN.split(',')
-    : ['http://localhost:3000', 'http://10.30.1.8:3000'];
+    : ['http://localhost:3000', 'http://localhost:8080', 'http://10.30.1.8:3000', 'http://10.30.1.8:8080'];
   
   app.enableCors({
     origin: process.env.NODE_ENV === 'production' 

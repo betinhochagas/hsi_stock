@@ -1,26 +1,17 @@
 'use client'
 
 import { Package, TrendingUp, FileKey, AlertCircle } from 'lucide-react'
-import { useDashboardStats } from '@/hooks/use-dashboard'
+import { useDashboardStats, useStockByCategory } from '@/hooks/use-dashboard'
 import { useRecentMovements } from '@/hooks/use-movements'
 import { StatsCard } from '@/components/dashboard/stats-card'
-import { AssetsByStatusChart } from '@/components/dashboard/assets-by-status-chart'
+import { StockByCategory } from '@/components/dashboard/stock-by-category'
 import { RecentMovementsTable } from '@/components/dashboard/recent-movements-table'
 import { formatCurrency } from '@/lib/utils'
 
 export default function DashboardPage() {
   const { data: stats, isLoading: statsLoading } = useDashboardStats()
+  const { data: stockData, isLoading: stockLoading } = useStockByCategory()
   const { data: movementsData, isLoading: movementsLoading } = useRecentMovements(10)
-
-  // Preparar dados para o gráfico (filtrar zeros)
-  const chartData = stats?.assetsByStatus
-    ? Object.entries(stats.assetsByStatus)
-        .filter(([, count]) => count > 0)
-        .map(([status, count]) => ({
-          status,
-          count,
-        }))
-    : []
 
   return (
     <div className="space-y-4 lg:space-y-6">
@@ -76,14 +67,11 @@ export default function DashboardPage() {
         />
       </div>
 
-      {/* Charts Section */}
-      <div className="grid gap-3 lg:gap-4">
-        <AssetsByStatusChart 
-          key={stats ? 'loaded' : 'loading'}
-          data={chartData} 
-          loading={statsLoading} 
-        />
-      </div>
+      {/* Stock by Category */}
+      <StockByCategory
+        data={stockData || []}
+        loading={stockLoading}
+      />
 
       {/* Recent Activity */}
       <RecentMovementsTable

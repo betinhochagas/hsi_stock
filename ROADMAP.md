@@ -14,6 +14,7 @@ Este documento descreve as funcionalidades que precisam ser implementadas para c
 - ✅ Frontend estruturado (Next.js 14)
 - ✅ Docker e CI/CD
 - ✅ Documentação (README, ADRs, diagramas)
+- ✅ Database seed com dados de teste (~64 registros)
 
 ---
 
@@ -77,6 +78,8 @@ Este documento descreve as funcionalidades que precisam ser implementadas para c
 - [ ] DELETE `/attachments/:id` - Remover
 
 ### 1.2 Sistema de Importação CSV ⏱️ ~16h
+
+**Nota:** Backend do wizard está implementado, mas importação de dados reais CSV ainda não foi executada.
 
 **Módulo de Importação**
 - [ ] POST `/import/upload` - Upload de CSV

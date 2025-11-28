@@ -101,7 +101,7 @@ export interface Asset {
   serialNumber: string | null;
   purchaseDate: string | null;
   purchasePrice: number | null;
-  warrantyEnd: string | null;
+  warrantyUntil: string | null;
   status: AssetStatus;
   notes: string | null;
   categoryId: string;

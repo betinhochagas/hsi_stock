@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { api } from '@/lib/api'
 import { Asset } from '@/types'
 import { AssetFormData } from '@/lib/validations'
+import { useAuthStore } from '@/store/auth-store'
 
 interface AssetsParams {
   page?: number
@@ -56,10 +57,42 @@ export function useAsset(id: string) {
 
 export function useCreateAsset() {
   const queryClient = useQueryClient()
+  const { user } = useAuthStore()
 
   return useMutation({
     mutationFn: async (data: AssetFormData) => {
-      const response = await api.post<Asset>('/assets', data)
+      // Limpar campos vazios e transformar em undefined
+      const cleanData: any = {
+        name: data.name,
+        categoryId: data.categoryId,
+        status: data.status,
+        createdById: user?.id,
+      }
+
+      // Adicionar campos opcionais apenas se tiverem valor
+      if (data.assetTag && data.assetTag.trim()) cleanData.assetTag = data.assetTag
+      if (data.serialNumber && data.serialNumber.trim()) cleanData.serialNumber = data.serialNumber
+      if (data.model && data.model.trim()) cleanData.model = data.model
+      if (data.observations && data.observations.trim()) cleanData.observations = data.observations
+      
+      // IDs opcionais
+      if (data.locationId && data.locationId !== '') cleanData.locationId = data.locationId
+      if (data.manufacturerId && data.manufacturerId !== '' && data.manufacturerId !== 'none') {
+        cleanData.manufacturerId = data.manufacturerId
+      }
+      if (data.assignedToId && data.assignedToId !== '') cleanData.assignedToId = data.assignedToId
+      
+      // Datas e números
+      if (data.purchaseDate) cleanData.purchaseDate = new Date(data.purchaseDate)
+      if (data.purchasePrice !== undefined && data.purchasePrice !== '' && data.purchasePrice !== null) {
+        const price = Number(data.purchasePrice)
+        if (!isNaN(price) && price >= 0) cleanData.purchasePrice = price
+      }
+      if (data.warrantyUntil) cleanData.warrantyUntil = new Date(data.warrantyUntil)
+
+      console.log('🔍 Payload enviado:', cleanData)
+      
+      const response = await api.post<Asset>('/assets', cleanData)
       return response.data
     },
     onSuccess: () => {
@@ -69,17 +102,67 @@ export function useCreateAsset() {
   })
 }
 
-export function useUpdateAsset(id: string) {
+export function useUpdateAsset() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: Partial<AssetFormData>) => {
-      const response = await api.put<Asset>(`/assets/${id}`, data)
+    mutationFn: async ({ id, data }: { id: string; data: Partial<AssetFormData> }) => {
+      // Limpar campos vazios e transformar em undefined
+      const cleanData: any = {}
+
+      // Adicionar campos apenas se existirem
+      if (data.name) cleanData.name = data.name
+      if (data.categoryId) cleanData.categoryId = data.categoryId
+      if (data.status) cleanData.status = data.status
+      
+      // Campos opcionais
+      if (data.assetTag !== undefined) {
+        cleanData.assetTag = data.assetTag && data.assetTag.trim() ? data.assetTag : null
+      }
+      if (data.serialNumber !== undefined) {
+        cleanData.serialNumber = data.serialNumber && data.serialNumber.trim() ? data.serialNumber : null
+      }
+      if (data.model !== undefined) {
+        cleanData.model = data.model && data.model.trim() ? data.model : null
+      }
+      if (data.observations !== undefined) {
+        cleanData.observations = data.observations && data.observations.trim() ? data.observations : null
+      }
+      
+      // IDs opcionais
+      if (data.locationId !== undefined) {
+        cleanData.locationId = data.locationId && data.locationId !== '' ? data.locationId : null
+      }
+      if (data.manufacturerId !== undefined) {
+        cleanData.manufacturerId = data.manufacturerId && data.manufacturerId !== '' && data.manufacturerId !== 'none' 
+          ? data.manufacturerId 
+          : null
+      }
+      
+      // Datas
+      if (data.purchaseDate !== undefined) {
+        cleanData.purchaseDate = data.purchaseDate ? new Date(data.purchaseDate) : null
+      }
+      if (data.warrantyUntil !== undefined) {
+        cleanData.warrantyUntil = data.warrantyUntil ? new Date(data.warrantyUntil) : null
+      }
+      
+      // Preço
+      if (data.purchasePrice !== undefined) {
+        if (data.purchasePrice === '' || data.purchasePrice === null) {
+          cleanData.purchasePrice = null
+        } else {
+          const price = Number(data.purchasePrice)
+          if (!isNaN(price) && price >= 0) cleanData.purchasePrice = price
+        }
+      }
+
+      const response = await api.patch<Asset>(`/assets/${id}`, cleanData)
       return response.data
     },
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['assets'] })
-      queryClient.invalidateQueries({ queryKey: ['asset', id] })
+      queryClient.invalidateQueries({ queryKey: ['asset', variables.id] })
       queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] })
     },
   })

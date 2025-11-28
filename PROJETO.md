@@ -2,9 +2,14 @@
 
 ## ✅ Status da Entrega
 
-**Data:** 11 de Novembro de 2025  
+**Data:** 26 de Novembro de 2025  
 **Versão:** 1.0.0  
-**Status:** Estrutura completa criada, pronta para instalação de dependências e execução
+**Status:** MVP 100% completo + 6 sprints adicionais + Sprint 7 em andamento (25%)
+
+**⚠️ ATENÇÃO:**
+- API container precisa ser iniciado manualmente (`docker-compose up api -d --build`)
+- Database contém ~64 registros seed (pronto para importação de dados reais)
+- Sistema testado e funcional quando API está rodando
 
 ---
 

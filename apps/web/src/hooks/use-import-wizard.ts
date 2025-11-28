@@ -3,26 +3,20 @@ import { api } from '@/lib/api'
 import { toast } from 'sonner'
 
 export interface UploadedFile {
+  filePath: string
   filename: string
   size: number
-  path: string
 }
 
 export interface DetectionResult {
-  filename: string
   encoding: string
   delimiter: string
-  hasHeader: boolean
   headers: string[]
-  fileType: 'hsi_inventario' | 'generic'
   sample: Record<string, string>[]
-  suggestedMappings: ColumnMapping[]
-  stats: {
-    totalRows: number
-    emptyRows: number
-    estimatedDuration: number
-    inconsistentColumns: boolean
-  }
+  totalRows: number
+  fileType?: string
+  suggestedMappings?: ColumnMapping[]
+  stats?: Record<string, any>
 }
 
 export interface ColumnMapping {
@@ -32,26 +26,17 @@ export interface ColumnMapping {
 }
 
 export interface ValidationResult {
-  valid: boolean
+  isValid: boolean
+  validRows: number
+  errorRows: number
+  warningRows: number
   errors: ValidationError[]
-  preview: {
-    assetsToCreate: AssetPreview[]
-    assetsToUpdate: AssetPreview[]
-  }
-  stats: {
-    totalRows: number
-    validRows: number
-    invalidRows: number
-    newAssets: number
-    existingAssets: number
-    newLocations: number
-    newManufacturers: number
-    estimatedDuration: number
-  }
+  stats: Record<string, any>
+  preview?: Record<string, any>
 }
 
 export interface ValidationError {
-  line: number
+  row: number
   field: string
   message: string
   severity: 'error' | 'warning'
@@ -120,7 +105,7 @@ export function useImportWizard() {
       setCurrentStep(2)
       
       // Auto-detect format
-      await detectFormat(response.data.filename)
+      await detectFormat(response.data.filePath)
     } catch (err: any) {
       const message = err.response?.data?.message || 'Erro ao fazer upload do arquivo'
       setError(message)
@@ -131,17 +116,20 @@ export function useImportWizard() {
     }
   }
 
-  const detectFormat = async (filename: string) => {
+  const detectFormat = async (filePath: string) => {
     setIsLoading(true)
     setError(null)
 
     try {
-      const response = await api.get<DetectionResult>(`/import/detect/${filename}`)
+      const response = await api.post<DetectionResult>('/import/detect', {
+        filePath,
+        skipRows: 0,
+      })
       setDetectionResult(response.data)
       
       // Initialize custom mappings with suggested ones
       const mappings: Record<string, string> = {}
-      response.data.suggestedMappings.forEach(m => {
+      response.data.suggestedMappings?.forEach(m => {
         mappings[m.csvColumn] = m.systemField
       })
       setCustomMappings(mappings)
@@ -156,15 +144,21 @@ export function useImportWizard() {
   }
 
   const validateImport = async () => {
-    if (!uploadedFile) return
+    if (!uploadedFile || !detectionResult) return
 
     setIsLoading(true)
     setError(null)
 
     try {
       const response = await api.post<ValidationResult>('/import/validate', {
-        filename: uploadedFile.filename,
-        mappings: customMappings,
+        filePath: uploadedFile.filePath,
+        fileType: detectionResult.fileType || 'generic',
+        columnMapping: customMappings,
+        config: {
+          encoding: detectionResult.encoding,
+          delimiter: detectionResult.delimiter,
+          skipRows: 0,
+        },
       })
 
       setValidationResult(response.data)
@@ -180,15 +174,23 @@ export function useImportWizard() {
   }
 
   const commitImport = async () => {
-    if (!uploadedFile) return
+    if (!uploadedFile || !detectionResult) return
 
     setIsLoading(true)
     setError(null)
 
     try {
       const response = await api.post<CommitResult>('/import/commit', {
-        filename: uploadedFile.filename,
-        mappings: customMappings,
+        filePath: uploadedFile.filePath,
+        fileType: detectionResult.fileType || 'generic',
+        columnMapping: customMappings,
+        config: {
+          encoding: detectionResult.encoding,
+          delimiter: detectionResult.delimiter,
+          skipRows: 0,
+          createMovements: true,
+          isHSIInventario: detectionResult.fileType === 'hsi-inventario',
+        },
       })
 
       setCurrentStep(4)
@@ -210,7 +212,7 @@ export function useImportWizard() {
 
   const pollJobStatus = async (importLogId: string) => {
     try {
-      const response = await api.get<JobStatus>(`/import/jobs/${importLogId}`)
+      const response = await api.get<JobStatus>(`/import/jobs/${importLogId}/status`)
       setJobStatus(response.data)
       
       // Stop polling if job is completed or failed
@@ -220,6 +222,10 @@ export function useImportWizard() {
         
         if (response.data.status === 'COMPLETED') {
           toast.success('Importação concluída com sucesso!')
+          // Redirect to dashboard or import history after a delay
+          setTimeout(() => {
+            window.location.href = '/dashboard'
+          }, 2000)
         } else {
           setError('Falha na importação')
           toast.error('Falha na importação')
@@ -229,7 +235,12 @@ export function useImportWizard() {
       return response.data
     } catch (err: any) {
       console.error('Erro ao consultar status do job:', err)
-      // Don't throw - keep polling
+      // If 404, the job might have completed already - check one more time
+      if (err.response?.status === 404) {
+        setIsPolling(false)
+        setIsLoading(false)
+      }
+      // Don't throw - keep polling unless it's 404
     }
   }
 
@@ -237,13 +248,16 @@ export function useImportWizard() {
     setIsPolling(true)
     setIsLoading(true)
     
+    // Check status immediately first
+    pollJobStatus(importLogId)
+    
     const interval = setInterval(async () => {
       const status = await pollJobStatus(importLogId)
       
       if (status && (status.status === 'COMPLETED' || status.status === 'FAILED')) {
         clearInterval(interval)
       }
-    }, 2000) // Poll every 2 seconds
+    }, 1000) // Poll every 1 second for faster feedback
     
     // Store interval ID for cleanup
     return () => clearInterval(interval)

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ArrowUpDown, Plus, Trash2 } from 'lucide-react'
+import { ArrowUpDown, Plus, Trash2, Download } from 'lucide-react'
 import { ColumnDef } from '@tanstack/react-table'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -11,6 +11,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { DataTable } from '@/components/shared/data-table'
@@ -18,6 +19,7 @@ import { EmptyState } from '@/components/shared/empty-state'
 import { useMovements, useDeleteMovement } from '@/hooks/use-movements'
 import { Movement } from '@/types'
 import { formatDateTime } from '@/lib/utils'
+import { downloadFile } from '@/lib/api'
 
 const typeLabels: Record<string, string> = {
   CHECK_IN: 'Entrada',
@@ -37,8 +39,21 @@ const typeVariants: Record<string, 'default' | 'secondary' | 'destructive' | 'ou
 
 export default function MovementsPage() {
   const [typeFilter, setTypeFilter] = useState<string | undefined>()
+  const [isExporting, setIsExporting] = useState(false)
   const { data, isLoading, error, isError } = useMovements({ type: typeFilter })
   const deleteMovement = useDeleteMovement()
+
+  const handleExport = async (format: 'csv' | 'xlsx') => {
+    setIsExporting(true)
+    try {
+      await downloadFile(`/export/movements?format=${format}`, `movements_${new Date().toISOString().split('T')[0]}.${format}`)
+      toast.success(`Movimentações exportadas em ${format.toUpperCase()} com sucesso!`)
+    } catch (error) {
+      toast.error('Erro ao exportar movimentações')
+    } finally {
+      setIsExporting(false)
+    }
+  }
 
   const handleDelete = async (id: string) => {
     if (!confirm('Tem certeza que deseja excluir esta movimentação?')) return
@@ -159,10 +174,30 @@ export default function MovementsPage() {
             Histórico de movimentações de ativos
           </p>
         </div>
-        <Button className="w-full sm:w-auto touch-manipulation">
-          <Plus className="mr-2 h-4 w-4" />
-          Nova Movimentação
-        </Button>
+        <div className="flex gap-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" disabled={isExporting} className="touch-manipulation">
+                <Download className="mr-2 h-4 w-4" />
+                {isExporting ? 'Exportando...' : 'Exportar'}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Formato de Exportação</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleExport('csv')}>
+                Exportar como CSV
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport('xlsx')}>
+                Exportar como XLSX
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Button className="w-full sm:w-auto touch-manipulation">
+            <Plus className="mr-2 h-4 w-4" />
+            Nova Movimentação
+          </Button>
+        </div>
       </div>
 
       <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2">

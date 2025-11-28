@@ -18,6 +18,7 @@ import { EmptyState } from '@/components/shared/empty-state'
 import { LocationFormDialog } from '@/components/forms/location-form-dialog'
 import { useLocations, useCreateLocation, useUpdateLocation, useDeleteLocation } from '@/hooks/use-metadata'
 import { Location } from '@/types'
+import { extractErrorMessage } from '@/lib/error-handler'
 
 export default function LocationsPage() {
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -34,7 +35,8 @@ export default function LocationsPage() {
       toast.success('Localização criada com sucesso!')
       setDialogOpen(false)
     } catch (error) {
-      toast.error('Erro ao criar localização')
+      const message = extractErrorMessage(error, 'Erro ao criar localização')
+      toast.error(message)
       throw error
     }
   }
@@ -48,7 +50,8 @@ export default function LocationsPage() {
       setEditingLocation(null)
       setDialogOpen(false)
     } catch (error) {
-      toast.error('Erro ao atualizar localização')
+      const message = extractErrorMessage(error, 'Erro ao atualizar localização')
+      toast.error(message)
       throw error
     }
   }
@@ -59,8 +62,9 @@ export default function LocationsPage() {
     try {
       await deleteLocation.mutateAsync(id)
       toast.success('Localização excluída com sucesso!')
-    } catch {
-      toast.error('Erro ao excluir localização')
+    } catch (error) {
+      const message = extractErrorMessage(error, 'Erro ao excluir localização')
+      toast.error(message)
     }
   }
 

@@ -27,7 +27,7 @@ interface DetectStepProps {
 
 // Campos disponíveis para mapeamento
 const SYSTEM_FIELDS = [
-  { value: 'assetTag', label: 'Tag do Ativo' },
+  { value: 'assetTag', label: 'Patrimônio' },
   { value: 'name', label: 'Nome' },
   { value: 'serialNumber', label: 'Número de Série' },
   { value: 'category', label: 'Categoria' },
@@ -38,7 +38,7 @@ const SYSTEM_FIELDS = [
   { value: 'condition', label: 'Condição' },
   { value: 'purchaseDate', label: 'Data de Compra' },
   { value: 'purchasePrice', label: 'Preço de Compra' },
-  { value: 'warrantyEnd', label: 'Fim da Garantia' },
+  { value: 'warrantyUntil', label: 'Fim da Garantia' },
   { value: 'notes', label: 'Observações' },
   { value: 'ignore', label: '(Ignorar coluna)' },
 ]

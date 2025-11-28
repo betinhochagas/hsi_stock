@@ -1,7 +1,6 @@
 import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { parse } from 'csv-parse';
-import { createReadStream } from 'fs';
 import { promises as fs } from 'fs';
 import * as chardet from 'chardet';
 import * as path from 'path';
@@ -47,58 +46,80 @@ export class ImportService {
 
     // Detectar encoding
     const buffer = await fs.readFile(filePath);
-    const detectedEncoding = chardet.detect(buffer) || 'utf-8';
-    const encoding = (detectedEncoding.toLowerCase() === 'utf-8' ? 'utf-8' : 'latin1') as BufferEncoding;
+    const detectedEncoding = chardet.detect(buffer);
+    
+    // Mapear encoding detectado para valores válidos do Node.js
+    let encoding: BufferEncoding = 'utf-8';
+    if (detectedEncoding) {
+      const encodingLower = detectedEncoding.toLowerCase();
+      if (encodingLower.includes('utf-8') || encodingLower.includes('utf8')) {
+        encoding = 'utf-8';
+      } else if (encodingLower.includes('iso-8859') || encodingLower.includes('latin')) {
+        encoding = 'latin1';
+      } else if (encodingLower.includes('windows-1252') || encodingLower.includes('cp1252')) {
+        encoding = 'latin1'; // Windows-1252 é superset de latin1
+      }
+    }
 
     // Detectar delimiter (heurística simples - na linha de headers)
     const lines = buffer.toString(encoding).split('\n');
     const headerLine = lines[skipRows] || lines[0];
     const delimiter = this.detectDelimiter(headerLine);
 
-    // Parsear CSV para extrair headers e amostra
+    // Parsear CSV para extrair headers e amostra com encoding correto
+    const fileContent = await fs.readFile(filePath, encoding);
     const records: any[] = [];
-    const parser = createReadStream(filePath)
-      .pipe(
-        parse({
+    
+    return new Promise<DetectFormatResponseDto>((resolve, reject) => {
+      const parser = parse(fileContent, {
+        delimiter,
+        columns: true,
+        skip_empty_lines: true,
+        skip_records_with_empty_values: true,
+        trim: true,
+        from: skipRows + 1,
+        relax_column_count: true,
+      });
+
+      let rowCount = 0;
+      const sampleRecords: any[] = [];
+
+      parser.on('data', (record) => {
+        if (rowCount < 5) {
+          sampleRecords.push(record);
+        }
+        rowCount++;
+      });
+
+      parser.on('end', () => {
+        const headers = sampleRecords.length > 0 ? Object.keys(sampleRecords[0]) : [];
+
+        // Detectar se é arquivo HSI Inventário pelas colunas características
+        const isHSIInventario = this.isHSIInventarioFormat(headers);
+        const detectedFileType = isHSIInventario ? 'hsi-inventario' : 'generic';
+
+        // Gerar sugestões de mapeamento
+        const suggestedMappings = this.suggestColumnMappings(headers, detectedFileType);
+
+        // Calcular estatísticas
+        const stats = this.calculateFileStats(sampleRecords, rowCount);
+
+        resolve({
+          encoding,
           delimiter,
-          columns: true,
-          skip_empty_lines: true,
-          trim: true,
-          from: skipRows + 1,
-          relax_column_count: true,
-        }),
-      );
+          headers,
+          sample: sampleRecords,
+          totalRows: rowCount,
+          fileType: detectedFileType,
+          suggestedMappings,
+          stats,
+        });
+      });
 
-    let rowCount = 0;
-    for await (const record of parser) {
-      if (rowCount < 5) {
-        records.push(record);
-      }
-      rowCount++;
-    }
-
-    const headers = records.length > 0 ? Object.keys(records[0]) : [];
-
-    // Detectar se é arquivo HSI Inventário pelas colunas características
-    const isHSIInventario = this.isHSIInventarioFormat(headers);
-    const detectedFileType = isHSIInventario ? 'hsi-inventario' : 'generic';
-
-    // Gerar sugestões de mapeamento
-    const suggestedMappings = this.suggestColumnMappings(headers, detectedFileType);
-
-    // Calcular estatísticas
-    const stats = this.calculateFileStats(records, rowCount);
-
-    return {
-      encoding,
-      delimiter,
-      headers,
-      sample: records,
-      totalRows: rowCount,
-      fileType: detectedFileType,
-      suggestedMappings,
-      stats,
-    };
+      parser.on('error', (error) => {
+        reject(new BadRequestException(`Erro ao processar CSV: ${error.message}`));
+      });
+    });
   }
 
   /**
@@ -254,17 +275,19 @@ export class ImportService {
     // Carregar mapeamento YAML se disponível
     const mappingRules = await this.loadMappingRules(fileType);
 
-    // Parsear CSV
-    const parser = createReadStream(filePath).pipe(
-      parse({
-        delimiter,
-        columns: true,
-        skip_empty_lines: true,
-        trim: true,
-        from: skipRows + 1,
-        relax_column_count: true,
-      }),
-    );
+    // Ler arquivo com encoding correto
+    const fileContent = await fs.readFile(filePath, encoding as BufferEncoding);
+
+    // Parsear CSV com encoding correto
+    const parser = parse(fileContent, {
+      delimiter,
+      columns: true,
+      skip_empty_lines: true,
+      skip_records_with_empty_values: true,
+      trim: true,
+      from: skipRows + 1,
+      relax_column_count: true,
+    });
 
     let rowNumber = skipRows + 1;
     const isHSIInventario = fileType === 'hsi-inventario';
@@ -274,28 +297,48 @@ export class ImportService {
 
       try {
         if (isHSIInventario) {
+          // Verificar se a linha está completamente vazia (ignora linhas vazias no final do CSV)
+          const hasAnyData = Object.values(record).some(value => value && String(value).trim() !== '');
+          if (!hasAnyData) {
+            continue; // Ignora linha totalmente vazia sem gerar erro
+          }
+
           // Validação específica HSI
           const patrimonio = record['Patrimônio']?.trim();
           const hostname = record['Hostname']?.trim();
+          const serialNumber = record['Serial Number CPU']?.trim();
 
+          // Se tem dados mas não tem nenhum identificador relevante, gerar warning
+          if (!patrimonio && !hostname && !serialNumber) {
+            errors.push({
+              row: rowNumber,
+              field: 'Patrimônio/Hostname/Serial',
+              message: 'Nenhum identificador encontrado - pelo menos um deve estar preenchido',
+              severity: 'warning',
+            });
+            warningRows++;
+            continue;
+          }
+
+          // Se tem algum identificador mas falta patrimônio E hostname, gerar warning
           if (!patrimonio && !hostname) {
             errors.push({
               row: rowNumber,
               field: 'Patrimônio/Hostname',
-              message: 'Pelo menos um dos campos deve estar preenchido',
-              severity: 'error',
+              message: 'Recomendado ter Patrimônio ou Hostname preenchido',
+              severity: 'warning',
             });
-            errorRows++;
-            continue;
+            warningRows++;
+            // Continua processando usando serial number como fallback
           }
 
           // Verificar se já existe
-          if (patrimonio || record['Serial Number CPU']) {
+          if (patrimonio || serialNumber) {
             const existing = await this.prisma.asset.findFirst({
               where: {
                 OR: [
                   patrimonio ? { assetTag: patrimonio } : {},
-                  record['Serial Number CPU'] ? { serialNumber: record['Serial Number CPU'].trim() } : {},
+                  serialNumber ? { serialNumber: serialNumber } : {},
                 ].filter(obj => Object.keys(obj).length > 0),
               },
               select: { id: true, name: true, assetTag: true },
@@ -304,7 +347,7 @@ export class ImportService {
             if (existing) {
               detailedStats.existingAssets++;
               detailedStats.assetsToUpdate.push({
-                name: hostname || existing.name,
+                name: hostname || existing.name || `Asset ${serialNumber}`,
                 assetTag: patrimonio || existing.assetTag,
                 action: 'update',
                 existingId: existing.id,
@@ -312,8 +355,8 @@ export class ImportService {
             } else {
               detailedStats.newAssets++;
               detailedStats.assetsToCreate.push({
-                name: hostname || `Computador ${patrimonio}`,
-                assetTag: patrimonio,
+                name: hostname || `Computador ${patrimonio || serialNumber}`,
+                assetTag: patrimonio || serialNumber,
                 action: 'create',
               });
             }
@@ -328,6 +371,14 @@ export class ImportService {
 
           validRows++;
         } else {
+          // Verificar se a linha está completamente vazia ou só tem dados irrelevantes
+          const values = Object.values(record).filter(value => value && String(value).trim() !== '');
+          
+          // Se não tem nenhum valor OU só tem "Não encontrado", ignora
+          if (values.length === 0 || (values.length === 1 && String(values[0]).includes('encontrado'))) {
+            continue; // Ignora linha vazia ou inválida sem gerar erro
+          }
+
           // Validação genérica
           const mappedRecord = this.mapColumns(record, columnMapping);
           const rowErrors = this.validateRecord(mappedRecord, rowNumber, mappingRules);
@@ -409,36 +460,68 @@ export class ImportService {
     dto: CommitImportDto,
     userId: string,
   ): Promise<CommitImportResponseDto> {
-    const { filePath, fileType, columnMapping = {}, config } = dto;
-    const filename = path.basename(filePath);
+    try {
+      const { filePath, fileType, columnMapping = {}, config } = dto;
+      const filename = path.basename(filePath);
 
-    // Create ImportLog with PENDING status
-    const importLog = await this.prisma.importLog.create({
-      data: {
-        filename,
-        originalName: filename,
-        fileType,
+      // Verificar se arquivo existe
+      try {
+        await fs.access(filePath);
+      } catch {
+        throw new NotFoundException(`Arquivo não encontrado: ${filePath}`);
+      }
+
+      // Create ImportLog with PENDING status
+      // Verificar se o userId existe antes de criar o log
+      let validUserId: string | undefined = undefined;
+      if (userId) {
+        const userExists = await this.prisma.user.findUnique({
+          where: { id: userId },
+        });
+        if (userExists) {
+          validUserId = userId;
+          if (process.env.NODE_ENV !== 'production') {
+            console.log('[CommitImport] Usuário encontrado:', userId);
+          }
+        } else {
+          console.warn('[CommitImport] Usuário não encontrado, criando ImportLog sem userId');
+        }
+      }
+      
+      const importLog = await this.prisma.importLog.create({
+        data: {
+          filename,
+          originalName: filename,
+          fileType,
+          status: 'PENDING',
+          totalRows: 0,
+          metadata: JSON.stringify({ columnMapping, config }),
+          userId: validUserId,
+        },
+      });
+
+      // Add job to BullMQ
+      const jobId = await this.importQueue.addJob({
+        importLogId: importLog.id,
+        filename: filePath, // Usar filePath completo ao invés de apenas filename
+        mappings: columnMapping,
+        userId: validUserId,
+      });
+      if (process.env.NODE_ENV !== 'production') {
+        console.log('[CommitImport] Job criado:', jobId);
+      }
+
+      return {
+        jobId,
+        importLogId: importLog.id,
+        message: 'Importação enfileirada para processamento assíncrono',
         status: 'PENDING',
-        totalRows: 0,
-        metadata: JSON.stringify({ columnMapping, config }),
-        userId,
-      },
-    });
-
-    // Add job to BullMQ
-    const jobId = await this.importQueue.addJob({
-      importLogId: importLog.id,
-      filename,
-      mappings: columnMapping,
-      userId,
-    });
-
-    return {
-      jobId,
-      importLogId: importLog.id,
-      message: 'Importação enfileirada para processamento assíncrono',
-      status: 'PENDING',
-    };
+      };
+    } catch (error) {
+      // Sempre logar erros para troubleshooting
+      console.error('[CommitImport] Erro:', error);
+      throw error;
+    }
   }
 
   /**
