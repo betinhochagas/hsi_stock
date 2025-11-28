@@ -35,6 +35,13 @@ import {
   CommitImportResponseDto,
 } from './dto/commit-import.dto';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { UserRole } from '@prisma/client';
+
+interface AuthenticatedUser {
+  userId: string;
+  email: string;
+  role: UserRole;
+}
 
 @ApiTags('import')
 @ApiBearerAuth()
@@ -156,7 +163,7 @@ export class ImportController {
   })
   async commitImport(
     @Body() dto: CommitImportDto,
-    @CurrentUser() user: any,
+    @CurrentUser() user: AuthenticatedUser,
   ): Promise<CommitImportResponseDto> {
     return this.importService.commitImport(dto, user.userId);
   }

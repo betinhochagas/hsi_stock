@@ -85,10 +85,19 @@ export interface JobStatus {
     assetsUpdated?: number
     movementsCreated?: number
   }
-  errors?: any
+  errors?: Array<{ message: string; row?: number }>
   startedAt?: string
   completedAt?: string
   duration?: number
+}
+
+interface ApiError {
+  response?: {
+    data?: {
+      message?: string
+    }
+  }
+  message?: string
 }
 
 export function useImportWizard() {
@@ -121,8 +130,9 @@ export function useImportWizard() {
       
       // Auto-detect format
       await detectFormat(response.data.filename)
-    } catch (err: any) {
-      const message = err.response?.data?.message || 'Erro ao fazer upload do arquivo'
+    } catch (err) {
+      const apiError = err as ApiError
+      const message = apiError.response?.data?.message || 'Erro ao fazer upload do arquivo'
       setError(message)
       toast.error(message)
       throw err
@@ -145,8 +155,9 @@ export function useImportWizard() {
         mappings[m.csvColumn] = m.systemField
       })
       setCustomMappings(mappings)
-    } catch (err: any) {
-      const message = err.response?.data?.message || 'Erro ao detectar formato do arquivo'
+    } catch (err) {
+      const apiError = err as ApiError
+      const message = apiError.response?.data?.message || 'Erro ao detectar formato do arquivo'
       setError(message)
       toast.error(message)
       throw err
@@ -169,8 +180,9 @@ export function useImportWizard() {
 
       setValidationResult(response.data)
       setCurrentStep(3)
-    } catch (err: any) {
-      const message = err.response?.data?.message || 'Erro ao validar importação'
+    } catch (err) {
+      const apiError = err as ApiError
+      const message = apiError.response?.data?.message || 'Erro ao validar importação'
       setError(message)
       toast.error(message)
       throw err
@@ -198,8 +210,9 @@ export function useImportWizard() {
       startPolling(response.data.importLogId)
       
       return response.data
-    } catch (err: any) {
-      const message = err.response?.data?.message || 'Erro ao executar importação'
+    } catch (err) {
+      const apiError = err as ApiError
+      const message = apiError.response?.data?.message || 'Erro ao executar importação'
       setError(message)
       toast.error(message)
       throw err
@@ -227,7 +240,7 @@ export function useImportWizard() {
       }
       
       return response.data
-    } catch (err: any) {
+    } catch (err) {
       console.error('Erro ao consultar status do job:', err)
       // Don't throw - keep polling
     }

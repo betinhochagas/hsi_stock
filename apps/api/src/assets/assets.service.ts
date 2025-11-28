@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateAssetDto } from './dto/create-asset.dto';
 import { UpdateAssetDto } from './dto/update-asset.dto';
 import { DashboardStatsDto } from './dto/stats-response.dto';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class AssetsService {
@@ -85,7 +86,7 @@ export class AssetsService {
   async findAll(params?: { skip?: number; take?: number; search?: string; status?: string }) {
     const { skip = 0, take = 50, search, status } = params || {};
     
-    const where: any = {};
+    const where: Prisma.AssetWhereInput = {};
     if (search) {
       where.OR = [
         { name: { contains: search, mode: 'insensitive' } },
@@ -94,7 +95,7 @@ export class AssetsService {
       ];
     }
     if (status) {
-      where.status = status;
+      where.status = status as Prisma.EnumAssetStatusFilter;
     }
 
     const [items, total] = await Promise.all([

@@ -96,7 +96,7 @@ export class ValidateImportResponseDto {
       },
     },
   })
-  stats: Record<string, any>;
+  stats: Record<string, string | number | boolean | Record<string, number>>;
 
   @ApiProperty({
     description: 'Preview de registros que serão criados/atualizados',
@@ -108,5 +108,5 @@ export class ValidateImportResponseDto {
     },
     required: false,
   })
-  preview?: Record<string, any>;
+  preview?: Record<string, Array<Record<string, string>>>;
 }

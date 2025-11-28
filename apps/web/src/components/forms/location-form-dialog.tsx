@@ -56,7 +56,7 @@ export function LocationFormDialog({
       await onSubmit(data)
       reset()
       onOpenChange(false)
-    } catch (error) {
+    } catch {
       // Error handling is done in parent component
     }
   }

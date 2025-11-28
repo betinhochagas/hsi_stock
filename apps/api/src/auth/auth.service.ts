@@ -2,6 +2,27 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { UsersService } from '../users/users.service';
+import { UserRole } from '@prisma/client';
+
+export interface UserWithoutPassword {
+  id: string;
+  email: string;
+  name: string;
+  role: UserRole;
+  active: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface LoginResponse {
+  access_token: string;
+  user: {
+    id: string;
+    email: string;
+    name: string;
+    role: UserRole;
+  };
+}
 
 @Injectable()
 export class AuthService {
@@ -10,7 +31,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(email: string, password: string): Promise<any> {
+  async validateUser(email: string, password: string): Promise<UserWithoutPassword> {
     const user = await this.usersService.findByEmail(email);
     if (!user) {
       throw new UnauthorizedException('Credenciais inválidas');
@@ -25,11 +46,11 @@ export class AuthService {
       throw new UnauthorizedException('Usuário inativo');
     }
 
-    const { password: _, ...result } = user;
+    const { password: _password, ...result } = user;
     return result;
   }
 
-  async login(user: any) {
+  async login(user: UserWithoutPassword): Promise<LoginResponse> {
     const payload = { email: user.email, sub: user.id, role: user.role };
     return {
       access_token: this.jwtService.sign(payload),

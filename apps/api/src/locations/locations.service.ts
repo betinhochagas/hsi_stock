@@ -2,6 +2,7 @@ import { Injectable, NotFoundException, ConflictException } from '@nestjs/common
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateLocationDto } from './dto/create-location.dto';
 import { UpdateLocationDto } from './dto/update-location.dto';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class LocationsService {
@@ -25,7 +26,7 @@ export class LocationsService {
   async findAll(params?: { skip?: number; take?: number; search?: string }) {
     const { skip = 0, take = 50, search } = params || {};
 
-    const where: any = {};
+    const where: Prisma.LocationWhereInput = {};
     if (search) {
       where.OR = [
         { name: { contains: search, mode: 'insensitive' } },

@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateMovementDto } from './dto/create-movement.dto';
-import { MovementType, AssetStatus } from '@prisma/client';
+import { MovementType, AssetStatus, Prisma } from '@prisma/client';
 
 @Injectable()
 export class MovementsService {
@@ -96,7 +96,7 @@ export class MovementsService {
   }) {
     const { skip = 0, take = 50, assetId, userId, type, startDate, endDate } = params || {};
 
-    const where: any = {};
+    const where: Prisma.MovementWhereInput = {};
 
     if (assetId) {
       where.assetId = assetId;
@@ -335,7 +335,7 @@ export class MovementsService {
   }
 
   private async updateAssetAfterMovement(dto: CreateMovementDto) {
-    const updateData: any = {};
+    const updateData: { status?: AssetStatus; assignedToId?: string | null } = {};
 
     // Atualizar status baseado no tipo de movimentação
     switch (dto.type) {
