@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { parse } from 'csv-parse';
 import { createReadStream } from 'fs';
@@ -56,7 +56,7 @@ export class ImportService {
     const delimiter = this.detectDelimiter(headerLine);
 
     // Parsear CSV para extrair headers e amostra
-    const records: any[] = [];
+    const records: Record<string, string>[] = [];
     const parser = createReadStream(filePath)
       .pipe(
         parse({
@@ -162,7 +162,7 @@ export class ImportService {
     for (const header of headers) {
       const normalizedHeader = this.normalizeText(header);
       
-      for (const [_, mapping] of Object.entries(fieldMappings)) {
+      for (const mapping of Object.values(fieldMappings)) {
         for (const keyword of mapping.keywords) {
           const normalizedKeyword = this.normalizeText(keyword);
           
@@ -188,7 +188,7 @@ export class ImportService {
   private calculateFileStats(
     sample: Record<string, string>[],
     totalRows: number,
-  ): Record<string, any> {
+  ): Record<string, boolean | string | number> {
     const hasEmptyRows = sample.some(row => 
       Object.values(row).every(val => !val || val.trim() === '')
     );
@@ -236,7 +236,6 @@ export class ImportService {
     let errorRows = 0;
     let warningRows = 0;
 
-    const encoding = config?.encoding || 'utf-8';
     const delimiter = config?.delimiter || ';';
     const skipRows = config?.skipRows || 0;
 
@@ -247,8 +246,8 @@ export class ImportService {
       newCategories: new Set<string>(),
       newLocations: new Set<string>(),
       newManufacturers: new Set<string>(),
-      assetsToCreate: [] as any[],
-      assetsToUpdate: [] as any[],
+      assetsToCreate: [] as Array<{ name: string; assetTag?: string; action: string; existingId?: string }>,
+      assetsToUpdate: [] as Array<{ name: string; assetTag?: string; action: string; existingId?: string }>,
     };
 
     // Carregar mapeamento YAML se disponível
@@ -479,7 +478,7 @@ export class ImportService {
   private validateRecord(
     record: Record<string, string>,
     rowNumber: number,
-    rules: any,
+    _rules: Record<string, unknown>,
   ): ValidationError[] {
     const errors: ValidationError[] = [];
     if (!record.name || record.name.trim() === '') {
@@ -496,7 +495,7 @@ export class ImportService {
   /**
    * Carregar regras de mapeamento
    */
-  private async loadMappingRules(fileType: string): Promise<any> {
+  private async loadMappingRules(_fileType: string): Promise<Record<string, unknown>> {
     return {}; // Placeholder
   }
 
