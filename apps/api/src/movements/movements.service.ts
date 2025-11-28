@@ -335,32 +335,32 @@ export class MovementsService {
   }
 
   private async updateAssetAfterMovement(dto: CreateMovementDto) {
-    const updateData: Prisma.AssetUpdateInput = {};
+    const updateData: { status?: AssetStatus; assignedToId?: string | null } = {};
 
     // Atualizar status baseado no tipo de movimentação
     switch (dto.type) {
       case MovementType.CHECK_OUT:
         updateData.status = AssetStatus.EM_USO;
         if (dto.userId) {
-          updateData.assignedTo = { connect: { id: dto.userId } };
+          updateData.assignedToId = dto.userId;
         }
         break;
 
       case MovementType.CHECK_IN:
         updateData.status = AssetStatus.EM_ESTOQUE;
-        updateData.assignedTo = { disconnect: true };
+        updateData.assignedToId = null;
         break;
 
       case MovementType.ASSIGNMENT:
         updateData.status = AssetStatus.EM_USO;
         if (dto.userId) {
-          updateData.assignedTo = { connect: { id: dto.userId } };
+          updateData.assignedToId = dto.userId;
         }
         break;
 
       case MovementType.RETURN:
         updateData.status = AssetStatus.EM_ESTOQUE;
-        updateData.assignedTo = { disconnect: true };
+        updateData.assignedToId = null;
         break;
 
       case MovementType.TRANSFER:

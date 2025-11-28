@@ -154,8 +154,10 @@ export class ImportProcessor extends WorkerHost {
     job: Job,
     importLogId: string,
     totalRows: number,
-  ) {
-    // Process HSI Inventário using chunk-based streaming
+  ): Promise<ImportResult> {
+    // TODO: Use HSIInventarioProcessor for specialized HSI format processing
+    // Currently delegates to generic CSV processing as a fallback
+    // The actual HSI-specific processing is handled by ImportService.validateImport
     return await this.processGenericCSV(filePath, {}, job, importLogId, totalRows);
   }
 
