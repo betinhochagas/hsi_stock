@@ -63,7 +63,7 @@ export function AssetFormDialog({
     },
   })
 
-  const handleFormSubmit = async (data: any) => {
+  const handleFormSubmit = async (data: AssetFormData) => {
     try {
       // Transform 'none' to empty string for optional fields
       const cleanedData: AssetFormData = {

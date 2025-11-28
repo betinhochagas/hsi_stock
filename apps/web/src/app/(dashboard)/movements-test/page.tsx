@@ -3,9 +3,19 @@
 import { useEffect, useState } from 'react'
 import { useMovements } from '@/hooks/use-movements'
 
+interface ManualResponse {
+  data?: unknown[]
+  pagination?: {
+    total: number
+    skip: number
+    take: number
+    pages: number
+  }
+}
+
 export default function MovementsTestPage() {
-  const [manualData, setManualData] = useState<any>(null)
-  const [manualError, setManualError] = useState<any>(null)
+  const [manualData, setManualData] = useState<ManualResponse | null>(null)
+  const [manualError, setManualError] = useState<string | null>(null)
   
   // Testar com React Query
   const { data: queryData, isLoading, error: queryError, isError } = useMovements()
@@ -30,9 +40,10 @@ export default function MovementsTestPage() {
         const data = await response.json()
         console.log('[MANUAL TEST] Response data:', data)
         setManualData(data)
-      } catch (err: any) {
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Unknown error'
         console.error('[MANUAL TEST] Error:', err)
-        setManualError(err.message)
+        setManualError(errorMessage)
       }
     }
 
