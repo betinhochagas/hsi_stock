@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useImportWizard } from '@/hooks/use-import-wizard'
 import { UploadStep } from './steps/upload-step'
 import { DetectStep } from './steps/detect-step'
@@ -9,6 +10,34 @@ import { Progress } from '@/components/ui/progress'
 
 export function ImportWizard() {
   const wizard = useImportWizard()
+
+  // Protect against losing uncommitted changes
+  useEffect(() => {
+    const UNCOMMITTED_CHANGES_MESSAGE = 'Uncommitted changes detected'
+    
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      // Show warning if user has uploaded a file but hasn't committed the import
+      // Steps 2 and 3 have uncommitted changes (detect/validate but not committed)
+      const hasUncommittedChanges = wizard.uploadedFile && wizard.currentStep >= 2 && wizard.currentStep < 4
+      
+      // Also check if we're on step 4 but the job is still processing
+      const isProcessing = wizard.currentStep === 4 && 
+        wizard.jobStatus && 
+        (wizard.jobStatus.status === 'PENDING' || wizard.jobStatus.status === 'PROCESSING')
+      
+      if (hasUncommittedChanges || isProcessing) {
+        e.preventDefault()
+        e.returnValue = UNCOMMITTED_CHANGES_MESSAGE
+        return UNCOMMITTED_CHANGES_MESSAGE
+      }
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [wizard.uploadedFile, wizard.currentStep, wizard.jobStatus])
 
   const steps = [
     { number: 1, title: 'Upload', description: 'Enviar arquivo CSV' },
