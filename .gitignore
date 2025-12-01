@@ -46,3 +46,6 @@ data/processed/*.pdf
 # Logs
 logs
 *.log
+
+# TypeScript build info
+*.tsbuildinfo
