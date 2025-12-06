@@ -27,6 +27,19 @@ jobs:
       
       - name: Run lint
         run: npm run lint
+      
+      - name: Check for uncommitted changes
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "❌ Uncommitted changes detected after linting!"
+            echo "The following files have been modified:"
+            git status --short
+            echo ""
+            echo "Please commit these changes or update .gitignore"
+            exit 1
+          else
+            echo "✅ No uncommitted changes detected"
+          fi
 
   test:
     name: Test
@@ -114,6 +127,19 @@ jobs:
         run: npm run build
         env:
           DATABASE_URL: postgresql://test_user:test_pass@localhost:5432/test_db
+      
+      - name: Check for uncommitted changes
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "❌ Uncommitted changes detected after build!"
+            echo "The following files have been modified:"
+            git status --short
+            echo ""
+            echo "Please commit these changes or update .gitignore"
+            exit 1
+          else
+            echo "✅ No uncommitted changes detected"
+          fi
 
   docker:
     name: Build Docker Images
