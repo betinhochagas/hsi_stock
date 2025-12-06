@@ -22,6 +22,11 @@ async function main() {
   await prisma.category.deleteMany();
   await prisma.user.deleteMany();
 
+  // ⚠️ ATENÇÃO: Senhas padrão para desenvolvimento
+  // 🔴 PRODUÇÃO: Altere estas senhas imediatamente após o primeiro deploy!
+  // As senhas abaixo são apenas para facilitar o desenvolvimento local.
+  // Em ambiente de produção, crie usuários com senhas fortes e únicas.
+  
   // Criar usuários
   const adminPassword = await bcrypt.hash('admin123', 10);
   const admin = await prisma.user.create({
@@ -316,6 +321,12 @@ async function main() {
   console.log('   Admin: admin@hsi.local / admin123');
   console.log('   Gestor: gestor@hsi.local / gestor123');
   console.log('   Técnico: tecnico@hsi.local / tecnico123');
+  console.log('');
+  console.log('⚠️  IMPORTANTE: Se este é um ambiente de PRODUÇÃO:');
+  console.log('   1. Altere IMEDIATAMENTE as senhas padrão acima');
+  console.log('   2. Use senhas fortes e únicas para cada usuário');
+  console.log('   3. Configure JWT_SECRET com valor aleatório forte');
+  console.log('   4. Revise o arquivo .env e aplique o checklist de segurança');
 }
 
 main()

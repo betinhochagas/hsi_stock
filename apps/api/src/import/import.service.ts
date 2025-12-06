@@ -480,9 +480,6 @@ export class ImportService {
         });
         if (userExists) {
           validUserId = userId;
-          if (process.env.NODE_ENV !== 'production') {
-            console.log('[CommitImport] Usuário encontrado:', userId);
-          }
         } else {
           console.warn('[CommitImport] Usuário não encontrado, criando ImportLog sem userId');
         }
@@ -507,9 +504,6 @@ export class ImportService {
         mappings: columnMapping,
         userId: validUserId,
       });
-      if (process.env.NODE_ENV !== 'production') {
-        console.log('[CommitImport] Job criado:', jobId);
-      }
 
       return {
         jobId,

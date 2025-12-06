@@ -48,7 +48,7 @@ secret: process.env.JWT_SECRET || (() => {
 })()
 ```
 
-**Status:** ✅ **CORRIGIDO** - Adicionado checklist no .env.example
+**Status:** ✅ **IMPLEMENTADO** - JWT_SECRET agora exige configuração em produção
 
 ---
 
@@ -64,7 +64,7 @@ const adminPassword = await bcrypt.hash('admin123', 10);
 
 **Observação:** Aceitável para ambiente de desenvolvimento, mas deve ser documentado que estas senhas devem ser alteradas em produção.
 
-**Recomendação:** ✅ **DOCUMENTADO** - Adicionado aviso no seed.ts e documentação
+**Recomendação:** ✅ **IMPLEMENTADO** - Adicionados avisos de segurança no seed.ts e mensagens de alerta no console
 
 ---
 
@@ -78,7 +78,7 @@ const adminPassword = await bcrypt.hash('admin123', 10);
 console.log('[CommitImport] Iniciando...', { filePath, fileType, userId });
 ```
 
-**Correção Aplicada:** ✅ Removidos console.log desnecessários, mantidos apenas console.error para troubleshooting.
+**Correção Aplicada:** ✅ Removidos console.log de desenvolvimento, mantidos apenas console.error e console.warn para troubleshooting.
 
 ---
 
@@ -403,14 +403,18 @@ apps/web/test/
 
 ### ✅ Correções Implementadas
 
-1. **Console.log removidos:**
-   - ✅ `apps/api/src/import/import.service.ts`
-   - ✅ `apps/web/src/app/(dashboard)/movements-test/page.tsx`
+1. **JWT_SECRET validação em produção:**
+   - ✅ `apps/api/src/auth/auth.module.ts` - Sistema agora falha ao iniciar em produção sem JWT_SECRET configurado
+   
+2. **Console.log removidos:**
+   - ✅ `apps/api/src/import/import.service.ts` - Removidos logs de desenvolvimento
+   - ✅ `apps/web/src/app/(dashboard)/movements-test/page.tsx` - Limpeza de logs de debug
 
-2. **Documentação melhorada:**
+3. **Documentação de segurança melhorada:**
    - ✅ Warnings de segurança no `.env.example`
    - ✅ Checklist de segurança para produção
-   - ✅ Comentários sobre senhas de seed
+   - ✅ Comentários e avisos sobre senhas de seed no `packages/db/prisma/seed.ts`
+   - ✅ Mensagens de alerta no console ao executar seed
 
 ---
 
