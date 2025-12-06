@@ -15,7 +15,6 @@ export default function MovementsTestPage() {
     async function testFetch() {
       try {
         const token = localStorage.getItem('token')
-        console.log('[MANUAL TEST] Token:', token ? 'EXISTS' : 'NULL')
         
         if (!token) {
           setManualError('No token in localStorage')
@@ -29,7 +28,6 @@ export default function MovementsTestPage() {
         const data = await response.json()
         setManualData(data)
       } catch (err: any) {
-        console.error('[MANUAL TEST] Error:', err)
         setManualError(err.message)
       }
     }
