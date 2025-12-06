@@ -516,7 +516,7 @@ export class ImportService {
       };
     } catch (error) {
       // Sempre logar erros para troubleshooting
-      console.error('[CommitImport] Erro:', error);
+      this.logger.error('[CommitImport] Erro:', error instanceof Error ? error.message : String(error), error instanceof Error ? error.stack : '');
       throw error;
     }
   }

@@ -6,23 +6,7 @@ import { AuthController } from './auth.controller';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
 import { UsersModule } from '../users/users.module';
-
-/**
- * Get JWT secret with validation for production environment
- * Throws error if JWT_SECRET is not set in production
- */
-function getJwtSecret(): string {
-  const secret = process.env.JWT_SECRET;
-  
-  if (!secret) {
-    if (process.env.NODE_ENV === 'production') {
-      throw new Error('JWT_SECRET must be set in production!');
-    }
-    return 'dev_only_secret';
-  }
-  
-  return secret;
-}
+import { getJwtSecret, getJwtExpiresIn } from '../config/jwt.config';
 
 @Module({
   imports: [
@@ -30,7 +14,7 @@ function getJwtSecret(): string {
     PassportModule,
     JwtModule.register({
       secret: getJwtSecret(),
-      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN || '7d' },
+      signOptions: { expiresIn: getJwtExpiresIn() },
     }),
   ],
   controllers: [AuthController],
