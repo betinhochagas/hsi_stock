@@ -280,7 +280,7 @@ graph TB
 ### 1. Clone o repositório
 
 \`\`\`powershell
-git clone https://github.com/seu-usuario/stock_hsi.git
+git clone https://github.com/betinhochagas/hsi_stock
 cd stock_hsi
 \`\`\`
 
